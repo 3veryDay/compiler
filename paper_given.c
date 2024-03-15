@@ -85,6 +85,7 @@ void initialize()
 {
 fp = fopen(FILE_NAME, "r");
 input = fgetc( fp );
+fclose(fp);
 }
 
 
@@ -117,7 +118,7 @@ void PrintHStable()
     for (i = 0; i <HTsize; i++)
         if (HT[i] != NULL){
             printf(" HashCode %3d :", i);
-            for (here = HT[i];here!=NULL; here = here-> next) {
+            for (here = HT[i];     here!=NULL; here = here-> next) {
                 j = here-> index;
                 while(ST[j] != '\0' && j < STsize)
                     printf("%c", ST[j++]);
@@ -282,7 +283,6 @@ if( input != EOF && err != illid ) {
 if( nextfree == STsize ) {
     err = overst;
     PrintError( err );
-// print error message
 }
 ST[nextfree++] = '\0';
 ComputeHS( nextid, nextfree );
