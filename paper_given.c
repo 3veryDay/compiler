@@ -105,9 +105,9 @@ int isSeperator(char c )
 void PrintHeading()
 {
     printf("\n\n");
-    printf(" ---------     ---------- \n");
+    printf(" ------------   ------------ \n");
     printf(" Index in ST    Identifier \n");
-    printf(" ---------     ---------- \n");
+    printf(" ------------   ------------ \n");
     printf("\n");
 }
 // PrintError - Print out error messages
