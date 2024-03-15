@@ -38,7 +38,7 @@ seperators - null , . ; : ? ! \t \n
 #define FALSE 0
 #define TRUE 1
 
-#define isLetter(x) (  ((x) >= 'a' && (x) <= 'z') || ((x) >= 'A' && (x) <= 'Z' || (x) == '_'))
+#define isLetter(x) (  ((x) >= 'a' && (x) <= 'z') || ((x) >= 'A' && (x) <= 'Z') || ((x) == '_'))
 #define isDigit(x) ( (x) >= '0' && (x) <= '9')
 // more define variables…
 
