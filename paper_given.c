@@ -71,8 +71,7 @@ ERRORtypes err;
 
 FILE *fp;            //to be a pointer to FILE
 char input;
-FILE *fp; //to be a pointer to FILE 
-char input;
+
 
 
 //Initialize - open input file
