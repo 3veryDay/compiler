@@ -90,7 +90,7 @@ input = fgetc( fp );
 
 
 //is Seperator - distinguis the seperator
-int isSeperator(char c ) 
+int isSeperator(char c )
 {
     int i;
     int sep_len;
@@ -205,7 +205,7 @@ void ReadID()
 // characters and then taking the sum modulo the size of HT. 
 void ComputeHS( int nid, int nfree )
 {
-    int code i;
+    int code, i;
     code = 0;
     for (i = nid;i <nfree -1; i++)
         code += (int)ST[i];
