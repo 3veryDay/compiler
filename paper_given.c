@@ -96,11 +96,11 @@ int isSeperator(char c )
     int sep_len;
 
     sep_len = strlen(seperators);
-    for (i = 0; i < sep_len, i ++) {
+    for (i = 0; i < sep_len; i ++) {
         if (c == seperators[i] )
             return 1;
     }
-    return 0
+    return 0;
 }
 
 //print Heading - print the heading
@@ -142,11 +142,11 @@ void PrintHStable()
             for (here = HT[i];here!=NULL; here-> next) {
                 j = here-> index;
                 while(ST[j] != '\0' && j < STsize) 
-                    printf("%c"), ST[j++]);
+                    printf("%c", ST[j++]);
                 printf("    ");
 
             }
-            printf("\n")
+            printf("\n");
         }
         printf("\n\n\n <%5d characters are used in the string table> \n", nextfree);
         printf("2176368 지현서, ");
