@@ -71,7 +71,6 @@ ERRORtypes err;
 
 FILE *fp;            //to be a pointer to FILE
 char input;
-ERRORtypes err;
 FILE *fp; //to be a pointer to FILE 
 char input;
 
