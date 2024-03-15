@@ -289,7 +289,7 @@ ADDHT( hashcode );
 else {
     printf("%6d     ", sameid);
     for( i = nextid; i< nextfree -1; i++)
-        printf("%c". ST[i]);
+        printf("%c", ST[i]);
     printf("    (alreadyexisted)\n");
     nextfree = nextid;
 // print message
