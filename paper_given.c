@@ -114,12 +114,12 @@ void PrintHStable()
     printf("\n\n\n\n\n [[ HASH TABLE]] \n\n");
 
 
-    for (i = 0; i <HTsize; i++) 
+    for (i = 0; i <HTsize; i++)
         if (HT[i] != NULL){
             printf(" HashCode %3d :", i);
             for (here = HT[i];here!=NULL; here = here-> next) {
                 j = here-> index;
-                while(ST[j] != '\0' && j < STsize) 
+                while(ST[j] != '\0' && j < STsize)
                     printf("%c", ST[j++]);
                 printf("    ");
 
@@ -127,7 +127,7 @@ void PrintHStable()
             printf("\n");
         }
         printf("\n\n\n <%5d characters are used in the string table> \n", nextfree);
-        printf("2176368 지현서, ");
+        printf("2176368 지현서, 조은혜, 조윤아, 박소현");
 }
 
 
