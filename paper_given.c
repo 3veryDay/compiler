@@ -1,3 +1,4 @@
+//박소현님
 /*******************************************************************************************************************************
 Hashtable Implementation (STsize = 1000)
 Programmer : 지현서, 조은혜, 조윤아, 박소현
@@ -28,7 +29,8 @@ letters - Set of letters A..Z, a..z, _
 digits - Set of digits 0..9
 seperators - null , . ; : ? ! \t \n
 *****************************************************************************************************************************/
-
+//지현서
+//*****************************************************************************************************************************
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -145,6 +147,12 @@ void PrintHeading()
 // print the hashtable and abort by calling the function "abort()".
 // illid : illegal identifier
 // illsp :illegal seperator
+
+
+
+
+//*****************************************************************************************************************************
+//조은혜님
 void PrintError( ERRORtypes err )
 {
     switch( err ) {
@@ -218,6 +226,14 @@ void ComputeHS( int nid, int nfree )
 // of the identifier.If find a match, set the found flag as true.
 // Otherwise flase.
 // If find a match, save the starting index of ST in same id. 
+
+
+
+
+
+
+//*****************************************************************************************************************************
+//조윤아
 void LookupHS( int nid, int hscode )
 {
     HTpointer here;
