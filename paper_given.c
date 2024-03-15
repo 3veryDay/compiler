@@ -293,7 +293,6 @@ if( !found ) {
         printf("%c", ST[i]);
     printf("        (entered) \n");
     ADDHT(hashcode);
-// print message
 }
 else {
     printf("%6d     ", sameid);
@@ -301,7 +300,7 @@ else {
         printf("%c", ST[i]);
     printf("    (alreadyexisted)\n");
     nextfree = nextid;
-// print message
+
 }
 }
 }
