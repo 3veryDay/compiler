@@ -85,7 +85,6 @@ void initialize()
 {
 fp = fopen(FILE_NAME, "r");
 input = fgetc( fp );
-fclose(fp);
 }
 
 
