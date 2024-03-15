@@ -35,34 +35,41 @@ seperators - null , . ; : ? ! \t \n
 #include <stdlib.h>
 #include <string.h>
 #define FILE_NAME "testdata.txt"
-#define STsize 1000 //size of string table
-#define HTsize 100 //size of hash table
+#define STsize 1000         //String Table 사이즈
+#define HTsize 100          //Hash Table 사이즈
 #define FALSE 0
 #define TRUE 1
 
+
+//문자는 a...z, A...Z, _
 #define isLetter(x) (  ((x) >= 'a' && (x) <= 'z') || ((x) >= 'A' && (x) <= 'Z') || ((x) == '_'))
 #define isDigit(x) ( (x) >= '0' && (x) <= '9')
-// more define variables…
+
 
 
 typedef struct HTentry *HTpointer;
+
 typedef struct HTentry {
 int index; //index of identifier in ST
 HTpointer next; //pointer to next identifier
 } HTentry;
 
 
+//에러 타입 정의
 enum errorTypes { noerror, illsp, illid, overst };
 typedef enum errorTypes ERRORtypes;
 
 
+//delimeter 정의
 char seperators[] = " .,;:?!\t\n";
 
 
+//HashTable, StringTable 선언
 HTpointer HT[HTsize];
 char ST[STsize];
 
-// more global variables…
+
+
 int nextid = 0;      //the current identifier
 int nextfree = 0;   // the next available index of ST
 int hashcode;       // hash code of identifier
@@ -77,12 +84,7 @@ char input;
 
 
 
-//Initialize - open input file
-
-
-
-
-//Initialize - open input file
+//Initialize - input file 열기
 void initialize()
 {
 fp = fopen(FILE_NAME, "r");
@@ -90,7 +92,7 @@ input = fgetc( fp );
 }
 
 
-//is Seperator - distinguis the seperator
+//is Seperator - delimeter(seperator) 구별해내기
 int isSeperator(char c )
 {
     int i;

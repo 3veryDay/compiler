@@ -1,1 +1,1 @@
-printf("%d", int("A"));
+printf("%d", int());
