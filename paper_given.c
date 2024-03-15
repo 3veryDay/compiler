@@ -1,7 +1,8 @@
 /*******************************************************************************************************************************
 Hashtable Implementation (STsize = 1000)
-Programmer : Choi, Ewha
-Date: 3/ 21/ 2023 
+Programmer : 지현서, 조은혜, 조윤아, 박소현
+Date: 03/15/2024
+
 Description :
 The input to the program is a file , consisting of identifiers seperated by
 spaces,tab characters, newlines and punctuation marks . , , , ; , :, ? , ! .
