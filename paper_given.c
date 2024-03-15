@@ -120,7 +120,7 @@ void SkipSeperators()
     while (input != EOF && !( isLetter(input) || isDigit(input) ) ) {
         if (!isSeperator(input) ) {
             err = illsp;
-            printError(err);
+            PrintError(err);
         }
         input = fgetc(fp);
     }
@@ -162,7 +162,7 @@ void PrintError( ERRORtypes err )
     switch( err ) {
         case overst :
             printf(" ... Error ... OVERFLOW ");
-            printHStable();
+            PrintHStable();
             exit(0);
             break;
         case illsp :
@@ -189,7 +189,7 @@ void ReadID()
     nextid = nextfree ;
     if (isDigit(input)) {
         err = illid;
-        printError( err);
+        PrintError(err);
     }else {
         while(input != EOF && (isLetter(input) || isDigit(input))) {
             if (nextfree == STsize){
