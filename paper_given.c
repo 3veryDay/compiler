@@ -110,6 +110,34 @@ void PrintHeading()
     printf(" ---------     ---------- \n");
     printf("\n");
 }
+// PrintError - Print out error messages
+// overst : overflow in ST
+// print the hashtable and abort by calling the function "abort()".
+// illid : illegal identifier
+// illsp :illegal seperator
+void PrintError( ERRORtypes err )
+{
+    switch( err ) {
+        case overst :
+            printf(" ... Error ... OVERFLOW ");
+            PrintHStable();
+            exit(0);
+            break;
+        case illsp :
+            printf(" ... Error ... %c is illegal seperator \n ", input);
+            
+            break;
+        case illid :
+            printf(" ... Error ...");
+            while(input != EOF && (isLetter(input) || isDigit(input)) ) {
+                printf("%c", input);
+                input = fgetc(fp);
+
+            }
+            printf(" start with digit \n");
+            break;
+    }
+}
 
 // Skip Seperators - skip over strings of spaces,tabs,newlines, . , ; : ? !
 // if illegal seperators,print out error message.
@@ -150,34 +178,7 @@ void PrintHStable()
         printf("2176368 지현서, ");
 }
 
-// PrintError - Print out error messages
-// overst : overflow in ST
-// print the hashtable and abort by calling the function "abort()".
-// illid : illegal identifier
-// illsp :illegal seperator
-void PrintError( ERRORtypes err )
-{
-    switch( err ) {
-        case overst :
-            printf(" ... Error ... OVERFLOW ");
-            PrintHStable();
-            exit(0);
-            break;
-        case illsp :
-            printf(" ... Error ... %c is illegal seperator \n ", input);
-            
-            break;
-        case illid :
-            printf(" ... Error ...");
-            while(input != EOF && (isLetter(input) || isDigit(input)) ) {
-                printf("%c", input);
-                input = fgetc(fp);
 
-            }
-            printf(" start with digit \n");
-            break;
-    }
-}
 //ReadIO - Read identifier from the input file the string table ST directly into
 // ST(append it to the previous identifier).
 // An identifier is a string of letters and digits, starting with a letter.
