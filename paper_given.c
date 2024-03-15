@@ -107,9 +107,11 @@ int isSeperator(char c )
 }
 
 
-// PrintHStable - Prints the hash table.write out the hashcode and the list of identifiers 
-// associated with each hashcode,but only for non-empty lists.
-// Print out the number of characters used up in ST. 
+//PrintHStable - 해쉬테이블 출력.
+//맨 위에 [[ HASH TABLE ]] 출력 후
+//hascode 와 이에 해당하는 identifiers 출력(단, 비어있지 않은 경우에만)
+//String Table에서 쓰인 character 수 출력
+//마지막에 팀원들 이름, 학번 출력
 void PrintHStable()
 {
     int i,j ;
@@ -121,7 +123,7 @@ void PrintHStable()
     for (i = 0; i <HTsize; i++)
         if (HT[i] != NULL){
             printf(" HashCode %3d :", i);
-            for (here = HT[i];     here!=NULL; here = here-> next) {
+            for (here = HT[i]; here!=NULL; here = here-> next) {
                 j = here-> index;
                 while(ST[j] != '\0' && j < STsize)
                     printf("%c", ST[j++]);
@@ -131,11 +133,11 @@ void PrintHStable()
             printf("\n");
         }
         printf("\n\n\n <%5d characters are used in the string table> \n", nextfree);
-        printf("2176368 지현서, 조은혜, 조윤아, 박소현");
+        //printf("2176368 지현서, 조은혜, 2171047 조윤아, 박소현");
 }
 
 
-//print Heading - print the heading
+//print Heading - HEADING 출력
 void PrintHeading()
 {
     printf("\n\n");
@@ -144,17 +146,18 @@ void PrintHeading()
     printf(" ------------   ------------ \n");
     printf("\n");
 }
-// PrintError - Print out error messages
-// overst : overflow in ST
-// print the hashtable and abort by calling the function "abort()".
-// illid : illegal identifier
-// illsp :illegal seperator
+
 
 
 
 
 //*****************************************************************************************************************************
 //조은혜님
+// PrintError - Print out error messages
+// overst : overflow in ST
+// print the hashtable and abort by calling the function "abort()".
+// illid : illegal identifier
+// illsp :illegal seperator
 void PrintError( ERRORtypes err )
 {
     switch( err ) {
