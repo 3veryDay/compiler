@@ -133,7 +133,7 @@ void PrintHStable()
             printf("\n");
         }
         printf("\n\n\n <%5d characters are used in the string table> \n", nextfree);
-        //printf("2176368 지현서, 조은혜, 2171047 조윤아, 박소현");
+        //printf("2176368 지현서, 2176365 조은혜, 2171047 조윤아, 2176143 박소현");
 }
 
 
