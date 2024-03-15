@@ -101,6 +101,8 @@ int isSeperator(char c )
     }
     return 0;
 }
+
+
 // PrintHStable - Prints the hash table.write out the hashcode and the list of identifiers 
 // associated with each hashcode,but only for non-empty lists.
 // Print out the number of characters used up in ST. 
@@ -278,14 +280,20 @@ SkipSeperators();
 ReadID();
 if( input != EOF && err != illid ) {
 if( nextfree == STsize ) {
+    err = overst;
+    PrintError( err );
 // print error message
 }
 ST[nextfree++] = '\0';
 ComputeHS( nextid, nextfree );
 LookupHS( nextid, hashcode );
 if( !found ) {
+    printf("%6d     ", nextid);
+    for (i = nextid; i < nextfree -1 ; i ++)
+        printf("%c", ST[i]);
+    printf("        (entered) \n");
+    ADDHT(hashcode);
 // print message
-ADDHT( hashcode );
 }
 else {
     printf("%6d     ", sameid);
