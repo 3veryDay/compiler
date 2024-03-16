@@ -71,10 +71,11 @@ char ST[STsize];
 
 
 
-int nextid = 0;      //현재 identifier
+int nextid = 0;     //현재 identifier
 int nextfree = 0;   // 비어있는 다음 StringTable 인덱스
-int hashcode;       // 현재 identifier의 hash
-int sameid;         //identifier 첫 부분 인덱스
+                    //이 다음부터 nextid 인덱스임.
+int hashcode;       // 현재 identifier의 hash code 값
+int sameid;         // 해당 identifier의 첫번째 hashtable 인덱스(중복 대비)
 
 int found;          //for the previous occurrence of an identifier
                     //HT 중복하면, 돌아갈 identifier의 인덱스
