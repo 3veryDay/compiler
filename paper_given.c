@@ -43,15 +43,16 @@ seperators - null , . ; : ? ! \t \n
 
 //문자는 a...z, A...Z, _
 #define isLetter(x) (  ((x) >= 'a' && (x) <= 'z') || ((x) >= 'A' && (x) <= 'Z') || ((x) == '_'))
+//숫자는 1,2 ... 9
 #define isDigit(x) ( (x) >= '0' && (x) <= '9')
 
 
-
+//HashTable 들어가는
 typedef struct HTentry *HTpointer;
 
 typedef struct HTentry {
-int index; //index of identifier in ST
-HTpointer next; //pointer to next identifier
+int index;              //StringTable에서의 인덱스
+HTpointer next;         //다음 identifier 포인터
 } HTentry;
 
 
@@ -70,16 +71,16 @@ char ST[STsize];
 
 
 
-int nextid = 0;      //the current identifier
-int nextfree = 0;   // the next available index of ST
-int hashcode;       // hash code of identifier
-int sameid;         //first index of identifier
+int nextid = 0;      //현재 identifier
+int nextfree = 0;   // 비어있는 다음 StringTable 인덱스
+int hashcode;       // 현재 identifier의 hash
+int sameid;         //identifier 첫 부분 인덱스
 
 int found;          //for the previous occurrence of an identifier
-
+                    //HT 중복하면, 돌아갈 identifier의 인덱스
 ERRORtypes err;
 
-FILE *fp;            //to be a pointer to FILE
+FILE *fp;            //hash대상 파일
 char input;
 
 
@@ -93,6 +94,7 @@ input = fgetc( fp );
 
 
 //is Seperator - delimeter(seperator) 구별해내기
+//seperator이면 1 리턴
 int isSeperator(char c )
 {
     int i;
