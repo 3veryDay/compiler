@@ -16,7 +16,8 @@ the matching identifier. For each identifier encountered, print the identifier a
 or already existed. After the program is finished processing its input, print hash table. If the ST overflows, print the hashtable 
 as above and abort by calling the function “exit()”.
 
-Input: A file consisting of identifiers separated by spaces, tab characters, newlines and punctuation marks. 
+Input: 
+A file consisting of identifiers separated by spaces, tab characters, newlines and punctuation marks. 
 An identifier is a string of letters and digits, starting with a letter.
 
  Output:
