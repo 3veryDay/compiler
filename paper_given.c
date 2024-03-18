@@ -4,25 +4,33 @@ Hashtable Implementation (STsize = 1000)
 Programmer : 지현서, 조은혜, 조윤아, 박소현
 Date: 03/15/2024
 
-Description :
-The input to the program is a file , consisting of identifiers seperated by
-spaces,tab characters, newlines and punctuation marks . , , , ; , :, ? , ! .
-An identifier is a string of letters and digits,starting with a letter.Case is insignificant.
-:
-If the ST overflows,prints the hashtable as above and abort by calling 
-the function "exit()".
-Input :
-A file consisting of identifiers seperated by spaces, tab characters,newlines and 
-punctuation marks. 
-An identifier is a string of letters and digits,starting with a letter.
-Output :
-The identifier,its index in the stringtable and whether entered or present.
-Prints error message for illegal identifier(starting with a digit),illegal seperator and 
-:
+Description:
+The input to the program is a file, consisting of identifiers separated by spaces tab characters newlines and punctuation marks.
+An identifier is a string of letters and digits, starting with a letter. Case is significant. The program reads in each identifier from
+the input file directly into ST(string table) and append it to the previous identifier, terminated by null character. Compute its 
+hashcode. The hashcode of an identifier is computed by summing the original values of its characters and then taking the sum 
+modulo the size of HT. Look up the identifier in ST starting with HT[hashcode]. If the listhead is nil, simply add a list element, 
+the starting index of the identifier in ST. Otherwise search the list for a previous occurrence of the identifier. If not match add 
+a new element to the list, pointing to the new identifier. If match, delete the new identifier from ST and print the ST-index of 
+the matching identifier. For each identifier encountered, print the identifier and its index in the string table, whether it was entered
+or already existed. After the program is finished processing its input, print hash table. If the ST overflows, print the hashtable 
+as above and abort by calling the function “exit()”.
+
+Input: A file consisting of identifiers separated by spaces, tab characters, newlines and punctuation marks. 
+An identifier is a string of letters and digits, starting with a letter.
+
+ Output:
+The identifier, its index in the string table and whether entered or present.
+Prints error message for illegal identifier(starting with a digit), illegal separator and over string. 
+Prints the hash table before terminating. Simply write out hashcode and the list of identifiers 
+associated with each hashcode, but not only for non-empty lists. Finally, print out the number 
+of characters used up in ST.
+
 Restriction:
-If the ST overflows, print the hashtable as above, and abort by calling 
-the function "exit()". "exit()" terminates the execution of a program.
-Global variables : 
+If the ST overflows, print the hash table as above, and abort by calling the function “exit()”. 
+“exit()” terminates the execution of a program.
+
+Global variations:
 ST - Array of string table
 HT - Array of list head of hashtable
 letters - Set of letters A..Z, a..z, _
