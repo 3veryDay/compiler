@@ -157,40 +157,42 @@ void PrintHeading()
 
 //*****************************************************************************************************************************
 //조은혜님
-// PrintError - Print out error messages
-// overst : overflow in ST
-// print the hashtable and abort by calling the function "abort()".
-// illid : illegal identifier
-// illsp :illegal seperator
+// 
+// PrintError - 에러 메시지 출력 함수
+//overst : ST에서의 오버플로우
+//해시테이블 출력, abort()함수에 의해 중단
+// illid : illegal identifier (올바르지 않은 identifier)
+// illsp :illegal seperator (올바르지 않은 seperator)
 void PrintError( ERRORtypes err )
 {
     switch( err ) {
-        case overst :
+        case overst :   // ST에서 오버플로우가 발생한 경우
             printf(" ... Error ... OVERFLOW ");
             PrintHStable();
             exit(0);
             break;
-        case illsp :
-            printf(" ... Error ... %c is illegal seperator \n ", input);
+        case illsp :    // 올바르지 않은 seperator가 입력된 경우
+            printf(" ... Error ... %c is illegal seperator \n ", input);    //입력이 올바르지 않은 seperator임을 출력
             
             break;
-        case illid :
+        case illid :    // 올바르지 않은 identifier가 입력된 경우
             printf(" ... Error ...");
             while(input != EOF && (isLetter(input) || isDigit(input)) ) {
                 printf("%c", input);
                 input = fgetc(fp);
 
             }
-            printf(" start with digit \n");
+            printf(" start with digit \n"); // 숫자로 시작함을 출력
             break;
     }
 }
 
-// Skip Seperators - skip over strings of spaces,tabs,newlines, . , ; : ? !
-// if illegal seperators,print out error message.
+
+// Skip Seperators - spaces,tabs,newlines, . , ; : ? ! 등의 seperator들을 저장하지 않고 넘어가는 함수
+// 만약 올바르지 않은 seperator가 입력된 경우 에러 메시지 출력
 void SkipSeperators()
 {
-    while (input != EOF && !( isLetter(input) || isDigit(input) ) ) {
+    while (input != EOF && !( isLetter(input) || isDigit(input) ) ) {   // 입력된 값이 문자나 숫자가 아닌지 확인
         if (!isSeperator(input) ) {
             err = illsp;
             PrintError(err);
@@ -200,10 +202,10 @@ void SkipSeperators()
 }
 
 
-//ReadIO - Read identifier from the input file the string table ST directly into
+//ReadIO - 입력에서 identifier를 읽어 스트링테이블 ST에 저장
 // ST(append it to the previous identifier).
-// An identifier is a string of letters and digits, starting with a letter.
-// If first letter is digit, print out error message. 
+// identifier는 문자로 시작하는 문자와 숫자의 문자열
+// 첫 글자가 숫자인 경우 에러 메시지 출력 
 void ReadID() 
 {
     nextid = nextfree ;
@@ -211,37 +213,33 @@ void ReadID()
         err = illid;
         PrintError(err);
     }else {
-        while(input != EOF && (isLetter(input) || isDigit(input))) {
-            if (nextfree == STsize){
+        while(input != EOF && (isLetter(input) || isDigit(input))) {    // 입력된 값이 문자나 숫자인지 확인
+            if (nextfree == STsize){    // 오버플로우가 발생한 경우
                 err = overst;
-                PrintError(err);
+                PrintError(err);    // 오버플로우 에러 메시지 출력
             }
             ST[nextfree ++] = input;
             input = fgetc(fp);
         }
     }
 }
-// ComputeHS - Compute the hash code of identifier by summing the ordinal values of its
-// characters and then taking the sum modulo the size of HT. 
+// ComputeHS - 문자의 ordinal values를 합한 다음 HT 크기로 mod 계산하여 해시 코드를 계산하는 함수
 void ComputeHS( int nid, int nfree )
 {
     int code, i;
     code = 0;
     for (i = nid;i <nfree -1; i++)
-        code += (int)ST[i];
+        code += (int)ST[i]; // (int)ST[i]: 해당 문자의 ordinal values
     hashcode = code % HTsize;
 }
-// LookupHS -For each identifier,Look it up in the hashtable for previous occurrence
-// of the identifier.If find a match, set the found flag as true.
-// Otherwise flase.
-// If find a match, save the starting index of ST in same id. 
-
-
-
 
 
 
 //*****************************************************************************************************************************
+// // LookupHS -For each identifier,Look it up in the hashtable for previous occurrence
+// of the identifier.If find a match, set the found flag as true.
+// Otherwise flase.
+// If find a match, save the starting index of ST in same id. 
 //조윤아
 void LookupHS( int nid, int hscode )
 {
