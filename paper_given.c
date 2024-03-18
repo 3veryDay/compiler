@@ -235,12 +235,12 @@ void ComputeHS( int nid, int nfree )
 
 
 
-//*****************************************************************************************************************************
-// // LookupHS -For each identifier,Look it up in the hashtable for previous occurrence
-// of the identifier.If find a match, set the found flag as true.
-// Otherwise flase.
-// If find a match, save the starting index of ST in same id. 
-//조윤아
+//***************************************************************************************************************************** 
+// 조윤아
+// LookupHS - 각 identifier에 대해 해시 테이블에 이전에 삽입됐는지 찾음
+// 이전에 삽입됐으면 found flag를 true로 설정, 
+// ST의 시작 인덱스를 동일한 아이디로 설정
+// 이전에 삽입되지 않았으면 found flag를 false로 설정
 void LookupHS( int nid, int hscode )
 {
     HTpointer here;
@@ -269,10 +269,9 @@ void LookupHS( int nid, int hscode )
         }
     }
 }
-// ADDHT - Add a new identifier to the hash table.
-// If list head ht[hashcode] is null, simply add a list element with
-// starting index of the identifier in ST.
-// IF list head is not a null , it adds a new identifier to the head of the chain 
+// ADDHT - 해시 테이블(HT)에 새로운 identifier 삽입
+// 만약 HT[hscode]가 null이면 ST identifier의 시작 인덱스를 리스트에 바로 삽입
+// HT[hscode]가 null이 아니면 HTpointer가 null이 될 때까지 포인터를 따라가다가 삽입
 void ADDHT( int hscode )
 {
     HTpointer ptr ;
@@ -282,15 +281,13 @@ void ADDHT( int hscode )
     ptr -> next = HT[hscode];
     HT[hscode] = ptr;
 }
-// // MAIN - Read the identifier from the file directly into ST.
-// Compute its hashcode.
-// Look up the idetifier in hashtable HT[hashcode]
-// If matched, delete the identifier from ST and print ST-index
-// of the matching identifier.
-// If not matched , add a new element to the list,pointing to new identifier.
-// Print the identifier,its index in ST, and whether it was entered or present.
-// Print out the hashtable,and number of characters used up in ST
-// //
+// main - 파일에서 identifier를 직접 읽어 ST에 삽입
+// 해시 코드 계산
+// 해시 테이블 HT[hashcode]에서 identifier 검색
+// 일치하는 경우 ST에서 identifier를 삭제하고 그 identifier의 ST-index를 출력
+// 일치하지 않는 경우 새 identifier를 가리키는 새로운 element를 list에 추가
+// identifier와 ST의 index를 출력하고 입력 또는 표시 여부 출력
+// 해시 테이블과 ST에서 사용된 문자 수 출력
 int main()
 {
 int i;
