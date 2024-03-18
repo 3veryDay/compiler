@@ -4,25 +4,34 @@ Hashtable Implementation (STsize = 1000)
 Programmer : 지현서, 조은혜, 조윤아, 박소현
 Date: 03/15/2024
 
-Description :
-The input to the program is a file , consisting of identifiers seperated by
-spaces,tab characters, newlines and punctuation marks . , , , ; , :, ? , ! .
-An identifier is a string of letters and digits,starting with a letter.Case is insignificant.
-:
-If the ST overflows,prints the hashtable as above and abort by calling 
-the function "exit()".
-Input :
-A file consisting of identifiers seperated by spaces, tab characters,newlines and 
-punctuation marks. 
-An identifier is a string of letters and digits,starting with a letter.
-Output :
-The identifier,its index in the stringtable and whether entered or present.
-Prints error message for illegal identifier(starting with a digit),illegal seperator and 
-:
+Description:
+The input to the program is a file, consisting of identifiers separated by spaces tab characters newlines and punctuation marks.
+An identifier is a string of letters and digits, starting with a letter. Case is significant. The program reads in each identifier from
+the input file directly into ST(string table) and append it to the previous identifier, terminated by null character. Compute its 
+hashcode. The hashcode of an identifier is computed by summing the original values of its characters and then taking the sum 
+modulo the size of HT. Look up the identifier in ST starting with HT[hashcode]. If the listhead is nil, simply add a list element, 
+the starting index of the identifier in ST. Otherwise search the list for a previous occurrence of the identifier. If not match add 
+a new element to the list, pointing to the new identifier. If match, delete the new identifier from ST and print the ST-index of 
+the matching identifier. For each identifier encountered, print the identifier and its index in the string table, whether it was entered
+or already existed. After the program is finished processing its input, print hash table. If the ST overflows, print the hashtable 
+as above and abort by calling the function “exit()”.
+
+Input: 
+A file consisting of identifiers separated by spaces, tab characters, newlines and punctuation marks. 
+An identifier is a string of letters and digits, starting with a letter.
+
+ Output:
+The identifier, its index in the string table and whether entered or present.
+Prints error message for illegal identifier(starting with a digit), illegal separator and over string. 
+Prints the hash table before terminating. Simply write out hashcode and the list of identifiers 
+associated with each hashcode, but not only for non-empty lists. Finally, print out the number 
+of characters used up in ST.
+
 Restriction:
-If the ST overflows, print the hashtable as above, and abort by calling 
-the function "exit()". "exit()" terminates the execution of a program.
-Global variables : 
+If the ST overflows, print the hash table as above, and abort by calling the function “exit()”. 
+“exit()” terminates the execution of a program.
+
+Global variations:
 ST - Array of string table
 HT - Array of list head of hashtable
 letters - Set of letters A..Z, a..z, _
@@ -157,40 +166,42 @@ void PrintHeading()
 
 //*****************************************************************************************************************************
 //조은혜님
-// PrintError - Print out error messages
-// overst : overflow in ST
-// print the hashtable and abort by calling the function "abort()".
-// illid : illegal identifier
-// illsp :illegal seperator
+// 
+// PrintError - 에러 메시지 출력 함수
+//overst : ST에서의 오버플로우
+//해시테이블 출력, abort()함수에 의해 중단
+// illid : illegal identifier (올바르지 않은 identifier)
+// illsp :illegal seperator (올바르지 않은 seperator)
 void PrintError( ERRORtypes err )
 {
     switch( err ) {
-        case overst :
+        case overst :   // ST에서 오버플로우가 발생한 경우
             printf(" ... Error ... OVERFLOW ");
             PrintHStable();
             exit(0);
             break;
-        case illsp :
-            printf(" ... Error ... %c is illegal seperator \n ", input);
+        case illsp :    // 올바르지 않은 seperator가 입력된 경우
+            printf(" ... Error ... %c is illegal seperator \n ", input);    //입력이 올바르지 않은 seperator임을 출력
             
             break;
-        case illid :
+        case illid :    // 올바르지 않은 identifier가 입력된 경우
             printf(" ... Error ...");
             while(input != EOF && (isLetter(input) || isDigit(input)) ) {
                 printf("%c", input);
                 input = fgetc(fp);
 
             }
-            printf(" start with digit \n");
+            printf(" start with digit \n"); // 숫자로 시작함을 출력
             break;
     }
 }
 
-// Skip Seperators - skip over strings of spaces,tabs,newlines, . , ; : ? !
-// if illegal seperators,print out error message.
+
+// Skip Seperators - spaces,tabs,newlines, . , ; : ? ! 등의 seperator들을 저장하지 않고 넘어가는 함수
+// 만약 올바르지 않은 seperator가 입력된 경우 에러 메시지 출력
 void SkipSeperators()
 {
-    while (input != EOF && !( isLetter(input) || isDigit(input) ) ) {
+    while (input != EOF && !( isLetter(input) || isDigit(input) ) ) {   // 입력된 값이 문자나 숫자가 아닌지 확인
         if (!isSeperator(input) ) {
             err = illsp;
             PrintError(err);
@@ -200,10 +211,10 @@ void SkipSeperators()
 }
 
 
-//ReadIO - Read identifier from the input file the string table ST directly into
+//ReadIO - 입력에서 identifier를 읽어 스트링테이블 ST에 저장
 // ST(append it to the previous identifier).
-// An identifier is a string of letters and digits, starting with a letter.
-// If first letter is digit, print out error message. 
+// identifier는 문자로 시작하는 문자와 숫자의 문자열
+// 첫 글자가 숫자인 경우 에러 메시지 출력 
 void ReadID() 
 {
     nextid = nextfree ;
@@ -211,38 +222,34 @@ void ReadID()
         err = illid;
         PrintError(err);
     }else {
-        while(input != EOF && (isLetter(input) || isDigit(input))) {
-            if (nextfree == STsize){
+        while(input != EOF && (isLetter(input) || isDigit(input))) {    // 입력된 값이 문자나 숫자인지 확인
+            if (nextfree == STsize){    // 오버플로우가 발생한 경우
                 err = overst;
-                PrintError(err);
+                PrintError(err);    // 오버플로우 에러 메시지 출력
             }
             ST[nextfree ++] = input;
             input = fgetc(fp);
         }
     }
 }
-// ComputeHS - Compute the hash code of identifier by summing the ordinal values of its
-// characters and then taking the sum modulo the size of HT. 
+// ComputeHS - 문자의 ordinal values를 합한 다음 HT 크기로 mod 계산하여 해시 코드를 계산하는 함수
 void ComputeHS( int nid, int nfree )
 {
     int code, i;
     code = 0;
     for (i = nid;i <nfree -1; i++)
-        code += (int)ST[i];
+        code += (int)ST[i]; // (int)ST[i]: 해당 문자의 ordinal values
     hashcode = code % HTsize;
 }
-// LookupHS -For each identifier,Look it up in the hashtable for previous occurrence
-// of the identifier.If find a match, set the found flag as true.
-// Otherwise flase.
-// If find a match, save the starting index of ST in same id. 
 
 
 
-
-
-
-//*****************************************************************************************************************************
-//조윤아
+//***************************************************************************************************************************** 
+// 조윤아
+// LookupHS - 각 identifier에 대해 해시 테이블에 이전에 삽입됐는지 찾음
+// 이전에 삽입됐으면 found flag를 true로 설정, 
+// ST의 시작 인덱스를 동일한 아이디로 설정
+// 이전에 삽입되지 않았으면 found flag를 false로 설정
 void LookupHS( int nid, int hscode )
 {
     HTpointer here;
@@ -271,10 +278,9 @@ void LookupHS( int nid, int hscode )
         }
     }
 }
-// ADDHT - Add a new identifier to the hash table.
-// If list head ht[hashcode] is null, simply add a list element with
-// starting index of the identifier in ST.
-// IF list head is not a null , it adds a new identifier to the head of the chain 
+// ADDHT - 해시 테이블(HT)에 새로운 identifier 삽입
+// 만약 HT[hscode]가 null이면 ST identifier의 시작 인덱스를 리스트에 바로 삽입
+// HT[hscode]가 null이 아니면 HTpointer가 null이 될 때까지 포인터를 따라가다가 삽입
 void ADDHT( int hscode )
 {
     HTpointer ptr ;
@@ -284,15 +290,13 @@ void ADDHT( int hscode )
     ptr -> next = HT[hscode];
     HT[hscode] = ptr;
 }
-// // MAIN - Read the identifier from the file directly into ST.
-// Compute its hashcode.
-// Look up the idetifier in hashtable HT[hashcode]
-// If matched, delete the identifier from ST and print ST-index
-// of the matching identifier.
-// If not matched , add a new element to the list,pointing to new identifier.
-// Print the identifier,its index in ST, and whether it was entered or present.
-// Print out the hashtable,and number of characters used up in ST
-// //
+// main - 파일에서 identifier를 직접 읽어 ST에 삽입
+// 해시 코드 계산
+// 해시 테이블 HT[hashcode]에서 identifier 검색
+// 일치하는 경우 ST에서 identifier를 삭제하고 그 identifier의 ST-index를 출력
+// 일치하지 않는 경우 새 identifier를 가리키는 새로운 element를 list에 추가
+// identifier와 ST의 index를 출력하고 입력 또는 표시 여부 출력
+// 해시 테이블과 ST에서 사용된 문자 수 출력
 int main()
 {
 int i;
