@@ -137,7 +137,7 @@ void PrintHStable()
             printf("\n");
         }
         printf("\n\n\n <%5d characters are used in the string table> \n", nextfree);
-        //printf("2176368 지현서, 2176365 조은혜, 2171047 조윤아, 2176143 박소현");
+        printf("2176368 지현서, 2176365 조은혜, 2171047 조윤아, 2176143 박소현");
 }
 
 
@@ -328,6 +328,29 @@ else {
 }
 }
 }
+
+
+    if (input == EOF) {
+        if (nextfree > nextid){
+            //마지막 단어까지
+            ST[nextfree++] = '\0';
+            ComputeHS(nextid, nextfree);
+            LookupHS(nextid, hashcode);
+            if( !found ) {
+                printf("%6d     ", nextid);
+                for (i = nextid; i < nextfree -1 ; i ++)
+                    printf("%c", ST[i]);
+                    printf("        (entered) \n");
+                    ADDHT(hashcode);
+            } else {
+                printf("%6d     ", sameid);
+                for( i = nextid; i< nextfree -1; i++)
+                    printf("%c", ST[i]);
+                    printf("    (alreadyexisted)\n");
+                    nextfree = nextid;
+            }
+        }
+    }
 PrintHStable();
 }
 
