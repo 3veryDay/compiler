@@ -100,7 +100,6 @@ void initialize()
 {
 fp = fopen(FILE_NAME, "r");
 input = fgetc( fp );
-input = input + " ";
 }
 
 
