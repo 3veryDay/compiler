@@ -31,7 +31,7 @@ Restriction:
 If the ST overflows, print the hash table as above, and abort by calling the function “exit()”. 
 “exit()” terminates the execution of a program.
 
-Global variations:
+Global variables:
 ST - Array of string table
 HT - Array of list head of hashtable
 letters - Set of letters A..Z, a..z, _
