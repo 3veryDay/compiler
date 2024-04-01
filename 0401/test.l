@@ -1,7 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-enum tnumber { TEOF, TIDEN, TNUM< TASSIGN, TADD, TSEMI, TDOT, TBEGIN, TEND, TERROR};
+enum tnumber { TEOF, TIDEN, TNUM, TASSIGN, TADD, TSEMI, TDOT, TBEGIN, TEND, TERROR};
 %}
 letter [a-zA-Z_]
 digit [0-9]
