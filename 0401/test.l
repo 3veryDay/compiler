@@ -24,7 +24,7 @@ void main() {
 		switch (tn) {
 			case TBEGIN : printf("Begin\n"); break;
 			case TEND : printf("End\n"); break;
-			case TIDEN : printf(Identifier\n"); break;
+			case TIDEN : printf("Identifier\n"); break;
 			case TASSIGN : printf("Assignment_op\n"); break;
 			case TADD : printf("Add_op\n"); break;
 			case TNUM : printf("Number: %d\n", atoi(yytext)); break;
