@@ -19,4 +19,4 @@ end						                  return(TEND);
 [ It\n]					                ;
 .						                    return(TERROR);
 %%
-void (main)
+void main()
