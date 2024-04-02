@@ -8,7 +8,7 @@ digit [0-9]
 %%
 begin	return(TBEGIN);
 end	return(TEND);
-{letter}({leter}|{digit})*	return(TIDEN);
+{letter}({letter}|{digit})*	return(TIDEN);
 ":="	return(TASSIGN);
 "+"	return(TADD);
 {digit}+	return(TNUM);
