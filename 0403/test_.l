@@ -17,8 +17,8 @@ end	return(TEND);
 \.	return(TDOT);
 [ \t\n]	;
 .	return(TERROR);
-"{" return(TOPEN);
-"}" return(TCLOSE);
+"{" return(TBEGIN);
+"}" return(TEND);
 %%
 void main() {
 	enum tnumber tn; /* token number */
@@ -35,8 +35,6 @@ void main() {
 			case TSEMI : printf("Semicolon\n"); break;
 			case TDOT : printf("Dot\n"); break;
 			case TERROR : printf("Error: %c\n", yytext[0]); break;
-      case TOPEN  : printf("begin");
-      case TCLOSE : printf("end");
 		}
 	}
 }
