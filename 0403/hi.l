@@ -19,7 +19,7 @@ int  printf("integer");
 void main() 
 {
 	printf("\nStart of Lex\n");
-	while ((yylex() != EOF) {
+	while ((yylex() != TEOF) {
 		
 	}
 }
