@@ -27,8 +27,8 @@ void main() {
 			case TIDEN : printf("%c", yytext); break;
 			case TASSIGN : printf(" := "); break;
 			case TADD : printf(" + "); break;
-			case TNUM : printf("%d ", atoi(yytext)); break;
-			case TSEMI : printf(";"); break;
+			case TNUM : printf("%d ", yytext); break;
+			case TSEMI : printf(";\n"); break;
 		}
 	}
 }
