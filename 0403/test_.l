@@ -1,7 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-enum tnumber { TINT, TEOF, TIDEN, TNUM, TASSIGN, TADD, TSEMI, TDOT, TBEGIN, TEND, TERROR};
+enum tnumber { TINT, TEOF, TIDEN, TNUM, TASSIGN, TADD, TSEMI, TBEGIN, TEND};
 %}
 letter [a-zA-Z_]
 digit [0-9]
@@ -14,9 +14,7 @@ int	return(TINT);
 "+"	return(TADD);
 {digit}+	return(TNUM);
 ";"	return(TSEMI);
-\.	return(TDOT);
 [ \t\n]	;
-.	return(TERROR);
 %%
 void main() {
 	enum tnumber tn; /* token number */
@@ -26,13 +24,11 @@ void main() {
       case TINT    :printf("Integer"); break;
 			case TBEGIN : printf("Begin\n"); break;
 			case TEND : printf("End\n"); break;
-			case TIDEN : printf("Identifier\n"); break;
-			case TASSIGN : printf("Assignment_op\n"); break;
-			case TADD : printf("Add_op\n"); break;
-			case TNUM : printf("Number: %d\n", atoi(yytext)); break;
-			case TSEMI : printf("Semicolon\n"); break;
-			case TDOT : printf("Dot\n"); break;
-			case TERROR : printf("Error: %c\n", yytext[0]); break;
+			case TIDEN : printf("%c", yytext); break;
+			case TASSIGN : printf(" := "); break;
+			case TADD : printf(" + "); break;
+			case TNUM : printf("%d ", atoi(yytext)); break;
+			case TSEMI : printf(";"); break;
 		}
 	}
 }
