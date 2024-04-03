@@ -1,5 +1,5 @@
 {
-  int num
-  num := 0;
-  num := num + 526;
+int num
+num := 0;
+num := num + 526;
 }
