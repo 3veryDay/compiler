@@ -1,14 +1,14 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-enum tnumber { TEOF, TIDEN, TNUM, TASSIGN, TADD, TSEMI, TDOT, TBEGIN, TEND, TERROR};
+enum tnumber { TINT, TEOF, TIDEN, TNUM, TASSIGN, TADD, TSEMI, TDOT, TBEGIN, TEND, TERROR};
 %}
 letter [a-zA-Z_]
 digit [0-9]
 %%
-begin	return(TBEGIN);
-end	return(TEND);
-"int" return(TINT);
+"{"	return(TBEGIN);
+"}"	return(TEND);
+int	return(TINT);
 {letter}({letter}|{digit})*	return(TIDEN);
 ":="	return(TASSIGN);
 "+"	return(TADD);
@@ -17,8 +17,6 @@ end	return(TEND);
 \.	return(TDOT);
 [ \t\n]	;
 .	return(TERROR);
-"{" return(TBEGIN);
-"}" return(TEND);
 %%
 void main() {
 	enum tnumber tn; /* token number */
