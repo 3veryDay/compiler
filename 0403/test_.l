@@ -23,7 +23,7 @@ void main() {
 	printf(" Start of Lex\n");
 	while ((tn=yylex()) != TEOF) {
 		switch (tn) {
-      case TINT    :printf("Integer");
+      case TINT    :printf("Integer"); break;
 			case TBEGIN : printf("Begin\n"); break;
 			case TEND : printf("End\n"); break;
 			case TIDEN : printf("Identifier\n"); break;
