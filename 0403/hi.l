@@ -16,3 +16,16 @@ int  printf("integer");
 "}"  printf("\nend");
 .    printf("%s". yytest);
 %%
+void main() 
+{
+	printf("\nStart of Lex\n");
+	while ((yylex() != EOF) {
+		
+	}
+}
+
+int yywrap()
+{
+	printf("\nEnd of Lex \n");
+	return 1;
+}
