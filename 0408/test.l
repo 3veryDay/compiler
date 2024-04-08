@@ -100,9 +100,3 @@ int yywrap() {
 	printf(" 2171047 조윤아\n2176143 박소현\n2176365 조은혜\n2176368 지현서\n);
 	return 1;
 }
-
-int yywrap()
-{
-  printf("2176143 ParkSohyun 2171047 JoYoona 2176365 JoEunhye 2176368 JiHyunseo\n")
-  return 1;
-}
