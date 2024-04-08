@@ -19,44 +19,31 @@
 "while"		return(TWHILE);
 ____________________________________________________________________________________
 
-"11"
-return(tequal);
+"=="	return(TEQUAL);
 
-"!="
-return(tnotequ);
+"!="	return(TNOTEQU);
 
-"^=！"
-return(tlesse);
+"<="	return(TLESS);
 
-">="
-return(tgreate);
+">="	return(TGREATE);
 
-"&&"
-return(tand);
+"&&"	return(TAND);
 
-"||"
-return(tor);
+"||"	return(TOR);
 
-"++"
-return(tinc);
+"++"	return(TINC);
 
-"--"
-return(tdec);
+"--"	return(TDEC);
 
-"+="
-return(taddAssign);
+"+="	return(TADDASSIGN);
 
-"-="
-return(tsubAssign);
+"-="	return(TSUBASSIGN);
 
-"*="
-return(tmulAssign);
+"*="	return(TMULASSIGN);
 
-"/="
-return(tdivAssign);
+"/="	return(TDIVASSIGN);
 
-"%="
-return(tmodAssign);
+"%="	return(TMODASSIGN);
 -------------------------------------------------------------------------------
 [A-Za-z_][A-Za-z0-9]*
 return(tident);
