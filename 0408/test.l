@@ -47,7 +47,7 @@ void main() {
 			case TLESSE:	printf("TLESSE\t<="); break;
 			case TGREATE:	printf("TGREATE\t>="); break;
 			case TAND:	printf("TAND\t&&"); break;
-			case TOR	:	printf("TOR\t\tor"); break;
+			case TOR:	printf("TOR\t\tor"); break;
 			case TINC:	printf("TINC\t\tinc"); break;
 			case TDEC:	printf("TDEC\t\tdec"); break;
 			case TADDASSIGN:	printf("TADDASSIGN\taddassign"); break;
