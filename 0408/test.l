@@ -4,26 +4,19 @@
 
 %%
 
-"const"
-return(tconst);
+"const"	return(TCONST);
 
-"else"
-return(telse);
+"else"		return(TELSE);
 
-"if"
-return (tif);
+"if"		return (TIF);
 
-"int"
-return(tint);
+"int"		return(TINT);
 
-"return"
-return(treturn);
+"return"	return(TRETURN);
 
-"void"
-return(tvoid);
+"void"		return(TVOID);
 
-"while"
-return(twhile);
+"while"		return(TWHILE);
 ____________________________________________________________________________________
 
 "11"
