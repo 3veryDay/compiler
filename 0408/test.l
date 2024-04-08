@@ -70,10 +70,10 @@ void main() {
 			case TCONST 	: printf("TCOSNT\t\tconst"); break;
 			case TELSE 	: printf("TELSE\t\telse"); break;
 			case TIF		: printf("TIF\t\tif");break;
-			case TINT	: printf("TINT\tint); break;
-			case TRETURN	:printf("TRETURN\treturn); break;
-			case TVOID	:printf("TVOID\tvoid);break;
-			case TWHILE	:printf("TWHILE\twhile); break;
+			case TINT	: printf("TINT\tint"); break;
+			case TRETURN	:printf("TRETURN\treturn"); break;
+			case TVOID	:printf("TVOID\tvoid");break;
+			case TWHILE	:printf("TWHILE\twhile"); break;
 			case TEQUAL	:printf("TEQUAL\t=="); break;
 			case TNOTEQU	:printf("TNOTEQU\t!="); break;
 			case TLESSE 	:printf("TLESSE\t<="); break;
