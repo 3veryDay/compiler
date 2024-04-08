@@ -4,7 +4,7 @@
 
 %%
 
-"const"	return(TCONST);
+"const"	  return(TCONST);
 
 "else"		return(TELSE);
 
