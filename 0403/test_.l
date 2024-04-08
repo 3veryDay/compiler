@@ -34,6 +34,6 @@ void main() {
 }
 int yywrap() {
 	printf(" End of Lex\n");
-	printf(" 2171047 조윤아\n2176143 박소현\n2176365 조은혜\n2176368 지현서\n");
+	printf(" 2171047 \n2176143 \n2176365 \n2176368");
 	return 1;
 }
