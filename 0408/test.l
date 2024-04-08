@@ -1,5 +1,7 @@
 %{
-/* lex source for Mini C */
+#include <stdio.h>
+#include <stdlib.h>
+enum tnumber {TCONST, TELSE, TIF, TINT, TRETURN, TVOID, TWHILE, TEQUAL, TNOTEQU, TLESS, TGREATE, TAND, TOR, TINT, TDEC, TADDASSIGN, TSUBASSIGN, TMULASSIGN, TDIVASSIGN, TMODASSIGN};
 %}
 
 %%
