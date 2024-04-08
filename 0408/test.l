@@ -33,7 +33,6 @@ enum tnumber {TEOF, TCONST, TELSE, TIF, TINT, TRETURN, TVOID, TWHILE, TEQUAL, TN
 %%
 void main() {
 	enum tnumber tn; /* token number */
-	//printf(" Start of Lex\n"); 없어짐
 	while ((tn=yylex()) != TEOF) {
 		switch (tn) {
 			case TCONST:	printf("TCOSNT\t\tconst"); break;
