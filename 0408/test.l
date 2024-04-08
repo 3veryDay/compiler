@@ -54,14 +54,13 @@ void main() {
 			case TSUBASSIGN:	printf("TSUBASSIGN\tsubassign\n"); break;
 			case TMULASSIGN:	printf("TMULASSIGN\tmulassign\n"); break;
 			case TDIVASSIGN:	printf("TDIVASSIGN\tdivassign\n"); break;
-			case TMODASSIGN:	printf("TMODASSIGN\mulassign\n"); break;
+			case TMODASSIGN:	printf("TMODASSIGN\tmodassign\n"); break;
 			case TIDENT:	printf("TIDENT\t%s\n", yytext); break;
 			case TNUMBER:	printf("TNUMBER\t%s\n", yytext) ; break;
 		}
 	}
 }
 int yywrap() {
-	printf(" End of Lex\n");
 	printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
 	return 1;
 }
