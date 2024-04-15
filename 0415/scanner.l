@@ -1,3 +1,6 @@
+/*
+ lex file
+*/
 %{
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,7 +34,9 @@
 [ \t\n]	;
 ・	return(yytext[0]);
 %%
+//main 함수는 없어야 함.
 int yywrap() {
 	printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
 	return 1;
 }
+
