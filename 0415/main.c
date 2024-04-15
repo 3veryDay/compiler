@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "tn.h"
 extern yylex();
-extrrn char *yytext;
+extern char *yytext;
 void main() {
 	enum tnumber tn; /* token number */
 	while ((tn=yylex()) != TEOF) {
