@@ -1,5 +1,11 @@
+/*
+scanner.l - lexical analyzer for lab
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
+
+// 내가 작성한 파일은 " " 로 추가
 #include "tn.h"
 extern yylex();
 extern char *yytext;
