@@ -27,7 +27,7 @@ void report_error(int i, char *s) {
 
     //Illegal Identifier - over 12 characters
     //식별자는 12자 이내이어야 함
-    if (strlen(s) > 12) {
+    if (strlen(s) >= 12) {
         printf("%s\t -> Too Long Identifier, over 12 characters", s);
     }
     //Illegal Identifier - Starts with Digit
