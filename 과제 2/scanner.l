@@ -45,7 +45,14 @@ digit  [0-9]
 "["|"]"  return(TSQUARE);
 ";"  return(TSEMI);
 [/t/n ]  ;
-{letter}({letter}|{digit})*  symtable(yytext); return(TIDENT); 
+{letter}({letter}|{digit})*  {
+	if (yyleng <= 12) {
+		symtable(yytext); 
+		return(TIDENT); 
+	} else {
+		return(TERROR);
+	}
+}
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+(e[+-]?[0-9]+)?  return(TFLOAT);
 [^ /t/n]*  report_error(yylineno, yytext);
