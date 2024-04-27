@@ -17,11 +17,11 @@ extern int STindex;
 void main(){
     enum tnumber tn;
 
-    printf(" Start of Lex\n");
+    PrintHeading();
 
     while((tn=yylex()) != EOF){
-        // printtoken 함수를 호출하여 토큰에 대한 정보를 출력한다.
-        printtoken(tn);
+        // PrintToken 함수를 호출하여 토큰에 대한 정보를 출력한다.
+        PrintToken(tn);
     }
     // 에러가 없는 경우 에러가 없다고 출력한다.
     if(cErrors == 0){
@@ -34,11 +34,16 @@ void main(){
 
     printf("End of LEX\n");
 }
+// PrintHeading: 토큰 출력 전 헤딩을 출력해주는 함수
+void PrintHeading(){
+    printf("Line number\tToken type\tST-index\tToken");
+    printf("\n");
+}
 
 // printtoken: 토큰을 출력해주는 함수
 // yylineno: 렉스 정규표현과 매칭된 문자열이 있는 행 정보
 // yytext: 렉스 정규표현과 매칭된 문자열
-printtoken(enum tnumber tn) {
+void PrintToken(enum tnumber tn) {
 	switch(tn)
         case TCOMMENT:  printf("%d\t\tcomment\t\t\t\t%s\n",yylineno,yytext); break;
         case TCONST:        printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
@@ -77,4 +82,5 @@ printtoken(enum tnumber tn) {
         case TSEMI:         printf("%d\t\tsemicolon\t\t\t\t%s\n", yylineno, yytext); break;
         case TIDENT:		printf("%d\t\tident\t\t%d\t\t%s\n", yylineno, STindex, yytext); break;
         case TNUMBER:		printf("%d\t\tnumber\t\t\t\t%s\n", yylineno, yytext); break;
+        case TFLOAT:        printf("%d\t\tfloat number\t\t\t\t%s\n", yylineno, yytext); break;
 }
