@@ -5,8 +5,8 @@ date - 2024/04/28
 */
 #include <stdio.h>
 #include "tn.h"`  /* token name definition */
-extern symtable
-extern report_error
+extern void symtable();
+extern void report_error();
 %}
 letter  [a-zA-Z_]
 digit  [0-9]
