@@ -13,14 +13,8 @@
 char ST[STsize];   // String Table 선언
 int STindex = 0;   // 다음으로 사용 가능한 ST의 인덱스
 
-// Initialize String Table
-void initST() {
-    // ST를 초기화하는 경우 여기에 작성
-    STindex = 0;  // 초기화 후 다음으로 사용 가능한 인덱스는 0부터 시작
-}
-
 // Add Identifier to String Table
-void addToST(char *yytext) {
+void symtable(char *yytext) {
     int i = 0;
     while (yytext[i] != '\0') {
         // ST에 식별자의 각 문자 추가
