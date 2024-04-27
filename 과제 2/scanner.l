@@ -10,7 +10,6 @@ letter  [a-zA-Z_]
 digit  [0-9]
 %%
 "//".*  return(TCOMMENT);
-{digit}+  return(TNUMBER);
 "const"  return(TCONST);
 "else"  return(TELSE);
 "if"  return(TIF);
@@ -38,7 +37,7 @@ digit  [0-9]
 ">"  return(TGREAT)'
 "<="  return(TLESSEQU);
 ">="  return(TGREATEQU);
-"++"  return((TINC);
+"++"  return(TINC);
 "--"  return(TDEC);
 "("|")"  return(TPAREN);
 ","  return(TCOMMA);
@@ -47,6 +46,7 @@ digit  [0-9]
 ";"  return(TSEMI);
 [/t/n ]  ;
 {letter}({letter}|{digit})*  return(TIDNET);
+{digit}+  return(TNUMBER);
 [^ /t/n]*  return(TERROR);
 %%
 int yywrap() {
