@@ -48,7 +48,7 @@ digit  [0-9]
 {letter}({letter}|{digit})*  return(TIDENT);
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+(e[+-]?[0-9]+)?  return(TFLOAT);
-[^ /t/n]*  return(TERROR);
+[^ /t/n]*  report_error(yylineno, yytext);
 %%
 int yywrap() {
 	printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
