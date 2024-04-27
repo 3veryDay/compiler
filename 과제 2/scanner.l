@@ -9,8 +9,7 @@ date - 2024/04/28
 letter  [a-zA-Z_]
 digit  [0-9]
 %%
-"//".  return(TCOMMENT);
-{letter}({letter}|{digit})*  return(TIDNET);
+"//".*  return(TCOMMENT);
 {digit}+  return(TNUMBER);
 "const"  return(TCONST);
 "else"  return(TELSE);
@@ -47,6 +46,7 @@ digit  [0-9]
 "["|"]"  return(TSQUARE);
 ";"  return(TSEMI);
 [/t/n ]  ;
+{letter}({letter}|{digit})*  return(TIDNET);
 .  return(TERROR);
 %%
 int yywrap() {
