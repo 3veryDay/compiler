@@ -45,7 +45,7 @@ digit  [0-9]
 "["|"]"  return(TSQUARE);
 ";"  return(TSEMI);
 [/t/n ]  ;
-{letter}({letter}|{digit})*  return(TIDNET);
+{letter}({letter}|{digit})*  return(TIDENT);
 {digit}+  return(TNUMBER);
 [^ /t/n]*  return(TERROR);
 %%
