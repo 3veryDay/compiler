@@ -4,6 +4,10 @@ date - 2024/04/28
 */
 #include <stdio.h>
 #include <ctype.h>
+
+//에러 카운트(마지막에 출력)
+int cErrors = 0;
+
 /* Function to report error for mixed characters */
 //report_error 함수(줄 위치 i, yytext에 있는 token s)
 void report_error(int i, char *s) {
