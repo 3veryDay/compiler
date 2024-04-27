@@ -47,6 +47,7 @@ digit  [0-9]
 [/t/n ]  ;
 {letter}({letter}|{digit})*  return(TIDENT);
 {digit}+  return(TNUMBER);
+{digit}+"."{digit}+(e[+-]?[0-9]+)?  return(TFLOAT);
 [^ /t/n]*  return(TERROR);
 %%
 int yywrap() {
