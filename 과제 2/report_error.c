@@ -17,17 +17,20 @@ void report_error(int i, char *s) {
     //공통 부분 출력 - ST-index - 비어있는 부분
     printf("\t\t\t");
 
+    //Illegal Identifier - Starts with Digit
+    //식별자는 숫자로 시작하면 안됨
     if(isdigit(s[0])) {
         printf("%s\t\t -> Starts with Digit",s);
     }
+
+    //Illegal Identifier - over 12 characters
+    //식별자는 12자 이내이어야 함
     else if (strlen(s) > 12) {
         printf("%s\t -> Too Long Identifier, over 12 characters", s);
     }
+    //Illegal Character
+    //정의되지 않은 문자를 사용하면 안됨.-
     else {
         printf("%s\t\t -> Illegal Character ", s);
     }
-
-
-
-
 }
