@@ -14,7 +14,7 @@ digit  [0-9]
 "const"  return(TCONST);
 "else"  return(TELSE);
 "if"  return(TIF);
-"int"  return(TINST);
+"int"  return(TINT);
 "return"  return(TRETURN);
 "void"  return(TVOID);
 "while"  return(TWHILE);
