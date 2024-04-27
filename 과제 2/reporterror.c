@@ -8,6 +8,8 @@ date - 2024/04/28
 //report_error 함수(줄 위치 i, yytext에 있는 token s)
 void report_error(int i, char *s) {
 
+    //토큰 분류에서 오류가 나는 경우(scanner.l에서 . -> TERROR 선언)
+    
     //공통 부분 출력 - Line Number 출력
     printf("%d\t\t", i);
 
