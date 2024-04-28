@@ -101,4 +101,3 @@ void main(){
 
     printf("End of LEX\n");
 }
-
