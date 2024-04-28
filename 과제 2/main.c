@@ -14,7 +14,7 @@ extern int cErrors;
 extern int STindex;
 
 // yylineno: Line number 출력을 위한 변수
-// int yylineno = 0;
+extern int yylineno;
 
 
 void main(){
