@@ -87,9 +87,10 @@ void PrintToken(enum tnumber tn) {
         case TCURLY:        printf("%d\t\tcurly bracket\t\t\t\t%s\n", yylineno, yytext); break;
         case TSQUARE:       printf("%d\t\tsquare bracket\t\t\t\t%s\n", yylineno, yytext); break;
         case TSEMI:         printf("%d\t\tsemicolon\t\t\t\t%s\n", yylineno, yytext); break;
-        // 
+        // White Spaces: blank, tab, newline
+        case TBLANK:        break;
+        case TTAB:          break;
         case TNEWLINE:      yylineno++; break;
-        case TERROR:        break;
         // Identifier (명칭)
         case TIDENT:		printf("%d\t\tident\t\t%d\t\t%s\n", yylineno, STindex, yytext); break;
         // Constant (상수): 정수 상수, 실수
