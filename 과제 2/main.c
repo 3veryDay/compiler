@@ -61,11 +61,11 @@ void PrintToken(enum tnumber tn) {
         	case TINC:	    	printf("%d\t\toperator\t\t\t%s\n", yylineno, yytext); break;
         	case TDEC:	    	printf("%d\t\toperator\t\t\t%s\n", yylineno, yytext); break;
         	// Special Symbols: 괄호, 중괄호, 대괄호, 콤마, 세미콜론
-        	case TPAREN:        	printf("%d\t\tparenthesis\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TPAREN:        	printf("%d\t\tparenthesis\t\t\t%s\n", yylineno, yytext); break;
         	case TCOMMA:        	printf("%d\t\tcomma\t\t\t\t%s\n", yylineno, yytext); break;
-        	case TCURLY:        	printf("%d\t\tcurly bracket\t\t\t\t%s\n", yylineno, yytext); break;
-        	case TSQUARE:       	printf("%d\t\tsquare bracket\t\t\t\t%s\n", yylineno, yytext); break;
-        	case TSEMI:         	printf("%d\t\tsemicolon\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TCURLY:        	printf("%d\t\tcurly bracket\t\t\t%s\n", yylineno, yytext); break;
+        	case TSQUARE:       	printf("%d\t\tsquare bracket\t\t\t%s\n", yylineno, yytext); break;
+        	case TSEMI:         	printf("%d\t\tsemicolon\t\t\t%s\n", yylineno, yytext); break;
         	// White Spaces: blank, tab, newline
         	case TBLANK:        	break;
         	case TTAB:          	break;
@@ -74,7 +74,7 @@ void PrintToken(enum tnumber tn) {
         	case TIDENT:		printf("%d\t\tident\t\t%d\t\t%s\n", yylineno, STindex, yytext); break;
         	// Constant (상수): 정수 상수, 실수
         	case TNUMBER:		printf("%d\t\tnumber\t\t\t\t%s\n", yylineno, yytext); break;
-        	case TFLOAT:        	printf("%d\t\tfloat number\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TFLOAT:        	printf("%d\t\tfloat number\t\t\t%s\n", yylineno, yytext); break;
     }	
 }
 
