@@ -46,7 +46,9 @@ digit  [0-9]
 "{"|"}"  return(TCURLY);
 "["|"]"  return(TSQUARE);
 ";"  return(TSEMI);
-[/t/n ]  ;
+" "	return(TBLANK);
+/t	return(TTAB);
+/n	return(TNEWLINE);
 {letter}({letter}|{digit})*  {
 	if (yyleng <= 12) {
 		symtable(yytext); 
