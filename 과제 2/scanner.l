@@ -7,7 +7,7 @@ date - 2024/04/28
 #include "tn.h"`  /* token name definition */
 extern void symtable();
 extern void report_error();
-int yylineno = 0;
+int yylineno = 1;
 %}
 letter  [a-zA-Z_]
 digit  [0-9]
