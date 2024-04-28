@@ -94,7 +94,7 @@ void main(){
     }
     // 에러가 있는 경우 몇 번의 에러가 있었는지 출력한다.
     else{
-        printf("%d errors detected", cErrors);
+        printf("\n%d errors detected", cErrors);
     }
 
 }
