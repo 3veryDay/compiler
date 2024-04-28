@@ -14,7 +14,7 @@ extern int cErrors;
 extern int STindex;
 
 // yylineno: Line number 출력을 위한 변수
-int yylineno = 0;
+// int yylineno = 0;
 
 
 void main(){
@@ -90,7 +90,7 @@ void PrintToken(enum tnumber tn) {
         // White Spaces: blank, tab, newline
         case TBLANK:        break;
         case TTAB:          break;
-        case TNEWLINE:      yylineno++; break;
+        case TNEWLINE:      break;
         // Identifier (명칭)
         case TIDENT:		printf("%d\t\tident\t\t%d\t\t%s\n", yylineno, STindex, yytext); break;
         // Constant (상수): 정수 상수, 실수
