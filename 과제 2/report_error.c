@@ -28,16 +28,16 @@ void report_error(int i, char *s) {
     //Illegal Identifier - over 12 characters
     //식별자는 12자 이내이어야 함
     if (strlen(s) >= 12) {
-        printf("%s -> Too Long Identifier, over 12 characters", s);
+        printf("%s -> Too Long Identifier, over 12 characters\n", s);
     }
     //Illegal Identifier - Starts with Digit
     //식별자는 숫자로 시작하면 안됨
     else if(isdigit(s[0])) {
-        printf("%s -> Starts with Digit",s);
+        printf("%s -> Starts with Digit\n",s);
     }
     //Illegal Character
     //정의되지 않은 문자를 사용하면 안됨.-
     else {
-        printf("%s -> Illegal Character ", s);
+        printf("%s -> Illegal Character\n ", s);
     }
 }
