@@ -7,7 +7,7 @@ date - 2024/04/28
 #include "tn.h"`  /* token name definition */
 extern void symtable();
 extern void report_error();
-int lineno = 0;
+int yylineno = 0;
 %}
 letter  [a-zA-Z_]
 digit  [0-9]
@@ -49,18 +49,18 @@ digit  [0-9]
 ";"  return(TSEMI);
 " "	return(TBLANK);
 /t	return(TTAB);
-/n	{ lineno++; return(TNEWLINE);}
+/n	{ yylineno++; return(TNEWLINE);}
 {letter}({letter}|{digit})*  {
 	if (yyleng <= 12) {
 		symtable(yytext); 
 		return(TIDENT); 
 	} else {
-		 report_error(lineno, yytext);
+		 report_error(yylineno, yytext);
 	}
 }
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+(e[+-]?[0-9]+)?  return(TFLOAT);
-[^ /t/n]*  report_error(lineno, yytext);
+[^ /t/n]*  report_error(yylineno, yytext);
 %%
 int yywrap() {
 	printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
