@@ -4,7 +4,7 @@ programmer - 조윤아
 date - 2024/04/28
 */
 #include <stdio.h>
-#include "tn.h"`  /* token name definition */
+#include "tn.h"  /* token name definition */
 extern void symtable();
 extern void report_error();
 int yylineno = 1;
