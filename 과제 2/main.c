@@ -15,7 +15,7 @@ extern int STindex;
 // 
 extern char *yytext;
 // yylineno: Line number 출력을 위한 변수
-extern int yylineno = 0;
+extern int yylineno;
 // PrintHeading: 토큰 출력 전 헤딩을 출력해주는 함수
 void PrintHeading(){
     printf("Line number\tToken type\tST-index\tToken");
