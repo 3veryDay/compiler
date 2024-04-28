@@ -84,7 +84,7 @@ void main(){
 
     PrintHeading();
 
-    while((tn=yylex()) != EOF){
+    while((tn=yylex()) != TEOF){
         // PrintToken 함수를 호출하여 토큰에 대한 정보를 출력한다.
         PrintToken(tn);
     }
