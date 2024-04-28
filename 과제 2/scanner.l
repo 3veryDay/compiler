@@ -36,7 +36,7 @@ digit  [0-9]
 "=="  return(TEQUAL);
 "!="  return(TNOTEQU);
 "<"  return(TLESS);
-">"  return(TGREAT)'
+">"  return(TGREAT);
 "<="  return(TLESSEQU);
 ">="  return(TGREATEQU);
 "++"  return(TINC);
