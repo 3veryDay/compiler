@@ -13,6 +13,9 @@ extern int cErrors;
 // Stindex: symtable.c에서 저장한 identifier의 ST-index
 extern int STindex;
 
+// yylineno: Line number 출력을 위한 변수
+int yylineno = 0;
+
 
 void main(){
     enum tnumber tn;
@@ -84,6 +87,9 @@ void PrintToken(enum tnumber tn) {
         case TCURLY:        printf("%d\t\tcurly bracket\t\t\t\t%s\n", yylineno, yytext); break;
         case TSQUARE:       printf("%d\t\tsquare bracket\t\t\t\t%s\n", yylineno, yytext); break;
         case TSEMI:         printf("%d\t\tsemicolon\t\t\t\t%s\n", yylineno, yytext); break;
+        // 
+        case TNEWLINE:      yylineno++; break;
+        case TERROR:        break;
         // Identifier (명칭)
         case TIDENT:		printf("%d\t\tident\t\t%d\t\t%s\n", yylineno, STindex, yytext); break;
         // Constant (상수): 정수 상수, 실수
