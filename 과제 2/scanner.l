@@ -48,8 +48,8 @@ digit  [0-9]
 "["|"]"  return(TSQUARE);
 ";"  return(TSEMI);
 " "	return(TBLANK);
-/t	return(TTAB);
-/n	{ yylineno++; return(TNEWLINE);}
+\t	return(TTAB);
+\n	{ yylineno++; return(TNEWLINE);}
 {letter}({letter}|{digit})*  {
 	if (yyleng <= 12) {
 		symtable(yytext); 
@@ -60,7 +60,7 @@ digit  [0-9]
 }
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+(e[+-]?[0-9]+)?  return(TFLOAT);
-[^ /t/n]*  report_error(yylineno, yytext);
+[^ \t\n]*  report_error(yylineno, yytext);
 %%
 int yywrap() {
 	printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
