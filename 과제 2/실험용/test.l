@@ -1,8 +1,6 @@
 %{
 #include <stdio.h>
-#include "tn.h"  /* token name definition */
-extern void symtable(char *yytext);
-extern void report_error(int i, char *s);
+#include <stdlib.h>
 
 %}
 letter  [a-zA-Z_]
@@ -92,12 +90,6 @@ void symtable(char *yytext) {
     }
 }
 
-// PrintHeading: 토큰 출력 전 헤딩을 출력해주는 함수
-void PrintHeading(){
-    printf("Line number\tToken type\tST-index\tToken");
-    printf("\n");
-}
-
 //에러 카운트(마지막에 출력)
 int cErrors = 0;
 
@@ -133,6 +125,12 @@ void report_error(int i, char *s) {
     else {
         printf("%s\t\t -> Illegal Character ", s);
     }
+}
+
+// PrintHeading: 토큰 출력 전 헤딩을 출력해주는 함수
+void PrintHeading(){
+    printf("Line number\tToken type\tST-index\tToken");
+    printf("\n");
 }
 
 // printtoken: 토큰을 출력해주는 함수
