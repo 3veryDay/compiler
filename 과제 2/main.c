@@ -49,53 +49,53 @@ void PrintHeading(){
 // yytext: 렉스 정규표현과 매칭된 문자열
 void PrintToken(enum tnumber tn) {
 	switch(tn){
-        // 주석
-        case TCOMMENT:  printf("%d\t\tcomment\t\t\t\t%s\n",yylineno,yytext); break;
-        // Keyword (예약어)
-        case TCONST:        printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
-        case TELSE:         printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
-        case TIF:           printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
-        case TINT:          printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
-        case TRETURN:       printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
-        case TVOID:         printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
-        case TWHILE:	    printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
-        // Operator (연산자): 사칙연산자, 배정연산자, 논리연산자, 관계연산자, 증감연산자
-        case TADD:          printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TSUB:          printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TMUL:          printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TDIV:          printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TMOD:          printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TASSIGN:       printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TADDASSIGN:	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TSUBASSIGN:	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TMULASSIGN:	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TDIVASSIGN:	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TMODASSIGN:	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TNOT:          printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TAND:		    printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TOR:		    printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TEQUAL:	    printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TNOTEQU:	    printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TLESS:	        printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TGREAT:	    printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TLESSEQU:      printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TGREATEQU:     printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TINC:		    printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        case TDEC:		    printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
-        // Special Symbols: 괄호, 중괄호, 대괄호, 콤마, 세미콜론
-        case TPAREN:        printf("%d\t\tparenthesis\t\t\t\t%s\n", yylineno, yytext); break;
-        case TCOMMA:        printf("%d\t\tcomma\t\t\t\t%s\n", yylineno, yytext); break;
-        case TCURLY:        printf("%d\t\tcurly bracket\t\t\t\t%s\n", yylineno, yytext); break;
-        case TSQUARE:       printf("%d\t\tsquare bracket\t\t\t\t%s\n", yylineno, yytext); break;
-        case TSEMI:         printf("%d\t\tsemicolon\t\t\t\t%s\n", yylineno, yytext); break;
-        // White Spaces: blank, tab, newline
-        case TBLANK:        break;
-        case TTAB:          break;
-        case TNEWLINE:      break;
-        // Identifier (명칭)
-        case TIDENT:		printf("%d\t\tident\t\t%d\t\t%s\n", yylineno, STindex, yytext); break;
-        // Constant (상수): 정수 상수, 실수
-        case TNUMBER:		printf("%d\t\tnumber\t\t\t\t%s\n", yylineno, yytext); break;
-        case TFLOAT:        printf("%d\t\tfloat number\t\t\t\t%s\n", yylineno, yytext); break;
-    }
+        	// 주석
+        	case TCOMMENT:		printf("%d\t\tcomment\t\t\t\t%s\n",yylineno,yytext); break;
+        	// Keyword (예약어)
+        	case TCONST:		printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TELSE:         	printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TIF:           	printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TINT:          	printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TRETURN:       	printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TVOID:         	printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TWHILE:	    	printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
+        	// Operator (연산자): 사칙연산자, 배정연산자, 논리연산자, 관계연산자, 증감연산자
+        	case TADD:          	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TSUB:          	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TMUL:          	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TDIV:          	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TMOD:          	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TASSIGN:       	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TADDASSIGN:	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TSUBASSIGN:	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TMULASSIGN:	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TDIVASSIGN:	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TMODASSIGN:	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TNOT:      	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TAND:		printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TOR:		printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TEQUAL:	    	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TNOTEQU:	    	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TLESS:	        printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TGREAT:	    	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TLESSEQU:      	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TGREATEQU:     	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TINC:	    	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TDEC:	    	printf("%d\t\toperator\t\t\t\t%s\n", yylineno, yytext); break;
+        	// Special Symbols: 괄호, 중괄호, 대괄호, 콤마, 세미콜론
+        	case TPAREN:        	printf("%d\t\tparenthesis\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TCOMMA:        	printf("%d\t\tcomma\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TCURLY:        	printf("%d\t\tcurly bracket\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TSQUARE:       	printf("%d\t\tsquare bracket\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TSEMI:         	printf("%d\t\tsemicolon\t\t\t\t%s\n", yylineno, yytext); break;
+        	// White Spaces: blank, tab, newline
+        	case TBLANK:        	break;
+        	case TTAB:          	break;
+        	case TNEWLINE:      	break;
+        	// Identifier (명칭)
+        	case TIDENT:		printf("%d\t\tident\t\t%d\t\t%s\n", yylineno, STindex, yytext); break;
+        	// Constant (상수): 정수 상수, 실수
+        	case TNUMBER:		printf("%d\t\tnumber\t\t\t\t%s\n", yylineno, yytext); break;
+        	case TFLOAT:        	printf("%d\t\tfloat number\t\t\t\t%s\n", yylineno, yytext); break;
+    }	
 }
