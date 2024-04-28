@@ -7,7 +7,7 @@ date - 2024/04/28
 #include "tn.h"  /* token name definition */
 extern void symtable();
 extern void report_error();
-int yylineno = 1;
+
 %}
 letter  [a-zA-Z_]
 digit  [0-9]
@@ -49,7 +49,7 @@ digit  [0-9]
 ";"  return(TSEMI);
 " "	return(TBLANK);
 \t	return(TTAB);
-\n	{ yylineno++; return(TNEWLINE);}
+\n	{return(TNEWLINE);}
 {letter}({letter}|{digit})*  {
 	if (yyleng <= 12) {
 		symtable(yytext); 
