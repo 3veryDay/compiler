@@ -49,7 +49,7 @@ digit  [0-9]
 ";"  return(TSEMI);
 " "	return(TBLANK);
 /t	return(TTAB);
-/n	lineno++; return(TNEWLINE);
+/n	{ lineno++; return(TNEWLINE);}
 {letter}({letter}|{digit})*  {
 	if (yyleng <= 12) {
 		symtable(yytext); 
