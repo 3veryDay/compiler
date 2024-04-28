@@ -11,6 +11,7 @@ extern void report_error(int i, char *s);
 %}
 letter  [a-zA-Z_]
 digit  [0-9]
+%option yylineno
 %%
 "//".*  return(TCOMMENT);
 "const"  return(TCONST);
