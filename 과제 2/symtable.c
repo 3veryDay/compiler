@@ -21,9 +21,7 @@ void symtable(char *yytext) {
         if (STindex < STsize) {
             ST[STindex++] = yytext[i];
         } else {
-            // ST 오버플로우 처리. 여기도 report_error로 빼야 하는지?
-            // report_error(yylineno, yytext) 아니면
-            // printf("Error: String Table overflow\n");
+            printf("Error: String Table overflow\n");
             exit(EXIT_FAILURE); 
         }
         i++;
@@ -32,9 +30,7 @@ void symtable(char *yytext) {
     if (STindex < STsize) {
         ST[STindex++] = '\0';
     } else {
-        // ST 오버플로우 처리 (위와 마찬가지)
-        // report_error(yylineno, yytext) 아니면
-        // printf("Error: String Table overflow\n");
+        printf("Error: String Table overflow\n");
         exit(EXIT_FAILURE);
     }
 }
