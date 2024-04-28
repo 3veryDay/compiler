@@ -97,5 +97,4 @@ void main(){
         printf("%d errors detected", cErrors);
     }
 
-    printf("End of LEX\n");
 }
