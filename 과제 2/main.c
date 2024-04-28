@@ -12,24 +12,43 @@ extern yylex();
 extern int cErrors;
 // Stindex: symtable.c에서 저장한 identifier의 ST-index
 extern int STindex;
-
-// yylineno: Line number 출력을 위한 변수
-extern int yylineno;
-//yytext   : ㅇㅇ
+// 
 extern char *yytext;
+// yylineno: Line number 출력을 위한 변수
+extern int yylineno = 0;
 
+
+void main(){
+    enum tnumber tn;
+
+    PrintHeading();
+
+    while((tn=yylex()) != EOF){
+        // PrintToken 함수를 호출하여 토큰에 대한 정보를 출력한다.
+        PrintToken(tn);
+    }
+    // 에러가 없는 경우 에러가 없다고 출력한다.
+    if(cErrors == 0){
+        printf("No errors detected ");
+    }
+    // 에러가 있는 경우 몇 번의 에러가 있었는지 출력한다.
+    else{
+        printf("%d errors detected", cErrors);
+    }
+
+    printf("End of LEX\n");
+}
 // PrintHeading: 토큰 출력 전 헤딩을 출력해주는 함수
 void PrintHeading(){
     printf("Line number\tToken type\tST-index\tToken");
     printf("\n");
 }
 
-
 // printtoken: 토큰을 출력해주는 함수
 // yylineno: 렉스 정규표현과 매칭된 문자열이 있는 행 정보
 // yytext: 렉스 정규표현과 매칭된 문자열
 void PrintToken(enum tnumber tn) {
-	switch(tn)
+	switch(tn){
         // 주석
         case TCOMMENT:  printf("%d\t\tcomment\t\t\t\t%s\n",yylineno,yytext); break;
         // Keyword (예약어)
@@ -78,26 +97,5 @@ void PrintToken(enum tnumber tn) {
         // Constant (상수): 정수 상수, 실수
         case TNUMBER:		printf("%d\t\tnumber\t\t\t\t%s\n", yylineno, yytext); break;
         case TFLOAT:        printf("%d\t\tfloat number\t\t\t\t%s\n", yylineno, yytext); break;
-}
-
-
-void main(){
-    enum tnumber tn;
-
-    PrintHeading();
-
-    while((tn=yylex()) != EOF){
-        // PrintToken 함수를 호출하여 토큰에 대한 정보를 출력한다.
-        PrintToken(tn);
     }
-    // 에러가 없는 경우 에러가 없다고 출력한다.
-    if(cErrors == 0){
-        printf("No errors detected ");
-    }
-    // 에러가 있는 경우 몇 번의 에러가 있었는지 출력한다.
-    else{
-        printf("%d errors detected", cErrors);
-    }
-
-    printf("End of LEX\n");
 }
