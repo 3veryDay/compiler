@@ -23,7 +23,7 @@ void report_error(int i, char *s) {
     printf("**Error**");
 
     //공통 부분 출력 - ST-index - 비어있는 부분
-    printf("\t\t\t\t");
+    printf("\t\t\t");
 
     //Illegal Identifier - over 12 characters
     //식별자는 12자 이내이어야 함
