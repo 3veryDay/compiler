@@ -38,6 +38,6 @@ void report_error(int i, char *s) {
     //Illegal Character
     //정의되지 않은 문자를 사용하면 안됨.-
     else {
-        printf("%s -> Illegal Character\n ", s);
+        printf("%s -> Illegal Character\n", s);
     }
 }
