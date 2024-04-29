@@ -15,15 +15,23 @@ int STindex = 0;   // 다음으로 사용 가능한 ST의 인덱스
 
 // ST에 동일한 identifier가 있는지 확인하는 함수
 int isIdentifierExists(char *yytext) {
-    int i;
+    int i, j;
+    int yytext_len = strlen(yytext);
     for (i = 0; i < STindex; i++) {
-        // 새로운 identifier와 ST 내 기존 identifiers 비교
-        if (strcmp(&ST[i], yytext) == 0) {
-            return 1; // Identifier 이미 존재
+        // Compare each character of yytext with the characters in ST
+        for (j = 0; j < yytext_len; j++) {
+            if (ST[i + j] != yytext[j]) {
+                break; // If any character does not match, break the loop
+            }
+        }
+        if (j == yytext_len) {
+            return 1; // If all characters match, return 1 (Identifier already exists)
         }
     }
-    return 0; // Identifier 겹치지 않음
+    return 0; // Identifier does not exist
 }
+
+
 
 // 기존의 것과 겹치지 않는 new identifier일 때 실행
 void symtable(char *yytext) {
