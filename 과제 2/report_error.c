@@ -25,9 +25,14 @@ void report_error(int i, char *s) {
     //공통 부분 출력 - ST-index - 비어있는 부분
     printf("\t\t\t");
 
+    //Illegal Identifier - over 12 characters and starts with digit
+    //식별자는 12자 이상이면서 숫자로 시작하면 error 출력
+    if (strlen(s) >= 12 && isdigit(s[0]) {
+        printf("%s\t -> Illegal identifier, Over 12 characters, and Starts with Digit\n",s);
+    }
     //Illegal Identifier - over 12 characters
     //식별자는 12자 이상이면 error 출력
-    if (strlen(s) >= 12) {
+    else if (strlen(s) >= 12) {
         printf("%s\t-> Illegal Identifier, Over 12 characters\n", s);
     }
     //Illegal Identifier - Starts with Digit
