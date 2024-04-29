@@ -12,7 +12,7 @@
 
 char ST[STsize];   // String Table 정의
 int STindextail = 0;   // 다음으로 사용 가능한 ST의 인덱스
-int STindex = 0;
+int STindex = 0;      // 해당 identifier가 저장된 ST 내 첫번째 주소
 int tmp = 0;
 
 // ST에 동일한 identifier가 있는지 확인하는 함수
