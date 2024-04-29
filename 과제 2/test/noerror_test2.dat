@@ -1,17 +1,1 @@
-//include 
-//<stdio.h>
 
-
-int main(void)
-{
-    int a, b;
-    int sum;
- 
-    scanf("%d", &a);  
-    scanf("%d", &b);  
-    
-    sum = a + b;
-    
-    printf("sum = %d\n", sum); //결과를 화면에 출력
-    return 0;
-}
