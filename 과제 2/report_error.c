@@ -1,5 +1,5 @@
 /* report_error.c - Function to report error for mixed characters
-programmer - 11
+programmer - 지현서
 date - 2024/04/28
 */
 #include <stdio.h>
