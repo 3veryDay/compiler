@@ -12,6 +12,7 @@
 
 char ST[STsize];   // String Table 정의
 int STindex = 0;   // 다음으로 사용 가능한 ST의 인덱스
+int tmp = 0;
 
 // ST에 동일한 identifier가 있는지 확인하는 함수
 int isIdentifierExists(char *yytext) {
@@ -25,7 +26,7 @@ int isIdentifierExists(char *yytext) {
             }
         }
         if (j == yytext_len) {
-            return 1; // If all characters match, return 1 (Identifier already exists)
+            return j; // If all characters match, return 1 (Identifier already exists)
         }
     }
     return 0; // Identifier does not exist
@@ -35,8 +36,9 @@ int isIdentifierExists(char *yytext) {
 
 // 기존의 것과 겹치지 않는 new identifier일 때 실행
 void symtable(char *yytext) {
+    if (tmp != 0) { STindex = tmp; tmp = 0;  }
     // 존재 여부 확인
-    if (!isIdentifierExists(yytext)) {
+    if (isIdentifierExists(yytext) == 0) {
         int i = 0;
         while (yytext[i] != '\0') {
             // ST에 식별자의 각 문자 추가
@@ -55,5 +57,9 @@ void symtable(char *yytext) {
             printf("Error: String Table overflow\n");
             exit(EXIT_FAILURE);
         }
+    }
+    else {
+        tmp = STindex;
+        STindex = isIdentifierExists(yytext) + 1;
     }
 }
