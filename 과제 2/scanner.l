@@ -61,6 +61,7 @@ digit  [0-9]
 }
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+(e[+-]?[0-9]+)?  return(TFLOAT);
+// . report_error(yylineno, yytext);
 [^ \t\n]*  report_error(yylineno, yytext);
 %%
 int yywrap() {
