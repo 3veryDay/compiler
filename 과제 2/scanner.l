@@ -48,9 +48,9 @@ digit  [0-9]
 "{"|"}"  return(TCURLY);
 "["|"]"  return(TSQUARE);
 ";"  return(TSEMI);
-" "	return(TBLANK);
-\t	return(TTAB);
-\n	return(TNEWLINE);
+" "	return(TBLANK);		// 공백 정의
+\t	return(TTAB);		// 탭 정의
+\n	return(TNEWLINE);	// 엔터 정의의
 {letter}({letter}|{digit})*  {
 	if (yyleng <= 12) {
 		symtable(yytext);	
@@ -62,7 +62,7 @@ digit  [0-9]
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+(e[+-]?[0-9]+)?  return(TFLOAT);
 
-.  report_error(yylineno, yytext);
+.  report_error(yylineno, yytext);	// 인식되지 않는 경우 에러 처리
 %%
 int yywrap() {
 	printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
