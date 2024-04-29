@@ -1,0 +1,8 @@
+//include <stdio.h>
+//error_test1 - error
+int main() {
+    const int 2aa = 20 ;
+    A = "Hi my name is Compiler" ;
+    printf(2aa);
+    printf(A);
+}
