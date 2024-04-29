@@ -27,8 +27,6 @@ void PrintHeading(){
 // yytext: 렉스 정규표현과 매칭된 문자열
 void PrintToken(enum tnumber tn) {
 	switch(tn){
-        	// 주석
-        	case TCOMMENT:		printf("%d\t\tcomment\t\t\t\t%s\n",yylineno,yytext); break;
         	// Keyword (예약어)
         	case TCONST:		printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
         	case TELSE:         	printf("%d\t\tkeyword\t\t\t\t%s\n", yylineno, yytext); break;
