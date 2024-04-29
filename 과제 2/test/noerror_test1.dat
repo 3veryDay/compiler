@@ -4,6 +4,6 @@ int main() {
     const float a = 00.300;
     const float b = 00.222;
     const sum = a + b;
-    printf("sum is %f", sum);
+    printf(sum);
     return 0;
 }
