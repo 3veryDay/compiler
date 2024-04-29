@@ -87,14 +87,15 @@ void main(){
         // PrintToken 함수를 호출하여 토큰에 대한 정보를 출력한다.
         PrintToken(tn);
 
-	    // 에러가 없는 경우 에러가 없다고 출력한다.
+	   
+    }
+	 // 에러가 없는 경우 에러가 없다고 출력한다.
     if(cErrors == 0){
         printf("\nNo errors detected\n");
     }
     // 에러가 있는 경우 몇 번의 에러가 있었는지 출력한다.
     else{
         printf("\n%d errors detected\n", cErrors);
-    }
     }
     
 
