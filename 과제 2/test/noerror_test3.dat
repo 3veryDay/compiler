@@ -1,1 +1,9 @@
+// no error test3
+void main () {
+	int count = 1;
+	while(count != 10)
+		count++;
+	int a[11];
+	const q123
+}
 
