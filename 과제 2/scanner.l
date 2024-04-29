@@ -13,7 +13,7 @@ letter  [a-zA-Z_]
 digit  [0-9]
 %option yylineno // Line number 출력을 위한 변수 yylineno 사용 설정
 %%
-"//".*  ;
+"//".*  ;		// 주석은 pass
 "const"  return(TCONST);
 "else"  return(TELSE);
 "if"  return(TIF);
@@ -50,13 +50,13 @@ digit  [0-9]
 ";"  return(TSEMI);
 " "	return(TBLANK);
 \t	return(TTAB);
-\n	{return(TNEWLINE);}
+\n	return(TNEWLINE);
 {letter}({letter}|{digit})*  {
 	if (yyleng <= 12) {
-		symtable(yytext); 
-		return(TIDENT); 
+		symtable(yytext);	
+		return(TIDENT); 	// 길이가 12자보다 짧으면 ident로 인식
 	} else {
-		 report_error(yylineno, yytext);
+		 report_error(yylineno, yytext);	// 그렇지 않으면 에러 처리, Illegal Identifier, Over 12 characters
 	}
 }
 {digit}+  return(TNUMBER);
