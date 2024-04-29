@@ -11,7 +11,7 @@ extern void report_error(int i, char *s);
 %}
 letter  [a-zA-Z_]
 digit  [0-9]
-%option yylineno
+%option yylineno // Line number 출력을 위한 변수 yylineno 사용 설정
 %%
 "//".*  ;
 "const"  return(TCONST);
