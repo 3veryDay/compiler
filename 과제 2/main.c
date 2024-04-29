@@ -78,7 +78,7 @@ void PrintToken(enum tnumber tn) {
     }	
 }
 
-
+//main.c - 각 token에 대한 출력
 void main(){
     enum tnumber tn;
 
