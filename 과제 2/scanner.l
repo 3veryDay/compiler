@@ -13,7 +13,7 @@ letter  [a-zA-Z_]
 digit  [0-9]
 %option yylineno
 %%
-"//".*  return(TCOMMENT);
+"//".*  ;
 "const"  return(TCONST);
 "else"  return(TELSE);
 "if"  return(TIF);
@@ -62,7 +62,7 @@ digit  [0-9]
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+(e[+-]?[0-9]+)?  return(TFLOAT);
 
-[^ \t\n]*  report_error(yylineno, yytext);
+.  report_error(yylineno, yytext);
 %%
 int yywrap() {
 	printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
