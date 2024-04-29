@@ -1,6 +1,6 @@
 /*
 * tn.h – token type 
-* progrmmer – 조윤아
+* programmer – 조윤아
 * date - 2024/04/27
 */
 
