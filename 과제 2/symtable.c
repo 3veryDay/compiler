@@ -26,7 +26,7 @@ int isIdentifierExists(char *yytext) {
             }
         }
         if (j == yytext_len) {
-            return j; // If all characters match, return 1 (Identifier already exists)
+            return i + j; // If all characters match, return 1 (Identifier already exists)
         }
     }
     return 0; // Identifier does not exist
@@ -36,9 +36,10 @@ int isIdentifierExists(char *yytext) {
 
 // 기존의 것과 겹치지 않는 new identifier일 때 실행
 void symtable(char *yytext) {
-    if (tmp != 0) { STindex = tmp; tmp = 0;  }
+    if (tmp != 0) { STindex = tmp; tmp = 0; }
     // 존재 여부 확인
-    if (isIdentifierExists(yytext) == 0) {
+    int exist = isIdentifierExists(yytext);
+    if (exist == 0) {
         int i = 0;
         while (yytext[i] != '\0') {
             // ST에 식별자의 각 문자 추가
@@ -60,6 +61,6 @@ void symtable(char *yytext) {
     }
     else {
         tmp = STindex;
-        STindex = isIdentifierExists(yytext) + 1;
+        STindex = exist + 1;
     }
 }
