@@ -1,4 +1,5 @@
-/* report_error.c 
+/* report_error.c
+토큰 오류가 발생한 경우, 에러 메시지 출력 함수
 programmer - 11
 date - 2024/04/28
 */
