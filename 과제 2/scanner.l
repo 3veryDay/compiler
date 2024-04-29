@@ -59,10 +59,11 @@ digit  [0-9]
 		 report_error(yylineno, yytext);	// 그렇지 않으면 에러 처리, Illegal Identifier, Over 12 characters
 	}
 }
+{digit}({letter}|{digit})*{letter}({letter}|{digit})*	report_error(yylineno, yytext);		// 숫자로 시작하는 identifier 에러 처리
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+(e[+-]?[0-9]+)?  return(TFLOAT);
 
-.  report_error(yylineno, yytext);	// 인식되지 않는 경우 에러 처리
+.  report_error(yylineno, yytext);	// 인식되지 않는 문자의 경우 에러 처리
 %%
 int yywrap() {
 	printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
