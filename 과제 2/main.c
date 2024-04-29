@@ -80,6 +80,7 @@ void PrintToken(enum tnumber tn) {
 void main(){
     enum tnumber tn;
 
+    // PrintHeading: 토큰 출력 전 헤딩을 출력해주는 함수	
     PrintHeading();
 
     while((tn=yylex()) != TEOF){
