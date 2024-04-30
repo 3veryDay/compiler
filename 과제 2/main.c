@@ -95,7 +95,7 @@ void main(){
     }
     // 에러가 있는 경우 몇 번의 에러가 있었는지 출력한다.
     else{
-        printf("\n%d errors detected\n", cErrors);
+        printf("\n%d errors detected\n\n", cErrors);
     }
 
 	printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
