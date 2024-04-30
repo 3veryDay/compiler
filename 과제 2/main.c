@@ -91,7 +91,7 @@ void main(){
     }
 	 // 에러가 없는 경우 에러가 없다고 출력한다.
     if(cErrors == 0){
-        printf("\nNo errors detected\n");
+        printf("\nNo errors detected\n\n");
     }
     // 에러가 있는 경우 몇 번의 에러가 있었는지 출력한다.
     else{
