@@ -4,6 +4,7 @@ int main() {
     const int 2A = 10 ;
     int aaaaaaaaaaaaaaaaa = 11;
     int c = 12;
-    b = 2A + aaaaaaaaaaaaaaa + c ;
+    b = 2A + 44aaaaaaaaaaaaaaa + c ;
+    SS22 22SS
 return b;
 }
