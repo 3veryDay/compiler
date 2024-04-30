@@ -66,6 +66,5 @@ digit  [0-9]
 .  report_error(yylineno, yytext);	// 인식되지 않는 문자의 경우 에러 처리
 %%
 int yywrap() {
-	printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
 	return 1;
 }
