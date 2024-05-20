@@ -7,9 +7,13 @@
 void semantic(int);
 %}
 
-%token tident tnumber tconst telse tif  tint treturn tvoid twhile
+%nonassoc tlowerthanelse
+%nonassoc telse
+
+%token tident tnumber tconst telse tif tint treturn tvoid twhile
 %token taddAssign tsubAssign tmulAssign tdivAssign tmodAssign
 %token tor tand tequal tnotequ tgreate tlesse tinc tdec
+
 
 %%
 mini_c 			: translation_unit				{semantic(1);};
@@ -61,7 +65,7 @@ statement 		: compound_st				{semantic(41);}
 expression_st 		: opt_expression ';'				{semantic(46);};
 opt_expression 		: expression				{semantic(47);}
 		 	|					{semantic(48);};
-if_st 			: tif '(' expression ')' statement 		{semantic(49);}
+if_st 			: tif '(' expression ')' statement %prec tlowerthanelse		{semantic(49);}
 			| tif '(' expression ')' statement telse statement 	{semantic(50);};
 while_st 			: twhile '(' expression ')' statement 		{semantic(51);};
 return_st 			: treturn opt_expression ';'			{semantic(52);};
