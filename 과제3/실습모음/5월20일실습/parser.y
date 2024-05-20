@@ -293,3 +293,24 @@ actual param actual param list
 
 1 semantic (92): 1:
 
+actual param list : assignment exp
+| actual param list *,* assignment exp
+primary exp
+tident
+tnumber
+| (' expression ")
+1 semantic(93);} { semantic(94);}:
+( semantic(95); 1 { semantic(96);} { semantic (97):}:
+%%
+#include "lexyy.c"
+void yyerror(char *s)
+/* #include *lex.yy.c*/
+printf("%sin", $);
+void semantic(int n)
+printf("reduced rule number = %din", n):
+void main®
+printf("start of parserin');
+yyparse:
+printf("end
+of parserin**);
+
