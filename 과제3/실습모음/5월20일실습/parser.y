@@ -197,3 +197,99 @@ I unary_exp tdivAssign assignment exp
 
 lunary exp todAssign assignment exp
 ¡ semantic(60):)
+
+logical _or_exp: logical and exp
+
+{ semantic(61);)
+I logical or exp tor logical and exp
+/ semantic (62); 1;
+Jogical and exp: equality exp
+
+{ semantic(63);}
+| logical and exp tand equality exp
+{ semantic(64): 1:
+equality_exp : relational exp
+
+{ semantic(65):}
+
+| equality_exp tequal relational exp
+/ semantic(66);)
+
+| equality exp trotequ relational exp
+{ semantic(67);}:
+relational
+_exp : additive exp;
+{ semantic (68),}
+
+| relational exp '>* additive exp
+{ semantic(69); }
+
+relational
+_exp "<* additive_exp
+{ semantic(70);;
+
+| relational exp greate additive exp
+{ semantic(71);)
+
+I relational exp tlesse additive exp
+{ semantic(72): P;
+
+additive_ exp : multiplicative exp
+{ semantic( 73);}
+
+| additive exp *+* multiplicative exp
+{ semantic( 74):)
+
+| additive exp '* multiplicative exp
+( semantic(75)::
+multiplicative exp : unary_exp
+
+l semantic(76);}
+
+| multiplicative exp *** unary exp
+{ semantic (77):)
+
+I multiplicative_exp */* unary_exp
+( semantic(78):)
+
+| multiplicative_ exp *%* unary exp
+( semantic(79):) ;
+ипагу_ схр
+: postfix exp
+{ semantic(80);)
+
+|*-* unary exp
+{ semantic(81);}
+
+| 'T unary_ exp
+{ semantic(82):}
+
+tune unary exp
+( semantic(83);
+
+tee unary exp
+/ semantic(84):1:
+postfix exp
+- primary exp
+/ semantic(85);}
+
+I postfix exp "I' expression 1'
+{ semantic(86); 1
+
+I postfix exp (* opt actual param **
+1 semantic (87): i
+
+I postfix exp tine
+{ semantic(88): )
+opt actual param : actual param
+I postfix exp tdec
+& semantic (89):):
+
+{ semantic(90): 1
+
+
+I semantic(91);):
+actual param actual param list
+
+1 semantic (92): 1:
+
