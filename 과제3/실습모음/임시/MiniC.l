@@ -1,6 +1,7 @@
 %{
 /*lex source for Mini C*/
-/*½ÇÇàÀ» À§ÇØ Ãß°¡ÇÑ ºÎºÐ*/
+#include â€¹stdio.h>
+#include â€¹stdlib.hâ€º
 #include "tn.h"
 
 %}
