@@ -1,4 +1,4 @@
-#include <stido.h>
+#include <stdio.h>
 void main() {
   printf("start of parser\n");
   yyparse();
