@@ -1,6 +1,10 @@
 #include <stdio.h>
-void main() {
-  printf("start of parser\n");
-  yyparse();
-  printf("end of parser\n");
+#include "tn.h"
+extern int yyparse();
+
+int main() {
+
+  int parse_result = yyparse();
+  printf("2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
+  return parse_result;
 }
