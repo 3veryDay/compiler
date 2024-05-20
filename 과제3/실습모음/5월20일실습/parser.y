@@ -105,3 +105,95 @@ init del _list ** init declarator
 
 : declarator
 1 semantic(30):1
+
+
+| declarator
+tnumber
+{ semantic (32):):
+declarator
+- tident
+1 semantic (33);
+I tident '[' opt number "1*
+/ semantic (34):):
+opt number
+a tnumber
+/ semantic(35);)
+
+/ semantic(36):1:
+opt stat list
+/ statement list
+I semantic(37):)
+
+4 scmantic(38): ):
+statement list: statement
+
+1 semantic (39):)
+statement list statement
+{ semantic(40): 1:
+statement
+* compound st
+1 semantic(4 1):
+
+/ expression_st
+/ semantic (42);}
+
+1 if st
+( semantic(43):/
+
+I while st
+semantic (44); }
+
+return st
+{ semantic(45);/
+
+
+
+
+expression st opt expression * :
+{ semantie(46):) ;
+opt
+expression : expression
+
+/ semantic(47);)
+
+
+I semantic(48):} :
+if st : tif *(' expression *)* statement
+
+1 semantic(49): )
+
+I tif 'C expression ")" statement
+
+telse statement
+1 semantic(50): 1:
+while st
+return st
+: twhile ' expression 1 stateme
+{ semantic (5 1);):
+treturn opt
+_expression ";
+( semantic(52),1:
+expression
+: assignment exp
+1 semantic (53):1:
+assignment exp: logical or_exp
+
+( semantic (54); )
+
+I unary_exp *=* assignment exp
+1 semantic (55),1
+
+unary exp taddAssign assignment exp
+i semantic(56);}
+
+unary exp tsubAssign assignment exp
+/ semantic(57): I
+
+unary exp tmulAssign assignment exp
+{ semantic(58):}
+
+I unary_exp tdivAssign assignment exp
+1 semantic(59); 1
+
+lunary exp todAssign assignment exp
+¡ semantic(60):)
