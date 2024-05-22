@@ -40,31 +40,31 @@ formal_param_list 		: param_dcl				{}
 param_dcl 		: dcl_spec declarator			{};
 compound_st 		: '{' opt_dcl_list opt_stat_list '}' 		{};
 opt_dcl_list 		: declaration_list			{};
-			|					{semantic(25);};
+			|					{};
 declaration_list 		: declaration				{}
 			| declaration_list declaration 			{};
 declaration 		: dcl_spec init_dcl_list ';'			{};
 init_dcl_list 		: init_declarator				{}
 			| init_dcl_list ',' init_declarator 		{};
 init_declarator 		: declarator				{}
-		 	| declarator '=' tnumber			{semantic(32);};
-declarator 		: tident					{semantic(33);}
-	     		| tident '[' opt_number ']'			{semantic(34);};
-opt_number 		: tnumber				{semantic(35);}
-	     		|					{semantic(36);};
-opt_stat_list 		: statement_list				{semantic(37);}
-		 	|					{semantic(38);};
-statement_list 		: statement				{semantic(39);}
-		 	| statement_list statement 			{semantic(40);};
-statement 		: compound_st				{semantic(41);}
-	   		| expression_st				{semantic(42);}
-	   		| if_st					{semantic(43);}
-	   		| while_st					{semantic(44);}
-	   		| return_st				{semantic(45);}
+		 	| declarator '=' tnumber			{};
+declarator 		: tident					{}
+	     		| tident '[' opt_number ']'			{};
+opt_number 		: tnumber				{}
+	     		|					{};
+opt_stat_list 		: statement_list				{}
+		 	|					{};
+statement_list 		: statement				{}
+		 	| statement_list statement 			{};
+statement 		: compound_st				{}
+	   		| expression_st				{}
+	   		| if_st					{}
+	   		| while_st					{}
+	   		| return_st				{}
 			;
-expression_st 		: opt_expression ';'				{semantic(46);};
-opt_expression 		: expression				{semantic(47);}
-		 	|					{semantic(48);};
+expression_st 		: opt_expression ';'				{};
+opt_expression 		: expression				{}
+		 	|					{};
 if_st 			: tif '(' expression ')' statement %prec tlowerthanelse		{semantic(49);}
 			| tif '(' expression ')' statement telse statement 	{semantic(50);};
 while_st 			: twhile '(' expression ')' statement 		{semantic(51);};
