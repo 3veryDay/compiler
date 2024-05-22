@@ -6,8 +6,16 @@
 
 #include "glob.h"
 
+/********************************************************************************/
+/********modified MINIC에 맞게 변형 **********************************************/
 int type_int = 0;
 int type_void = 0;
+int type_char = 0;
+int type_float = 0;
+int type_double = 0;
+int type_long = 0;
+int type_short = 0;
+
 
 void line(int);
 extern printError();
