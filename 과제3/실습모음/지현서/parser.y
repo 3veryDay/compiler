@@ -70,13 +70,19 @@ type_qualifier         : TCONSt
                        ;
 //여기서 modified MINI C에 맞게 추가해야됨!!
 /*****************************************************************************************************************/
-type_specifier         : TINT { type_int = 1;}
-                       | TVOID {type_void = 1;}
+type_specifier         : TINT { type_int = 1; }
+                       | TVOID { type_void = 1; }
+                       | TCHAR { type_char = 1; }
+                       | TFLOAT { type_float = 1; }
+                       | TDOUBLE { type_double = 1; }
+                       | TLONG { type_long = 1; }
+                       | TSHORT { type_short = 1; }
                        ;
 function_name          : TIDEN
                         { /* identifier about parse error or not definced identifier/function*/
                              if(look_id -> type=0 || look_id -> type=5)
-                               {
+                            //부분의 코드는 식별자가 함수명인지 확인하고, 해당 식별자를 함수로 설정하는 로직을 포함하고 있습니다                               
+                              {
                                  look_id -> type=4 ;
                                  type_int= 0 ;
                                  type_void = 0;
