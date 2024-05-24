@@ -1,0 +1,3 @@
+void symtable(char *yytext) 
+{
+}
