@@ -52,6 +52,8 @@ D [0-9]
 \n line_num++;
 [ \t] ;
 "//".* ;
+/************* *******************/
+//여기 report_error로 일괄 처리하도록 코드 변경
 {L}({L}|{D})* { 
 if(yyleng > 12) return(TTOOLONG); 
 else {
@@ -59,6 +61,8 @@ symbolTable();
 return(TIDENT);
 }
 }
+/************* *******************/
+//여기 report_error로 일괄 처리하도록 코드 변경
 {D}+{L}({L}|{D})* return(TILLIDENT);
 {D}+ return(TNUMBER);
 {D}+"."{D}+ return(TRNUMBER);
