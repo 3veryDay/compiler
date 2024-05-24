@@ -88,7 +88,7 @@ type_specifier         : TINT { type_int = 1; }
                        ;
 function_name          : TIDEN
                         { /* identifier about parse error or not definced identifier/function*/
-                             if(look_id -> type=0 || look_id -> type=5)
+                             if(look_id -> type==0 || look_id -> type==5)
                             //부분의 코드는 식별자가 함수명인지 확인하고, 해당 식별자를 함수로 설정하는 로직을 포함하고 있습니다                               
                               {
                                  look_id -> type=4 ;
