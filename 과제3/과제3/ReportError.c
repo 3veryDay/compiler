@@ -1,3 +1,3 @@
-void ReportError(int i, errorType err) //error line, error type
+void ReportError(int i, ErrorType err) //error line, error type
 {
 }
