@@ -2,3 +2,5 @@ enum errorType { noerror, digit_ident, long_ident, ill_symbol, over_st, missing_
 };
 typedef enum errorType ErrorType;
 ErrorType err;
+
+int lineno;
