@@ -84,19 +84,19 @@ declaration 		: dcl_spec init_dcl_list TSEMI
 
 init_dcl_list 		: init_declarator				
 					| init_dcl_list TCOMMA init_declarator				
-					| init_dcl_list init_declarator							{yyerrok; PrintError(missing_comma); current_id -> error =1;}
+					| init_dcl_list init_declarator							{yyerrok; ReportError(missing_comma); current_id -> error =1;}
 					;
 
 init_declarator 	: declarator						
 		 			| declarator TASSIGN TNUMBER
-					| declarator TEQUAL TNUMBER								{yyerrok; PrintError(declaring_err);}
+					| declarator TEQUAL TNUMBER								{yyerrok; ReportError(declaring_err);}
 					| declarator TASSIGN TFLOAT
-					| declarator TEQUAL TFLOAT								{yyerrok; PrintError(declaring_err);}
+					| declarator TEQUAL TFLOAT								{yyerrok; ReportError(declaring_err);}
 					;
 
 declarator 			: TIDENT												{changeHSTable(); }
 	     			| TIDENT TLSQUARE opt_number TRSQUARE					{array=1; changeHSTable(); }
-					| TIDENT TLSQUARE opt_number error						{yyerrok; PrintError(missing_lbracket); }
+					| TIDENT TLSQUARE opt_number error						{yyerrok; ReportError(missing_square); }
 					;
 
 opt_number 			: TNUMBER					
@@ -120,7 +120,7 @@ statement 			: compound_st
 					;
 
 expression_st 		: opt_expression TSEMI
-					| expression error										{yyerrok; PrintError(missing_semi);}
+					| expression error										{yyerrok; ReportError(missing_semi);}
 					;
 
 
@@ -130,20 +130,20 @@ opt_expression 		: expression
 
 if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE 		
 					| TIF TLPAREN expression TRPAREN statement TELSE statement
-					| TIF TLPAREN expression error							{yyerrok; PrintError(missing_sbracket);}
-					| TIF TLPAREN TRPAREN error								{yyerrok; PrintError(missing_condition);}
-					| TIF error                                             {yyerrok; PrintError(missing_sbracket);}
+					| TIF TLPAREN expression error							{yyerrok; ReportError(missing_paren);}
+					| TIF TLPAREN TRPAREN error								{yyerrok; ReportError(missing_condition);}
+					| TIF error                                             {yyerrok; ReportError(missing_paren);}
 					;
 
-while_st 			: TWHILE TLPAREN expression TRPAREN TLBRACE statement TRBRACE
-					| TWHILE TLPAREN expression TRPAREN TLBRACE statement error 			{yyerrok; PrintError(missing_mbracket);}
-					| TWHILE TLPAREN expression error						{yyerrok; PrintError(missing_sbracket);}
-					| TWHILE TLPAREN TRPAREN error							{yyerrok; PrintError(missing_condition);}
-					| TWHILE error                                        {yyerrok; PrintError(missing_sbracket);}
+while_st 			: TWHILE TLPAREN expression TRPAREN TLCURLY statement TRCURLY
+					| TWHILE TLPAREN expression TRPAREN TLCURLY statement error 			{yyerrok; ReportError(missing_curly);}
+					| TWHILE TLPAREN expression error						{yyerrok; ReportError(missing_paren);}
+					| TWHILE TLPAREN TRPAREN error							{yyerrok; ReportError(missing_condition);}
+					| TWHILE error                                        {yyerrok; PrintError(missing_paren);}
 					;
 
 return_st 			: TRETURN opt_expression TSEMI
-					| TRETURN opt_expression error							{yyerrok; PrintError(missing_semi);}
+					| TRETURN opt_expression error							{yyerrok; ReportError(missing_semi);}
 					;
 
 expression 			: assignment_exp;
@@ -155,29 +155,29 @@ assignment_exp 		: logical_or_exp
 					| unary_exp TMULASSIGN assignment_exp 	
 					| unary_exp TDIVASSIGN assignment_exp 	
 					| unary_exp TMODASSIGN assignment_exp 	
-					| unary_exp TASSIGN										{yyerrok; PrintError(wrong_assign);}
-					| unary_exp TADDASSIGN									{yyerrok; PrintError(wrong_assign);}
-					| unary_exp TSUBASSIGN				 					{yyerrok; PrintError(wrong_assign);}
-					| unary_exp TMULASSIGN				 					{yyerrok; PrintError(wrong_assign);}
-					| unary_exp TDIVASSIGN				 					{yyerrok; PrintError(wrong_assign);}
-					| unary_exp TMODASSIGN				 					{yyerrok; PrintError(wrong_assign);}
+					| unary_exp TASSIGN										{yyerrok; ReportError(wrong_assign);}
+					| unary_exp TADDASSIGN									{yyerrok; ReportError(wrong_assign);}
+					| unary_exp TSUBASSIGN				 					{yyerrok; ReportError(wrong_assign);}
+					| unary_exp TMULASSIGN				 					{yyerrok; ReportError(wrong_assign);}
+					| unary_exp TDIVASSIGN				 					{yyerrok; ReportError(wrong_assign);}
+					| unary_exp TMODASSIGN				 					{yyerrok; ReportError(wrong_assign);}
 					;
 
 logical_or_exp 		: logical_and_exp				
 					| logical_or_exp TOR logical_and_exp 	
-					| logical_or_exp TOR error								{yyerrok; PrintError(missing_operand);}
+					| logical_or_exp TOR error								{yyerrok; ReportError(missing_operand);}
 					;
 
 logical_and_exp		: equality_exp					
 		 			| logical_and_exp TAND equality_exp 
-					| logical_and_exp TAND error							{yyerrok; PrintError(missing_operand);}
+					| logical_and_exp TAND error							{yyerrok; ReportError(missing_operand);}
 					;
 
 equality_exp 		: relational_exp				
 					| equality_exp TEQUAL relational_exp 	
 					| equality_exp TNOTEQU relational_exp 	
-					| equality_exp TEQUAL error								{yyerrok; PrintError(missing_operand);}
-					| equality_exp TNOTEQU error							{yyerrok; PrintError(missing_operand);}
+					| equality_exp TEQUAL error								{yyerrok; ReportError(missing_operand);}
+					| equality_exp TNOTEQU error							{yyerrok; ReportError(missing_operand);}
 					;
 
 
