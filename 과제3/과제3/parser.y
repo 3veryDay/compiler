@@ -18,8 +18,10 @@ glob.h에 참고 코드랑 살짝 다르게 해서 에러 타입 정의해놨어
 
 %}
 
-%nonassoc tlowerthanelse
-%nonassoc telse
+%nonassoc LOWER_THAN_ELSE
+%nonassoc TELSE
+%nonassoc LOWER_THAN_OPT_STAT_LIST	
+%nonassoc OPT_STAT_LIST
 
 %token TEOF
 %token TIDENT TNUMBER TFLOAT TCONST TELSE TIF TEIF TINT TRETURN TVOID TWHILE TFLOAT
