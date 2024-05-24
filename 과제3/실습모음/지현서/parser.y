@@ -91,9 +91,14 @@ function_name          : TIDEN
                              if(look_id -> type==0 || look_id -> type==5)
                             //부분의 코드는 식별자가 함수명인지 확인하고, 해당 식별자를 함수로 설정하는 로직을 포함하고 있습니다                               
                               {
-                                 look_id -> type=4 ;
-                                 type_int= 0 ;
+                                 look_id -> type = 4;
+                                 type_int = 0;
                                  type_void = 0;
+                                 **type_char = 0;**
+                                 **type_float = 0;**
+                                 **type_double = 0;**
+                                 **type_long = 0;**
+                                 **type_short = 0;**
                                  look_tmp = look_id;
                                }
                        }
