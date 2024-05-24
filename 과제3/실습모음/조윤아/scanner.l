@@ -7,11 +7,12 @@ date - 2024/04/28
 #include "tn.h"  /* token name definition */
 extern void symtable(char *yytext);	// ident가 인식된 경우 symbol table에 저장 및 처리하기 위한 함수 불러오기
 extern void report_error(int i, char *s);	// 에러가 인식된 경우 에러 처리를 위한 함수 불러오기
-
 %}
+
 letter  [a-zA-Z_]
 digit  [0-9]
 %option yylineno
+
 %%
 "//".*  ;		// 주석은 pass
 "const"  return(TCONST);
