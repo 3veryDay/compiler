@@ -112,4 +112,107 @@ formal_param_list      : param_dcl
                        |formal_param_list TCOMMA param_dcl
                        ;
 
-/** 이 후에 param_dcl도 있어야 함.**/
+param_dcl 		         : dcl_spec declarator
+                       ;
+compound_st 		       : '{' opt_dcl_list opt_stat_list '}'
+                       ;
+opt_dcl_list 		       : declaration_list
+                       ;
+declaration_list 	     : declaration
+			                 | declaration_list declaration
+                       ;
+declaration 		       : dcl_spec init_dcl_list ';'
+                       ;
+init_dcl_list 		     : init_declarator
+
+                       | init_dcl_list ',' init_declarator
+                       ;
+init_declarator 	     : declarator
+                       | declarator '=' tnumber
+                       ;
+declarator 		         : tident
+                       | tident '[' opt_number ']'
+                       ;
+opt_number 		         : tnumber
+                       ;
+opt_stat_list 		     : statement_list
+                       ;
+statement_list 		     : statement
+                       | statement_list statement
+                       ;
+statement 		         : compound_st
+                       | expression_st			{semantic(42);}
+                       | if_st					{semantic(43);}
+                       | while_st				{semantic(44);}
+                       | return_st				{semantic(45);}
+                       ;
+expression_st 	       : opt_expression ';'
+                       ;
+opt_expression 	       : expression	
+                       |;
+if_st 		           	: tif '(' expression ')' statement
+                       | tif '(' expression ')' statement telse statement
+                       ;
+while_st 		           : twhile '(' expression ')' statement;
+return_st 		         : treturn opt_expression ';';
+expression 		         : assignment_exp;
+assignment_exp        	: logical_or_exp
+                       | unary_exp '=' assignment_exp 	
+                       | unary_exp taddAssign assignment_exp 
+                       | unary_exp tsubAssign assignment_exp 
+                       | unary_exp tmulAssign assignment_exp 
+                       | unary_exp tdivAssign assignment_exp 	
+                       | unary_exp tmodAssign assignment_exp 
+                       ;
+logical_or_exp 	       : logical_and_exp
+                       | logical_or_exp tor logical_and_exp
+                       ;
+logical_and_exp 	     : equality_exp	
+                       | logical_and_exp tand equality_exp;
+equality_exp 		       : relational_exp
+                       | equality_exp tequal relational_exp 
+                       | equality_exp tnotequ relational_exp
+                       ;
+relational_exp 	       : additive_exp 	
+                       | relational_exp '>' additive_exp 
+                       | relational_exp '<' additive_exp 
+                       | relational_exp tgreate additive_exp 
+                       | relational_exp tlesse additive_exp 	
+                       ;
+additive_exp 		: multiplicative_exp	
+                       | additive_exp '+' multiplicative_exp 
+                       | additive_exp '-' multiplicative_exp
+                       ;
+multiplicative_exp 	: unary_exp			
+                       | multiplicative_exp '*' unary_exp 	
+                       | multiplicative_exp '/' unary_exp 	
+                       | multiplicative_exp '%' unary_exp 	
+                       ;
+unary_exp 		: postfix_exp		
+                       | '-' unary_exp			
+                       | '!' unary_exp			
+                       | tinc unary_exp		
+                       | tdec unary_exp		
+                       ;
+postfix_exp 		: primary_exp				
+                       | postfix_exp '[' expression ']' 	
+                       | postfix_exp '(' opt_actual_param ')' 
+                       | postfix_exp tinc			
+                       | postfix_exp tdec		
+                       ;
+opt_actual_param 	     : actual_param;
+actual_param 	         : actual_param_list;		
+actual_param_list 	   : assignment_exp;	
+                       | actual_param_list ',' assignment_exp                        
+                       ;
+primary_exp 		: tident			
+                       | tnumber				
+                       | '(' expression ')'			
+                       ;
+%%
+
+void semantic(int n)
+{	
+	printf("reduced rule number = %d\n",n);
+}
+
