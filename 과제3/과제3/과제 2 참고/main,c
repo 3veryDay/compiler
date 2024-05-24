@@ -1,0 +1,182 @@
+/*
+* main.c - 각 token에 대한 출력
+* programmer – 김예지(2176082), 송채원(2076216), 신정화(2271035), 윤하영(2071033)
+* date – 2024-04-29
+*/
+# include <stdio.h>
+# include <stdlib.h>
+# include "tn.h"
+# include "glob.h"
+// global variables
+extern int yylex();
+extern char* yytext;
+int line_num = 1;
+int cErrors = 0;
+int isOverst;
+// printToken() - token type 별로 출력
+void printtoken(enum tokentypes tn) {
+ printf(" %-8d ", line_num);
+ switch (tn) {
+ case TIDENT:
+ if (isOverst == 0) {
+ printf("%-18s %-10d %-12s\n", "ident", stidx, yytext);
+ }
+ else {
+ printf("%-18s %-12s %-12s %s\n", "**Error**", "", yytext, "OVER FLOW");
+ cErrors++;
+ }
+ break;
+ case TNUMBER:
+[ 컴파일러 과제2 ]
+Team 03
+김예지(2176082)
+송채원(2076216)
+신정화(2271035)
+윤하영(2071033) 
+1) 구현한 C코드
+ printf("%-16s %-14s %-12s\n", "number", "", yytext);
+ break;
+ case TRNUMBER:
+ printf("%-16s %-14s %-12s\n", "real number", "", yytext);
+ break;
+ case TCONST:
+ printf("%-16s %-14s %-12s\n", "const", "", yytext);
+ break;
+ case TELSE:
+ printf("%-16s %-14s %-12s\n", "else", "", yytext);
+ break;
+ case TIF:
+ printf("%-16s %-14s %-12s\n", "if", "", yytext);
+ break;
+ case TINT:
+ printf("%-16s %-14s %-12s\n", "int", "", yytext);
+ break;
+ case TRETURN:
+ printf("%-16s %-14s %-12s\n", "return", "", yytext);
+ break;
+ case TVOID:
+ printf("%-16s %-14s %-12s\n", "void", "", yytext);
+ break;
+ case TWHILE:
+ printf("%-16s %-14s %-12s\n", "while", "", yytext);
+ break;
+ case TADD:
+ printf("%-16s %-14s %-12s\n", "add", "", yytext);
+ break;
+ case TSUB:
+ printf("%-16s %-14s %-12s\n", "substraction", "", yytext);
+ break;
+ case TMUL:
+ printf("%-16s %-14s %-12s\n", "multiplication", "", yytext);
+ break;
+ case TDIV:
+ printf("%-16s %-14s %-12s\n", "division", "", yytext);
+ break;
+ case TMOD:
+ printf("%-16s %-14s %-12s\n", "mod", "", yytext);
+ break;
+ case TINC:
+ printf("%-16s %-14s %-12s\n", "increase", "", yytext);
+ break;
+ case TDEC:
+ printf("%-16s %-14s %-12s\n", "decrease", "", yytext);
+ break;
+ case TEQUAL:
+ printf("%-16s %-14s %-12s\n", "equal", "", yytext);
+ break;
+ case TNOTEQU:
+ printf("%-16s %-14s %-12s\n", "not equal", "", yytext);
+ break;
+ case TLESS:
+ printf("%-16s %-14s %-12s\n", "less than", "", yytext);
+ break;
+ case TGREAT:
+ printf("%-16s %-14s %-12s\n", "greater than", "", yytext);
+ break;
+ case TLESSE:
+ printf("%-16s %-14s %-12s\n", "less or equal", "", yytext);
+ break;
+ case TGREATE:
+ printf("%-16s %-14s %-12s\n", "greater or equal", "", yytext);
+ break;
+ case TNOT:
+ printf("%-16s %-14s %-12s\n", "not", "", yytext);
+ break;
+ case TAND:
+ printf("%-16s %-14s %-12s\n", "and", "", yytext);
+ break;
+ case TOR:
+ printf("%-16s %-14s %-12s\n", "or", "", yytext);
+ break;
+ case TASSIGN:
+ printf("%-16s %-14s %-12s\n", "equal assign", "", yytext);
+ break;
+ case TADDASSIGN:
+ printf("%-16s %-14s %-12s\n", "add assign", "", yytext);
+ break;
+ case TSUBASSIGN:
+ printf("%-16s %-14s %-12s\n", "sub assign", "", yytext);
+ break;
+ case TMULASSIGN:
+ printf("%-16s %-14s %-12s\n", "mul assign", "", yytext);
+ break;
+ case TDIVASSIGN:
+ printf("%-16s %-14s %-12s\n", "div assign", "", yytext);
+ break;
+ case TMODASSIGN:
+ printf("%-16s %-14s %-12s\n", "mod assign", "", yytext);
+ break;
+ case TLPAREN:
+ printf("%-16s %-14s %-12s\n", "left paren", "", yytext);
+ break;
+ case TRPAREN:
+ printf("%-16s %-14s %-12s\n", "right paren", "", yytext);
+ break;
+ case TLBRACE:
+ printf("%-16s %-14s %-12s\n", "left brace", "", yytext);
+ break;
+ case TRBRACE:
+ printf("%-16s %-14s %-12s\n", "right brace", "", yytext);
+ break;
+ case TLSQUARE:
+ printf("%-16s %-14s %-12s\n", "left bracket", "", yytext);
+ break;
+ case TRSQUARE:
+ printf("%-16s %-14s %-12s\n", "right bracket", "", yytext);
+ break;
+ case TCOMMA:
+ printf("%-16s %-14s %-12s\n", "comma", "", yytext);
+ break;
+ case TSEMICOLON:
+ printf("%-16s %-14s %-12s\n", "semicolon", "", yytext);
+ break;
+ case TTOOLONG:
+ cErrors++;
+ printf("%-16s %-14s %-12s %s\n", "**Error**", "", yytext, "Too long 
+identifier");
+ break;
+ case TILLIDENT:
+ cErrors++;
+ printf("%-16s %-14s %-12s %s\n", "**Error**", "", yytext, "Illegal Identifier");
+ break;
+ case TILLCH:
+ cErrors++;
+ printf("%-16s %-14s %-12s %s\n", "**Error**", "", yytext, "Illegal Character");
+ break;
+ default:
+ break;
+ }
+}
+int main() {
+ enum tokentypes tn; // token number
+ // print header
+ printf("%-12s %-17s %-13s %-14s\n", "Line number", "Token type", "ST-index", "Token");
+ while ((tn = yylex()) != TEOF) {
+ printtoken(tn);
+ }
+ // print number of errors
+ if (cErrors == 0)
+ printf("No errors detected\n");
+ else
+ printf("%d errors detected\n", cErrors);
+}
