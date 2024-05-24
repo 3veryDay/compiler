@@ -51,9 +51,7 @@ digit  [0-9]
 "]" return(TRSQUARE);
 "," return(TCOMMA);
 ";"  return(TSEMI);
-" "	return(TBLANK);		// 공백 정의
-\t	return(TTAB);		// 탭 정의
-\n	return(TNEWLINE);	// 엔터 정의의
+[ \t\n]	;
 {letter}({letter}|{digit})*  {
 	if (yyleng <= 12) {
 		symtable(yytext);	
