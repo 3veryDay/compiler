@@ -4,7 +4,8 @@ programmer - 조윤아
 date - 2024/04/28
 */
 #include <stdio.h>
-#include "tn.h"  /* token name definition */
+#include "tn.h"
+#include "glob.h"
 extern void symtable(char *yytext);	// ident가 인식된 경우 symbol table에 저장 및 처리하기 위한 함수 불러오기
 extern void ReportError(int i, char *s);	// 에러가 인식된 경우 에러 처리를 위한 함수 불러오기
 %}
@@ -58,14 +59,15 @@ digit  [0-9]
 		symtable(yytext);	
 		return(TIDENT); 	// 길이가 12자보다 짧으면 ident로 인식
 	} else {
-		 report_error(yylineno, yytext);	// 그렇지 않으면 에러 처리, Illegal Identifier, Over 12 characters
+		 err = long_ident;
+		 report_error(yylineno, err);	// 그렇지 않으면 에러 처리, Illegal Identifier, Over 12 characters
 	}
 }
-{digit}({letter}|{digit})*{letter}({letter}|{digit})*	report_error(yylineno, yytext);		// 숫자로 시작하는 identifier 에러 처리
+{digit}({letter}|{digit})*{letter}({letter}|{digit})*	{err = digit_ident; report_error(yylineno, err);}  // 숫자로 시작하는 identifier 에러 처리
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+  return(TFLOAT);
 
-.  report_error(yylineno, yytext);	// 인식되지 않는 문자의 경우 에러 처리
+.  {err = ill_symbol; report_error(yylineno, err);}  // 인식되지 않는 문자의 경우 에러 처리
 %%
 int yywrap() {
 	return 1;
