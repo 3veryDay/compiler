@@ -7,12 +7,11 @@ date - 2024/04/28
 #include "tn.h"
 #include "glob.h"
 extern void symtable(char *yytext);	// ident가 인식된 경우 symbol table에 저장 및 처리하기 위한 함수 불러오기
-extern void ReportError(int i, char *s);	// 에러가 인식된 경우 에러 처리를 위한 함수 불러오기
+extern void ReportError(errorType err);	// 에러가 인식된 경우 에러 처리를 위한 함수 불러오기
 %}
 
 letter  [a-zA-Z_]
 digit  [0-9]
-%option yylineno
 
 %%
 "//".*  ;		// 주석은 pass
@@ -53,21 +52,22 @@ digit  [0-9]
 "]" return(TRSQUARE);
 "," return(TCOMMA);
 ";"  return(TSEMI);
-[ \t\n]	;
+[ \t]	;
+\n	lineno ++;
 {letter}({letter}|{digit})*  {
 	if (yyleng <= 12) {
 		symtable(yytext);	
 		return(TIDENT); 	// 길이가 12자보다 짧으면 ident로 인식
 	} else {
 		 err = long_ident;
-		 report_error(yylineno, err);	// 그렇지 않으면 에러 처리, Illegal Identifier, Over 12 characters
+		 report_error(err);	// 그렇지 않으면 에러 처리, Illegal Identifier, Over 12 characters
 	}
 }
-{digit}({letter}|{digit})*{letter}({letter}|{digit})*	{err = digit_ident; report_error(yylineno, err);}  // 숫자로 시작하는 identifier 에러 처리
+{digit}({letter}|{digit})*{letter}({letter}|{digit})*	{err = digit_ident; report_error(err);}  // 숫자로 시작하는 identifier 에러 처리
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+  return(TFLOAT);
 
-.  {err = ill_symbol; report_error(yylineno, err);}  // 인식되지 않는 문자의 경우 에러 처리
+.  {err = ill_symbol; report_error(err);}  // 인식되지 않는 문자의 경우 에러 처리
 %%
 int yywrap() {
 	return 1;
