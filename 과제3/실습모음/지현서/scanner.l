@@ -20,7 +20,46 @@ int i;
 "const"    {return(TCONST);}
 "else"     {return(TELSE);}
 "if"       {return(TIF);}
-...
+"const"  return(TCONST);
+"else"  return(TELSE);
+"if"  return(TIF);
+"int"  return(TINT);
+"return"  return(TRETURN);
+"void"  return(TVOID);
+"while"  return(TWHILE);
+"+"  return(TADD);
+"-"   return(TSUB);
+"*"  return(TMUL);
+"/"  return(TDIV);
+"%"  return(TMOD);
+"="  return(TASSIGN);
+"+="  return(TADDASSIGN);
+"-="  return(TSUBASSIGN);
+"*="  return(TMULASSIGN);
+"/="  return(TDIVASSIGN);
+"%="  return(TMODASSIGN);
+"!"  return(TNOT);
+"&&"  return(TAND);
+"||"  return(TOR);
+"=="  return(TEQUAL);
+"!="  return(TNOTEQU);
+"<"  return(TLESS);
+">"  return(TGREAT);
+"<="  return(TLESSEQU);
+">="  return(TGREATEQU);
+"++"  return(TINC);
+"--"  return(TDEC);
+"("|")"  return(TPAREN);
+","  return(TCOMMA);
+"{"|"}"  return(TCURLY);
+"["|"]"  return(TSQUARE);
+";"  return(TSEMI);
+" "	return(TBLANK);		// 공백 정의
+\t	return(TTAB);		// 탭 정의
+\n	return(TNEWLINE);	// 엔터 정의
+
+
+
 
 [A-Za-z_][A-Za-z0-0_]* {//identifier의 경우 스트링 테이블 및 해쉬 테이블 관리
 
