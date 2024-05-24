@@ -1,7 +1,18 @@
+/*
+보충설명용 ..
+과제2 에서 report error할 때 text 자체를 보냇던 것과 다르게
+error type 정의해서 void ReportError(int i, ErrorType err) 이렇게 바꿔놨습니다
+참고 코드의 PrintError(missing_funcheader) 대신에 위에 거 쓰면 되고
+glob.h에 참고 코드랑 살짝 다르게 해서 에러 타입 정의해놨어요!! ㅎㅎ
+
+*/
+
+
 %{
 #include <stdio.h>
 #include <ctype.h>
 #include <malloc.h>
+#include "glob.h"
 
 /*yacc source for Mini C*/
 
@@ -47,7 +58,11 @@ opt_dcl_list 		: declaration_list				{semantic(24);}
 			|					{semantic(25);};
 declaration_list 		: declaration				{semantic(26);}
 			| declaration_list declaration 			{semantic(27);};
-declaration 		: dcl_spec init_dcl_list ';'			{semantic(28);};
+
+
+// 조윤아
+
+declaration 		: dcl_spec init_dcl_list TSEMI			;
 init_dcl_list 		: init_declarator				{semantic(29);}
 			| init_dcl_list ',' init_declarator 		{semantic(30);};
 init_declarator 		: declarator				{semantic(31);}
@@ -89,6 +104,11 @@ logical_and_exp 		: equality_exp				{semantic(63);}
 equality_exp 		: relational_exp				{semantic(65);}
 			| equality_exp tequal relational_exp 		{semantic(66);}
 			| equality_exp tnotequ relational_exp 		{semantic(67);};
+
+
+
+//
+
 relational_exp 		: additive_exp 				{semantic(68);}
 			| relational_exp '>' additive_exp 		{semantic(69);}
 			| relational_exp '<' additive_exp 		{semantic(70);}
