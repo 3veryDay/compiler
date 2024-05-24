@@ -1,7 +1,7 @@
 /*
 보충설명용 ..
 과제2 에서 report error할 때 text 자체를 보냇던 것과 다르게
-error type 정의해서 void ReportError(int i, ErrorType err) 이렇게 바꿔놨습니다
+error type 정의해서 void ReportError( ErrorType err) 이렇게 바꿔놨습니다
 참고 코드의 PrintError(missing_funcheader) 대신에 위에 거 쓰면 되고
 glob.h에 참고 코드랑 살짝 다르게 해서 에러 타입 정의해놨어요!! ㅎㅎ
 
@@ -62,48 +62,122 @@ declaration_list 		: declaration				{semantic(26);}
 
 // 조윤아
 
-declaration 		: dcl_spec init_dcl_list TSEMI			;
-init_dcl_list 		: init_declarator				{semantic(29);}
-			| init_dcl_list ',' init_declarator 		{semantic(30);};
-init_declarator 		: declarator				{semantic(31);}
-		 	| declarator '=' tnumber			{semantic(32);};
-declarator 		: tident					{semantic(33);}
-	     		| tident '[' opt_number ']'			{semantic(34);};
-opt_number 		: tnumber				{semantic(35);}
-	     		|					{semantic(36);};
-opt_stat_list 		: statement_list				{semantic(37);}
-		 	|					{semantic(38);};
-statement_list 		: statement				{semantic(39);}
-		 	| statement_list statement 			{semantic(40);};
-statement 		: compound_st				{semantic(41);}
-	   		| expression_st				{semantic(42);}
-	   		| if_st					{semantic(43);}
-	   		| while_st					{semantic(44);}
-	   		| return_st				{semantic(45);}
-			;
-expression_st 		: opt_expression ';'				{semantic(46);};
-opt_expression 		: expression				{semantic(47);}
-		 	|					{semantic(48);};
-if_st 			: tif '(' expression ')' statement %prec tlowerthanelse		{semantic(49);}
-			| tif '(' expression ')' statement telse statement 	{semantic(50);};
-while_st 			: twhile '(' expression ')' statement 		{semantic(51);};
-return_st 			: treturn opt_expression ';'			{semantic(52);};
-expression 		: assignment_exp				{semantic(53);};
-assignment_exp 		: logical_or_exp				{semantic(54);}
-			| unary_exp '=' assignment_exp 		{semantic(55);}
-			| unary_exp taddAssign assignment_exp 	{semantic(56);}
-			| unary_exp tsubAssign assignment_exp 	{semantic(57);}
-			| unary_exp tmulAssign assignment_exp 	{semantic(58);}
-			| unary_exp tdivAssign assignment_exp 	{semantic(59);}
-			| unary_exp tmodAssign assignment_exp 	{semantic(60);}
-			;
-logical_or_exp 		: logical_and_exp				{semantic(61);}
-			| logical_or_exp tor logical_and_exp 		{semantic(62);};
-logical_and_exp 		: equality_exp				{semantic(63);}
-		 	| logical_and_exp tand equality_exp 		{semantic(64);};
-equality_exp 		: relational_exp				{semantic(65);}
-			| equality_exp tequal relational_exp 		{semantic(66);}
-			| equality_exp tnotequ relational_exp 		{semantic(67);};
+declaration 		: dcl_spec init_dcl_list TSEMI	
+					{
+						con = 0;
+						func =0;
+						param = 0;
+						array = 0;
+						type = NONE;
+					}
+					| dcl_spec init_dcl_list error							
+					{yyerrok;
+					con = 0;
+					func =0;
+					param = 0;
+					array = 0;
+					type = NONE;
+					(missing_semi);}
+					;
+
+init_dcl_list 		: init_declarator				
+					| init_dcl_list TCOMMA init_declarator				
+					| init_dcl_list init_declarator							{yyerrok; PrintError(missing_comma); current_id -> error =1;}
+					;
+
+init_declarator 	: declarator						
+		 			| declarator TASSIGN TNUMBER
+					| declarator TEQUAL TNUMBER								{yyerrok; PrintError(declaring_err);}
+					| declarator TASSIGN TREALNUMBER
+					| declarator TEQUAL TREALNUMBER								{yyerrok; PrintError(declaring_err);}
+					;
+
+declarator 			: TIDENT												{changeHSTable(); }
+	     			| TIDENT TLBRACKET opt_number TRBRACKET					{array=1; changeHSTable(); }
+					| TIDENT TLBRACKET opt_number error						{yyerrok; PrintError(missing_lbracket); }
+					;
+
+opt_number 			: TNUMBER					
+	     			|						
+					;
+
+opt_stat_list 		: statement_list OPT_STAT_LIST
+		 			|
+					;
+
+statement_list 		: statement %prec LOWER_THAN_OPT_STAT_LIST					
+			        | statement_list error 
+					| statement_list statement 			
+					;
+
+statement 			: compound_st				
+	   				| expression_st				
+	   				| if_st						
+	   				| while_st					
+	   				| return_st					
+					;
+
+expression_st 		: opt_expression TSEMI
+					| expression error										{yyerrok; PrintError(missing_semi);}
+					;
+
+
+opt_expression 		: expression					
+		 			|						
+					;
+
+if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE 		
+					| TIF TLPAREN expression TRPAREN statement TELSE statement
+					| TIF TLPAREN expression error							{yyerrok; PrintError(missing_sbracket);}
+					| TIF TLPAREN TRPAREN error								{yyerrok; PrintError(missing_condition);}
+					| TIF error                                             {yyerrok; PrintError(missing_sbracket);}
+					;
+
+while_st 			: TWHILE TLPAREN expression TRPAREN TLBRACE statement TRBRACE
+					| TWHILE TLPAREN expression TRPAREN TLBRACE statement error 			{yyerrok; PrintError(missing_mbracket);}
+					| TWHILE TLPAREN expression error						{yyerrok; PrintError(missing_sbracket);}
+					| TWHILE TLPAREN TRPAREN error							{yyerrok; PrintError(missing_condition);}
+					| TWHILE error                                        {yyerrok; PrintError(missing_sbracket);}
+					;
+
+return_st 			: TRETURN opt_expression TSEMI
+					| TRETURN opt_expression error							{yyerrok; PrintError(missing_semi);}
+					;
+
+expression 			: assignment_exp;
+
+assignment_exp 		: logical_or_exp				
+					| unary_exp TASSIGN assignment_exp 		
+					| unary_exp TADDASSIGN assignment_exp 	
+					| unary_exp TSUBASSIGN assignment_exp 	
+					| unary_exp TMULASSIGN assignment_exp 	
+					| unary_exp TDIVASSIGN assignment_exp 	
+					| unary_exp TMODASSIGN assignment_exp 	
+					| unary_exp TASSIGN										{yyerrok; PrintError(wrong_assign);}
+					| unary_exp TADDASSIGN									{yyerrok; PrintError(wrong_assign);}
+					| unary_exp TSUBASSIGN				 					{yyerrok; PrintError(wrong_assign);}
+					| unary_exp TMULASSIGN				 					{yyerrok; PrintError(wrong_assign);}
+					| unary_exp TDIVASSIGN				 					{yyerrok; PrintError(wrong_assign);}
+					| unary_exp TMODASSIGN				 					{yyerrok; PrintError(wrong_assign);}
+					;
+
+logical_or_exp 		: logical_and_exp				
+					| logical_or_exp TOR logical_and_exp 	
+					| logical_or_exp TOR error								{yyerrok; PrintError(missing_operand);}
+					;
+
+logical_and_exp		: equality_exp					
+		 			| logical_and_exp TAND equality_exp 
+					| logical_and_exp TAND error							{yyerrok; PrintError(missing_operand);}
+					;
+
+equality_exp 		: relational_exp				
+					| equality_exp TEQUAL relational_exp 	
+					| equality_exp TNOTEQU relational_exp 	
+					| equality_exp TEQUAL error								{yyerrok; PrintError(missing_operand);}
+					| equality_exp TNOTEQU error							{yyerrok; PrintError(missing_operand);}
+					;
+
 
 
 
