@@ -77,7 +77,7 @@ declaration 		: dcl_spec init_dcl_list TSEMI
 					param = 0;
 					array = 0;
 					type = NONE;
-					(missing_semi);}
+					ReportError(missing_semi);}
 					;
 
 init_dcl_list 		: init_declarator				
@@ -88,13 +88,13 @@ init_dcl_list 		: init_declarator
 init_declarator 	: declarator						
 		 			| declarator TASSIGN TNUMBER
 					| declarator TEQUAL TNUMBER								{yyerrok; PrintError(declaring_err);}
-					| declarator TASSIGN TREALNUMBER
-					| declarator TEQUAL TREALNUMBER								{yyerrok; PrintError(declaring_err);}
+					| declarator TASSIGN TFLOAT
+					| declarator TEQUAL TFLOAT								{yyerrok; PrintError(declaring_err);}
 					;
 
 declarator 			: TIDENT												{changeHSTable(); }
-	     			| TIDENT TLBRACKET opt_number TRBRACKET					{array=1; changeHSTable(); }
-					| TIDENT TLBRACKET opt_number error						{yyerrok; PrintError(missing_lbracket); }
+	     			| TIDENT TLSQUARE opt_number TRSQUARE					{array=1; changeHSTable(); }
+					| TIDENT TLSQUARE opt_number error						{yyerrok; PrintError(missing_lbracket); }
 					;
 
 opt_number 			: TNUMBER					
