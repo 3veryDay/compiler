@@ -31,9 +31,9 @@ int sameid;  //st, ht용
 int cErrors;  //number of errors
 int lineno;
 
-enum errorType { noerror, digit_ident, long_ident, ill_symbol, over_st, missing_semi, missing_paren, missing_curly, missing_square, missing_comma, missing_funcheader, declaring_err, missing_condition, wrong_assign, missing_operand
+enum ErrorType { noerror, digit_ident, long_ident, ill_symbol, over_st, missing_semi, missing_paren, missing_curly, missing_square, missing_comma, missing_funcheader, declaring_err, missing_condition, wrong_assign, missing_operand
 };
-typedef enum errorType ErrorType;
+typedef enum ErrorType ErrorType;
 ErrorType err;
 
 enum Types { INT, VOID, FLOAT, NONE};
