@@ -185,42 +185,79 @@ equality_exp 		: relational_exp
 
 
 
+/**********************************************************************************/
+//지현서 담당 부분  
 
-//
+relational_exp 		: additive_exp 				
+					| relational_exp TGREAT additive_exp 		
+					| relational_exp TLESS additive_exp 		
+					| relational_exp TGREATE additive_exp 	
+					| relational_exp TLESSE additive_exp 	
+					| relational_exp TGREAT error							{yyerrok; PrintError(missing_operand);}
+					| relational_exp TLESS  error							{yyerrok; PrintError(missing_operand);} 		
+					| relational_exp TGREATE error							{yyerrok; PrintError(missing_operand);}
+					| relational_exp TLESSE error							{yyerrok; PrintError(missing_operand);}
+					;
 
-relational_exp 		: additive_exp 				{semantic(68);}
-			| relational_exp '>' additive_exp 		{semantic(69);}
-			| relational_exp '<' additive_exp 		{semantic(70);}
-			| relational_exp tgreate additive_exp 		{semantic(71);}
-			| relational_exp tlesse additive_exp 		{semantic(72);};
-additive_exp 		: multiplicative_exp				{semantic(73);}
-			| additive_exp '+' multiplicative_exp 		{semantic(74);}
-			| additive_exp '-' multiplicative_exp 		{semantic(75);};
-multiplicative_exp 		: unary_exp				{semantic(76);}
-		    	| multiplicative_exp '*' unary_exp 		{semantic(77);}
-		    	| multiplicative_exp '/' unary_exp 		{semantic(78);}
-		    	| multiplicative_exp '%' unary_exp 		{semantic(79);};
-unary_exp 		: postfix_exp				{semantic(80);}
-	   		| '-' unary_exp				{semantic(81);}
-	   		| '!' unary_exp				{semantic(82);}
-	   		| tinc unary_exp				{semantic(83);}
-	   		| tdec unary_exp				{semantic(84);};
-postfix_exp 		: primary_exp				{semantic(85);}
-	      		| postfix_exp '[' expression ']' 		{semantic(86);}
-	      		| postfix_exp '(' opt_actual_param ')' 		{semantic(87);}
-	      		| postfix_exp tinc				{semantic(88);}
-	      		| postfix_exp tdec				{semantic(89);};
-opt_actual_param 		: actual_param				{semantic(90);}
-		  	|					{semantic(91);};
-actual_param 		: actual_param_list				{semantic(92);};
-actual_param_list 		: assignment_exp				{semantic(93);}
-		   	| actual_param_list ',' assignment_exp 		{semantic(94);};
-primary_exp 		: tident					{semantic(95);}
-	     		| tnumber				{semantic(96);}
-	     		| '(' expression ')'				{semantic(97);};
+additive_exp 		: multiplicative_exp				
+					| additive_exp TPLUS multiplicative_exp 
+					| additive_exp TMINUS multiplicative_exp 	
+					| additive_exp TPLUS error								{yyerrok; PrintError(missing_operand);}
+					| additive_exp TMINUS error								{yyerrok; PrintError(missing_operand);}
+					;
+
+multiplicative_exp 	: unary_exp					
+		    		| multiplicative_exp TSTAR unary_exp 		
+		    		| multiplicative_exp TSLASH unary_exp 		
+		    		| multiplicative_exp TMOD unary_exp 		
+					| multiplicative_exp TSTAR error						{yyerrok; PrintError(missing_operand);}
+		    		| multiplicative_exp TSLASH error						{yyerrok; PrintError(missing_operand);}
+		    		| multiplicative_exp TMOD error							{yyerrok; PrintError(missing_operand);}
+					;
+
+unary_exp 			: postfix_exp					
+	   				| TMINUS unary_exp				
+	   				| TNOT unary_exp				
+	   				| TINC unary_exp				
+	   				| TDEC unary_exp				
+					;
+
+postfix_exp 		: primary_exp
+	      			| postfix_exp TLBRACKET expression TRBRACKET
+					| postfix_exp TLBRACKET expression error				{yyerrok; PrintError(missing_lbracket);}
+	      			| postfix_exp TLPAREN opt_actual_param TRPAREN
+					| postfix_exp TLPAREN opt_actual_param error			{yyerrok; PrintError(missing_sbracket);}
+					| postfix_exp TINC
+	      			| postfix_exp TDEC
+					;
+
+opt_actual_param 	: actual_param			
+		  			|						
+					;
+
+actual_param 		: actual_param_list;
+
+actual_param_list 	: assignment_exp				
+		   			| actual_param_list TCOMMA assignment_exp 
+					;
+
+primary_exp 		: TIDENT		
+					{con = 0;
+					func =0;
+					param = 0;
+					array = 0;
+					type = NONE;}
+	     			| TNUMBER	
+					| TREALNUMBER
+	     			| TLPAREN expression TRPAREN
+					| TLPAREN expression error								{yyerrok; PrintError(missing_sbracket);}
+					;
 %%
 
-void semantic(int n)
-{	
-	printf("reduced rule number = %d\n",n);
+void changeHSTable(){
+	current_id->isConst= con;
+	current_id->isFunction= func;
+	current_id->isParam= param;
+	current_id->isArray= array;
+	current_id->spec= type;
 }
