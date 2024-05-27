@@ -189,69 +189,67 @@ equality_exp 		: relational_exp
 //지현서 담당 부분  
 
 relational_exp 		: additive_exp 				
-					| relational_exp TGREAT additive_exp 		
-					| relational_exp TLESS additive_exp 		
-					| relational_exp TGREATE additive_exp 	
-					| relational_exp TLESSE additive_exp 	
-					| relational_exp TGREAT error							{yyerrok; PrintError(missing_operand);}
-					| relational_exp TLESS  error							{yyerrok; PrintError(missing_operand);} 		
-					| relational_exp TGREATE error							{yyerrok; PrintError(missing_operand);}
-					| relational_exp TLESSE error							{yyerrok; PrintError(missing_operand);}
-					;
+			| relational_exp TGREAT additive_exp 		
+			| relational_exp TLESS additive_exp 		
+			| relational_exp TGREATEQU additive_exp 	
+			| relational_exp TLESSEQU additive_exp 	
+			| relational_exp TGREAT error							{yyerrok; PrintError(missing_operand);}
+			| relational_exp TLESS  error							{yyerrok; PrintError(missing_operand);} 		
+			| relational_exp TGREATEQU error						{yyerrok; PrintError(missing_operand);}
+			| relational_exp TLESSEQU error							{yyerrok; PrintError(missing_operand);}
+			;
 
 additive_exp 		: multiplicative_exp				
-					| additive_exp TPLUS multiplicative_exp 
-					| additive_exp TMINUS multiplicative_exp 	
-					| additive_exp TPLUS error								{yyerrok; PrintError(missing_operand);}
-					| additive_exp TMINUS error								{yyerrok; PrintError(missing_operand);}
-					;
+			| additive_exp TADD multiplicative_exp 
+			| additive_exp TSUB multiplicative_exp 	
+			| additive_exp TADD error							{yyerrok; PrintError(missing_operand);}
+			| additive_exp TSUB error							{yyerrok; PrintError(missing_operand);}
+			;
 
 multiplicative_exp 	: unary_exp					
-		    		| multiplicative_exp TSTAR unary_exp 		
-		    		| multiplicative_exp TSLASH unary_exp 		
-		    		| multiplicative_exp TMOD unary_exp 		
-					| multiplicative_exp TSTAR error						{yyerrok; PrintError(missing_operand);}
-		    		| multiplicative_exp TSLASH error						{yyerrok; PrintError(missing_operand);}
-		    		| multiplicative_exp TMOD error							{yyerrok; PrintError(missing_operand);}
-					;
+		    	| multiplicative_exp TMUL unary_exp 		
+		    	| multiplicative_exp TDIV unary_exp 		
+		    	| multiplicative_exp TMOD unary_exp 		
+			| multiplicative_exp TMUL error							{yyerrok; PrintError(missing_operand);}
+		    	| multiplicative_exp TDIV error							{yyerrok; PrintError(missing_operand);}
+		    	| multiplicative_exp TMOD error							{yyerrok; PrintError(missing_operand);}
+			;
 
-unary_exp 			: postfix_exp					
-	   				| TMINUS unary_exp				
-	   				| TNOT unary_exp				
-	   				| TINC unary_exp				
-	   				| TDEC unary_exp				
-					;
+unary_exp 		: postfix_exp					
+	   		| TSUB unary_exp				
+	   		| TNOT unary_exp				
+	   		| TINC unary_exp				
+	   		| TDEC unary_exp				
+			;
 
 postfix_exp 		: primary_exp
-	      			| postfix_exp TLBRACKET expression TRBRACKET
-					| postfix_exp TLBRACKET expression error				{yyerrok; PrintError(missing_lbracket);}
-	      			| postfix_exp TLPAREN opt_actual_param TRPAREN
-					| postfix_exp TLPAREN opt_actual_param error			{yyerrok; PrintError(missing_sbracket);}
-					| postfix_exp TINC
-	      			| postfix_exp TDEC
-					;
+	      		| postfix_exp TLCURLY expression TRCURLY
+			| postfix_exp TLCURLY expression error						{yyerrok; PrintError(missing_lbracket);}
+	      		| postfix_exp TLPAREN opt_actual_param TRPAREN
+			| postfix_exp TLPAREN opt_actual_param error					{yyerrok; PrintError(missing_sbracket);}
+			| postfix_exp TINC
+	      		| postfix_exp TDEC
+			;
 
-opt_actual_param 	: actual_param			
-		  			|						
-					;
+opt_actual_param 	: actual_param	;
 
 actual_param 		: actual_param_list;
 
 actual_param_list 	: assignment_exp				
-		   			| actual_param_list TCOMMA assignment_exp 
-					;
+		   	| actual_param_list TCOMMA assignment_exp 
+			;
 
 primary_exp 		: TIDENT		
-					{con = 0;
-					func =0;
-					param = 0;
-					array = 0;
-					type = NONE;}
-	     			| TNUMBER	
-					| TREALNUMBER
-	     			| TLPAREN expression TRPAREN
-					| TLPAREN expression error								{yyerrok; PrintError(missing_sbracket);}
-					;
+				{con = 0;
+				func =0;
+				param = 0;
+				array = 0;
+				type = NONE;}
+	     		| TNUMBER	
+			| TFLOAT
+	     		| TLPAREN expression TRPAREN
+			| TLPAREN expression error							{yyerrok; PrintError(missing_sbracket);}
+			;
 %%
 
 void changeHSTable(){
