@@ -19,6 +19,7 @@ digit  [0-9]
 "else"  return(TELSE);
 "if"  return(TIF);
 "int"  return(TINT);
+"float"	return(TFLOAT);
 "return"  return(TRETURN);
 "void"  return(TVOID);
 "while"  return(TWHILE);
@@ -65,7 +66,6 @@ digit  [0-9]
 }
 {digit}({letter}|{digit})*{letter}({letter}|{digit})*	{err = digit_ident; ReportError(err);}  // 숫자로 시작하는 identifier 에러 처리
 {digit}+  return(TNUMBER);
-{digit}+"."{digit}+  return(TFLOAT);
 
 .  {err = ill_symbol; ReportError(err);}  // 인식되지 않는 문자의 경우 에러 처리
 %%
