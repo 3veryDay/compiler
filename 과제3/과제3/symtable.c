@@ -87,7 +87,7 @@ void ADDHT(int hscode)
 		ptr->isParam = 0;
 		ptr->isArray = 0;
 		ptr->spec = NONE;
-		ptr->linenum = cLine;
+		ptr->linenum = lineno;
 		ptr->error = 0;
 		HT[hscode] = ptr;
 	}
@@ -99,7 +99,7 @@ void ADDHT(int hscode)
 		ptr->isParam = 0;
 		ptr->isArray = 0;
 		ptr->spec = NONE;
-		ptr->linenum = cLine;
+		ptr->linenum = lineno;
 		ptr->error = 0;
 		HT[hscode] = ptr;
 	}	
