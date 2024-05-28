@@ -115,7 +115,7 @@ int SymbolTable()
 	err = noerror;
 	if((nextfree == STsize) || ((nextfree+yyleng) > STsize)) {
 		err = overst;
-		PrintError(err);
+		ReportError(err);
 	}
 
 	//READ identifier
