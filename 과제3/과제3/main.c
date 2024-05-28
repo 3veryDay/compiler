@@ -6,22 +6,22 @@
 
 extern yylex();
 extern char *yytext;
-void printHT();
+void printHSTable();
 
 void main()
 {
-    cLine = 1;
+    lineno = 1;
 	printf("******************************[[MiniC parsing begins]]\n");
 	yyparse();
 	printf("[[Parsing Ends]]**************************************\n");
 	printf("\n\n%d error(s) detected\n\n", cErrors);
 	printf("====================[[Hash Table]]====================\n");
 
-	printHT();
+	printHSTable();
 }
 
 
-void printHT(){
+void printHSTable(){
 	HTpointer here;
 	int i, j;
 
