@@ -99,7 +99,7 @@ function_name 		: TIDENT							{func = 1;
 
 formal_param 		: TLPARAN opt_formal_param TRPAREN
 				| TLPAREN opt_formal_param error			{yyerrok;
-												ReportError(missing_paren);)}
+												ReportError(missing_rparen);)}
 				;
 
 opt_formal_param 		: formal_param_list						{param = 1;
@@ -127,7 +127,7 @@ param_dcl 			: dcl_spec declarator					{param = 1;
 
 compound_st 		: TLCURLY opt_dcl_list opt_stat_list TRCURLY
 				| TLCURLY opt_dcl_list opt_stat_list error		{yyerrok;
-												ReportError(missing_curly);}
+												ReportError(missing_rcurly);}
 				;
 
 opt_dcl_list 			: declaration_list
@@ -172,7 +172,7 @@ init_declarator 	: declarator
 
 declarator 			: TIDENT												{changeHSTable(); }
 	     			| TIDENT TLSQUARE opt_number TRSQUARE					{array=1; changeHSTable(); }
-					| TIDENT TLSQUARE opt_number error						{yyerrok; ReportError(missing_square); }
+					| TIDENT TLSQUARE opt_number error						{yyerrok; ReportError(missing_rsquare); }
 					;
 
 opt_number 			: TNUMBER					
@@ -206,16 +206,16 @@ opt_expression 		: expression
 
 if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE 		
 					| TIF TLPAREN expression TRPAREN statement TELSE statement
-					| TIF TLPAREN expression error							{yyerrok; ReportError(missing_paren);}
+					| TIF TLPAREN expression error							{yyerrok; ReportError(missing_rparen);}
 					| TIF TLPAREN TRPAREN error								{yyerrok; ReportError(missing_condition);}
-					| TIF error                                             {yyerrok; ReportError(missing_paren);}
+					| TIF error                                             {yyerrok; ReportError(missing_lparen);}
 					;
 
 while_st 			: TWHILE TLPAREN expression TRPAREN TLCURLY statement TRCURLY
-					| TWHILE TLPAREN expression TRPAREN TLCURLY statement error 			{yyerrok; ReportError(missing_curly);}
-					| TWHILE TLPAREN expression error						{yyerrok; ReportError(missing_paren);}
+					| TWHILE TLPAREN expression TRPAREN TLCURLY statement error 			{yyerrok; ReportError(missing_rcurly);}
+					| TWHILE TLPAREN expression error						{yyerrok; ReportError(missing_rparen);}
 					| TWHILE TLPAREN TRPAREN error							{yyerrok; ReportError(missing_condition);}
-					| TWHILE error                                        {yyerrok; PrintError(missing_paren);}
+					| TWHILE error                                        {yyerrok; ReportError(missing_lparen);}
 					;
 
 return_st 			: TRETURN opt_expression TSEMI
@@ -297,9 +297,9 @@ unary_exp 		: postfix_exp
 
 postfix_exp 		: primary_exp
 	      		| postfix_exp TLCURLY expression TRCURLY
-			| postfix_exp TLCURLY expression error						{yyerrok; ReportError(missing_curly);}
+			| postfix_exp TLCURLY expression error						{yyerrok; ReportError(missing_rcurly);}
 	      		| postfix_exp TLPAREN opt_actual_param TRPAREN
-			| postfix_exp TLPAREN opt_actual_param error					{yyerrok; ReportError(missing_paren);}
+			| postfix_exp TLPAREN opt_actual_param error					{yyerrok; ReportError(missing_rparen);}
 			| postfix_exp TINC
 	      		| postfix_exp TDEC
 			;
@@ -321,7 +321,7 @@ primary_exp 		: TIDENT
 	     		| TNUMBER	
 			| TFLOAT
 	     		| TLPAREN expression TRPAREN
-			| TLPAREN expression error							{yyerrok; ReportError(missing_paren);}
+			| TLPAREN expression error							{yyerrok; ReportError(missing_rparen);}
 			;
 %%
 
