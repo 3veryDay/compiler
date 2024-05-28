@@ -224,9 +224,9 @@ unary_exp 		: postfix_exp
 
 postfix_exp 		: primary_exp
 	      		| postfix_exp TLCURLY expression TRCURLY
-			| postfix_exp TLCURLY expression error						{yyerrok; ReportError(missing_lbracket);}
+			| postfix_exp TLCURLY expression error						{yyerrok; ReportError(missing_curly);}
 	      		| postfix_exp TLPAREN opt_actual_param TRPAREN
-			| postfix_exp TLPAREN opt_actual_param error					{yyerrok; ReportError(missing_sbracket);}
+			| postfix_exp TLPAREN opt_actual_param error					{yyerrok; ReportError(missing_paren);}
 			| postfix_exp TINC
 	      		| postfix_exp TDEC
 			;
@@ -248,7 +248,7 @@ primary_exp 		: TIDENT
 	     		| TNUMBER	
 			| TFLOAT
 	     		| TLPAREN expression TRPAREN
-			| TLPAREN expression error							{yyerrok; ReportError(missing_sbracket);}
+			| TLPAREN expression error							{yyerrok; ReportError(missing_paren);}
 			;
 %%
 
