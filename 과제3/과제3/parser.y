@@ -1,16 +1,3 @@
-/*
-보충설명용 ..
-과제2 에서 report error할 때 text 자체를 보냇던 것과 다르게
-error type 정의해서 void ReportError( ErrorType err) 이렇게 바꿔놨습니다
-참고 코드의 PrintError(missing_funcheader) 대신에 위에 거 쓰면 되고
-glob.h에 참고 코드랑 살짝 다르게 해서 에러 타입 정의해놨어요!! ㅎㅎ
-
-기타 HStable 설정 (con, func 등) 은 일단 그대로 뒀습니다
-
-yylineno 는 parser에선 사용 불가해서 glob.h에 lineno 정의하고 scanner.l에서 처리하는 걸로 바꿨어요
-*/
-
-
 %{
 #include <stdio.h>
 #include <ctype.h>
