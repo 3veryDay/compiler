@@ -66,6 +66,7 @@ digit  [0-9]
 }
 {digit}({letter}|{digit})*{letter}({letter}|{digit})*	{err = digit_ident; ReportError(err);}  // 숫자로 시작하는 identifier 에러 처리
 {digit}+  return(TNUMBER);
+{digit}+"."{digit}+	return(TREAL);
 
 .  {err = ill_symbol; ReportError(err);}  // 인식되지 않는 문자의 경우 에러 처리
 %%
