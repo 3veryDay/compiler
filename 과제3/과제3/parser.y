@@ -97,7 +97,7 @@ function_name 		: TIDENT							{func = 1;
 												type = NONE;}
 				;
 
-formal_param 		: TLPARAN opt_formal_param TRPAREN
+formal_param 		: TLPAREN opt_formal_param TRPAREN
 				| TLPAREN opt_formal_param error			{yyerrok;
 												ReportError(missing_rparen);)}
 				;
