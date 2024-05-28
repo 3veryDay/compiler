@@ -6,7 +6,7 @@
 
 extern yylex();
 extern char *yytext;
-void printHSTable();
+void printHT();
 
 void main()
 {
