@@ -53,15 +53,15 @@ void ReportError(ErrorType err)
 		break;
 	case missing_rparen:
 		cErrors++;
-		printf("%6d          ERROR!!			  not closed right parenthesis\n", lineno);
+		printf("%6d          ERROR!!			  no right parenthesis\n", lineno);
 		break;
 	case missing_rcurly:
 		cErrors++;
-		printf("%6d          ERROR!!			  not closed right curly bracket\n", lineno);
+		printf("%6d          ERROR!!			  no right curly bracket\n", lineno);
 		break;
 	case missing_rsquare:
 		cErrors++;
-		printf("%6d          ERROR!!			  not closed right square bracket\n", lineno);
+		printf("%6d          ERROR!!			  no right square bracket\n", lineno);
 		break;
 
 	case missing_comma:
