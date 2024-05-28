@@ -10,22 +10,18 @@ void ReportError(ErrorType err)
 	{
 	case noerror: 
 		break;
-  case digit_ident:
+  	case digit_ident:
 		cErrors++;
 		printf("%6d          ERROR!!			  %-10s		start with digit\n", lineno, yytext);
 		break;
 	case long_ident:
 		cErrors++;
-		printf("%6d          ERROR!!			  %-13s	 too long identifier\n", lineno, yytext);
+		printf("%6d          ERROR!!			  %-13s	 	too long identifier\n", lineno, yytext);
 		break;
 	case ill_symbol:
 		cErrors++;
 		printf("%6d          ERROR!!			  %-5c		illegal symbol\n", lineno, yytext[0]);
 		break;
-	/* case illid_illegal:
-		cErrors++;
-		printf("%6d          ERROR!!			  %-5s		illegal identifier\n", lineno, yytext);
-		break; */
 	case over_st:
 		cErrors++;
 		printf("\nError : OVERFLOW in ST\n");
