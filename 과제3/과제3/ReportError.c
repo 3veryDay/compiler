@@ -54,19 +54,19 @@ void ReportError(ErrorType err)
 		break;
 	case declaring_err:
 		cErrors++;
-		printf("%6d          ERROR!!              wrong declaration\n", lineno);
+		printf("%6d          ERROR!!              	wrong declaration\n", lineno);
 		break;
 	case missing_condition:
 		cErrors++;
-		printf("%6d          ERROR!!              missing condition\n", lineno);
+		printf("%6d          ERROR!!              	missing condition\n", lineno);
 		break;
 	case wrong_assign:
 		cErrors++;
-		printf("%6d          ERROR!!              wrong assignment\n", lineno);
+		printf("%6d          ERROR!!              	wrong assignment\n", lineno);
 		break;
 	case missing_operand:
 		cErrors++;
-		printf("%6d          ERROR!!              missing operand\n", lineno);
+		printf("%6d          ERROR!!              	missing operand\n", lineno);
 		break;
 		
 	}
