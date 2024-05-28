@@ -47,8 +47,8 @@ digit  [0-9]
 "--"  return(TDEC);
 "(" return(TLPAREN);
 ")" return(TRPAREN);
-"{" return(TLBRACE);
-"}" return(TRBRACE);
+"{" return(TLCURLY);
+"}" return(TRCURLY);
 "[" return(TLSQUARE);
 "]" return(TRSQUARE);
 "," return(TCOMMA);
