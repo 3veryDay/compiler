@@ -31,7 +31,7 @@ int nextid;
 int nextfree;
 int hashcode; 
 int sameid;  //st, ht용
-boolean found;
+int found;
 
 int cErrors;  //number of errors
 int lineno;
