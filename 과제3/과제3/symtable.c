@@ -114,7 +114,7 @@ int SymbolTable()
 {
 	err = noerror;
 	if((nextfree == STsize) || ((nextfree+yyleng) > STsize)) {
-		err = overst;
+		err = over_st;
 		ReportError(err);
 	}
 
