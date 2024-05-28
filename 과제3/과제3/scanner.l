@@ -60,14 +60,14 @@ digit  [0-9]
 		return(TIDENT); 	// 길이가 12자보다 짧으면 ident로 인식
 	} else {
 		 err = long_ident;
-		 report_error(err);	// 그렇지 않으면 에러 처리, Illegal Identifier, Over 12 characters
+		 ReportError(err);	// 그렇지 않으면 에러 처리, Illegal Identifier, Over 12 characters
 	}
 }
-{digit}({letter}|{digit})*{letter}({letter}|{digit})*	{err = digit_ident; report_error(err);}  // 숫자로 시작하는 identifier 에러 처리
+{digit}({letter}|{digit})*{letter}({letter}|{digit})*	{err = digit_ident; ReportError(err);}  // 숫자로 시작하는 identifier 에러 처리
 {digit}+  return(TNUMBER);
 {digit}+"."{digit}+  return(TFLOAT);
 
-.  {err = ill_symbol; report_error(err);}  // 인식되지 않는 문자의 경우 에러 처리
+.  {err = ill_symbol; ReportError(err);}  // 인식되지 않는 문자의 경우 에러 처리
 %%
 int yywrap() {
 	return 1;
