@@ -100,7 +100,7 @@ function_name 		: TIDENT							{func = 1;
 
 formal_param 		: TLPAREN opt_formal_param TRPAREN
 				| TLPAREN opt_formal_param error			{yyerrok;
-												ReportError(missing_rparen);)}
+												ReportError(missing_rparen);}
 				;
 
 opt_formal_param 		: formal_param_list						{param = 1;
