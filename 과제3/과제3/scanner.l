@@ -6,7 +6,7 @@ date - 2024/04/28
 #include <stdio.h>
 #include "tn.h"
 #include "glob.h"
-extern void symtable(char *yytext);	// ident가 인식된 경우 symbol table에 저장 및 처리하기 위한 함수 불러오기
+extern int SymbolTable();	// ident가 인식된 경우 symbol table에 저장 및 처리하기 위한 함수 불러오기
 extern void ReportError(ErrorType err);	// 에러가 인식된 경우 에러 처리를 위한 함수 불러오기
 %}
 
@@ -56,7 +56,7 @@ digit  [0-9]
 \n	lineno ++;
 {letter}({letter}|{digit})*  {
 	if (yyleng <= 12) {
-		symtable(yytext);	
+		SymbolTable();	
 		return(TIDENT); 	// 길이가 12자보다 짧으면 ident로 인식
 	} else {
 		 err = long_ident;
