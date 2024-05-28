@@ -4,6 +4,13 @@
 // 라인 넘버 변수는 lineno , glob.h에 정의되어 있음
 // ErrorType 도 glob.h에 정의
 
+extern char *yytext;
+
+yyerror(char* s)
+{
+
+}
+
 void ReportError(ErrorType err)
 {
 	switch(err)
