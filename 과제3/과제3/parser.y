@@ -13,7 +13,7 @@ yylineno 는 parser에선 사용 불가해서 glob.h에 lineno 정의하고 scan
 
 %{
 #include <stdio.h>
-#include <stlib.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <malloc.h>
 #include "glob.h"
