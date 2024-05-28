@@ -125,7 +125,7 @@ param_dcl 			: dcl_spec declarator					{param = 1;
 												changeHSTable();}
 				;
 
-compound_st 		: TLCURLY opt_dcl_list opt_stat_list TRCURLY
+compound_st 		: TLCURLY opt_dcl_list opt_stat_list TRCURLY %prec LOWER_THAN_OPT_STAT_LIST
 				| TLCURLY opt_dcl_list opt_stat_list error		{yyerrok;
 												ReportError(missing_rcurly);}
 				;
