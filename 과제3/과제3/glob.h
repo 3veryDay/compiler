@@ -6,6 +6,10 @@
 #define FALSE 0
 #define TRUE 1
 
+enum Types { INT, VOID, FLOAT, NONE};
+typedef enum Types Types;
+Types type;
+
 typedef struct HTentry* HTpointer;
 typedef struct HTentry {
 	int index;
@@ -37,7 +41,3 @@ enum ErrorType { noerror, digit_ident, long_ident, ill_symbol, over_st, missing_
 };
 typedef enum ErrorType ErrorType;
 ErrorType err;
-
-enum Types { INT, VOID, FLOAT, NONE};
-typedef enum Types Types;
-Types type;
