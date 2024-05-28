@@ -8,7 +8,7 @@
 #include <malloc.h>
 #include "glob.h"
 
-void ReportError(ERRORtypes err);
+void ReportError(ErrorType err);
 extern char *yytext;
 extern int yyleng;
 
