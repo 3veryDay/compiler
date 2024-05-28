@@ -193,26 +193,26 @@ relational_exp 		: additive_exp
 			| relational_exp TLESS additive_exp 		
 			| relational_exp TGREATEQU additive_exp 	
 			| relational_exp TLESSEQU additive_exp 	
-			| relational_exp TGREAT error							{yyerrok; PrintError(missing_operand);}
-			| relational_exp TLESS  error							{yyerrok; PrintError(missing_operand);} 		
-			| relational_exp TGREATEQU error						{yyerrok; PrintError(missing_operand);}
-			| relational_exp TLESSEQU error							{yyerrok; PrintError(missing_operand);}
+			| relational_exp TGREAT error							{yyerrok; ReportError(missing_operand);}
+			| relational_exp TLESS  error							{yyerrok; ReportError(missing_operand);} 		
+			| relational_exp TGREATEQU error						{yyerrok; ReportError(missing_operand);}
+			| relational_exp TLESSEQU error							{yyerrok; ReportError(missing_operand);}
 			;
 
 additive_exp 		: multiplicative_exp				
 			| additive_exp TADD multiplicative_exp 
 			| additive_exp TSUB multiplicative_exp 	
-			| additive_exp TADD error							{yyerrok; PrintError(missing_operand);}
-			| additive_exp TSUB error							{yyerrok; PrintError(missing_operand);}
+			| additive_exp TADD error							{yyerrok; ReportError(missing_operand);}
+			| additive_exp TSUB error							{yyerrok; ReportError(missing_operand);}
 			;
 
 multiplicative_exp 	: unary_exp					
 		    	| multiplicative_exp TMUL unary_exp 		
 		    	| multiplicative_exp TDIV unary_exp 		
 		    	| multiplicative_exp TMOD unary_exp 		
-			| multiplicative_exp TMUL error							{yyerrok; PrintError(missing_operand);}
-		    	| multiplicative_exp TDIV error							{yyerrok; PrintError(missing_operand);}
-		    	| multiplicative_exp TMOD error							{yyerrok; PrintError(missing_operand);}
+			| multiplicative_exp TMUL error							{yyerrok; ReportError(missing_operand);}
+		    	| multiplicative_exp TDIV error							{yyerrok; ReportError(missing_operand);}
+		    	| multiplicative_exp TMOD error							{yyerrok; ReportError(missing_operand);}
 			;
 
 unary_exp 		: postfix_exp					
@@ -224,9 +224,9 @@ unary_exp 		: postfix_exp
 
 postfix_exp 		: primary_exp
 	      		| postfix_exp TLCURLY expression TRCURLY
-			| postfix_exp TLCURLY expression error						{yyerrok; PrintError(missing_lbracket);}
+			| postfix_exp TLCURLY expression error						{yyerrok; ReportError(missing_lbracket);}
 	      		| postfix_exp TLPAREN opt_actual_param TRPAREN
-			| postfix_exp TLPAREN opt_actual_param error					{yyerrok; PrintError(missing_sbracket);}
+			| postfix_exp TLPAREN opt_actual_param error					{yyerrok; ReportError(missing_sbracket);}
 			| postfix_exp TINC
 	      		| postfix_exp TDEC
 			;
@@ -248,7 +248,7 @@ primary_exp 		: TIDENT
 	     		| TNUMBER	
 			| TFLOAT
 	     		| TLPAREN expression TRPAREN
-			| TLPAREN expression error							{yyerrok; PrintError(missing_sbracket);}
+			| TLPAREN expression error							{yyerrok; ReportError(missing_sbracket);}
 			;
 %%
 
