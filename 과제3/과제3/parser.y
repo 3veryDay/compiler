@@ -19,6 +19,15 @@ yylineno 는 parser에선 사용 불가해서 glob.h에 lineno 정의하고 scan
 
 /*yacc source for Mini C*/
 
+int con = 0;
+int func = 0;
+int param = 0;
+int array = 0;
+int type = NONE;
+
+extern int yylex();
+extern yyerror(char* s);
+void changeHSTable();
 %}
 
 %nonassoc LOWER_THAN_ELSE
@@ -36,34 +45,98 @@ yylineno 는 parser에선 사용 불가해서 glob.h에 lineno 정의하고 scan
 
 
 %%
-mini_c 			: translation_unit				{semantic(1);};
-translation_unit 		: external_dcl				{semantic(2);}
-			| translation_unit external_dcl			{semantic(3);};
-external_dcl 		: function_def				{semantic(4);}
-		  	| declaration				{semantic(5);};
-function_def 		: function_header compound_st		{semantic(6);};
-function_header 		: dcl_spec function_name formal_param	{semantic(7);};
-dcl_spec 			: dcl_specifiers				{semantic(8);};
-dcl_specifiers 		: dcl_specifier				{semantic(9);}
-		 	| dcl_specifiers dcl_specifier			{semantic(10);};
-dcl_specifier 		: type_qualifier				{semantic(11);}
-			| type_specifier				{semantic(12);};
-type_qualifier 		: tconst					{semantic(13);};
-type_specifier 		: tint					{semantic(14);}
-		 	| tvoid					{semantic(15);};
-function_name 		: tident					{semantic(16);};
-formal_param 		: '(' opt_formal_param ')' 			{semantic(17);};
-opt_formal_param 		: formal_param_list				{semantic(18);}
-		   	|					{semantic(19);};
-formal_param_list 		: param_dcl				{semantic(20);}
-		    	| formal_param_list ',' param_dcl 		{semantic(21);};
-param_dcl 		: dcl_spec declarator			{semantic(22);};
-compound_st 		: '{' opt_dcl_list opt_stat_list '}' 		{semantic(23);};
-opt_dcl_list 		: declaration_list				{semantic(24);}
-			|					{semantic(25);};
-declaration_list 		: declaration				{semantic(26);}
-			| declaration_list declaration 			{semantic(27);};
+mini_c 			: translation_unit
+				;
 
+translation_unit 		: external_dcl
+				| translation_unit external_dcl
+				;
+
+external_dcl 			: function_def
+		  		| declaration
+				| TIDENT TSEMI						{yyerrok;
+												ReportError(missing_semi);}
+				| TIDENT error
+				;
+
+function_def 		: function_header compound_st
+				| function_header error					{yyerrok;
+												ReportError(missing_semi);}
+				| error compound_st					{yyerrok;
+												ReportError(missing_funcheader);}
+				;
+
+function_header 		: dcl_spec function_name formal_param
+				;
+
+dcl_spec 			: dcl_specifiers
+				;
+
+dcl_specifiers 		: dcl_specifier
+		 		| dcl_specifiers dcl_specifier
+				;
+
+dcl_specifier 		: type_qualifier
+				| type_specifier
+				;
+
+type_qualifier 		: TCONST							{con = 1;}
+				;
+
+type_specifier 		: TINT								{type = INT;}
+		 		| TVOID							{type = VOID;}
+				| TFLOAT							{type = FLOAT;}
+				;
+
+function_name 		: TIDENT							{func = 1;
+												changeHSTable();
+												func = 0;
+												con = 0;
+												param = 0;
+												array = 0;
+												type = NONE;}
+				;
+
+formal_param 		: TLPARAN opt_formal_param TRPAREN
+				| TLPAREN opt_formal_param error			{yyerrok;
+												ReportError(missing_paren);)}
+				;
+
+opt_formal_param 		: formal_param_list						{param = 1;
+												changeHSTable();
+												func = 0;
+												con = 0;
+												param = 0;
+												array = 0;
+												type = NONE;}
+		   		|								{param = 0;}
+				;
+
+formal_param_list 		: param_dcl							{param = 1;
+												changeHSTable();}
+		    		| formal_param_list TCOMMA param_dcl
+				| formal_param_list TCOMMA error			{yyerrok;
+												ReportError(missing_comma);}
+				| formal_param_list param_dcl				{yyerrok;
+												ReportError(missing_comma);}
+				;
+
+param_dcl 			: dcl_spec declarator					{param = 1;
+												changeHSTable();}
+				;
+
+compound_st 		: TLCURLY opt_dcl_list opt_stat_list TRCURLY
+				| TLCURLY opt_dcl_list opt_stat_list error		{yyerrok;
+												ReportError(missing_curly);}
+				;
+
+opt_dcl_list 			: declaration_list
+				|
+				;
+
+declaration_list 		: declaration
+				| declaration_list declaration
+				;
 
 // 조윤아
 
