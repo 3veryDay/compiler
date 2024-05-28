@@ -39,18 +39,31 @@ void ReportError(ErrorType err)
 		cErrors++;
 		printf("%6d          ERROR!!			  missing semicolon\n", lineno-1);
 		break;
-	case missing_paren:
+	case missing_lparen:
 		cErrors++;
-		printf("%6d          ERROR!!			  not closed parenthesis\n", lineno);
+		printf("%6d          ERROR!!			  no left parenthesis\n", lineno);
 		break;
-	case missing_curly:
+	case missing_lcurly:
 		cErrors++;
-		printf("%6d          ERROR!!			  not closed curly bracket\n", lineno);
+		printf("%6d          ERROR!!			  no left curly bracket\n", lineno);
 		break;
-	case missing_square:
+	case missing_lsquare:
 		cErrors++;
-		printf("%6d          ERROR!!			  not closed square bracket\n", lineno);
+		printf("%6d          ERROR!!			  no left square bracket\n", lineno);
 		break;
+	case missing_rparen:
+		cErrors++;
+		printf("%6d          ERROR!!			  not closed right parenthesis\n", lineno);
+		break;
+	case missing_rcurly:
+		cErrors++;
+		printf("%6d          ERROR!!			  not closed right curly bracket\n", lineno);
+		break;
+	case missing_rsquare:
+		cErrors++;
+		printf("%6d          ERROR!!			  not closed right square bracket\n", lineno);
+		break;
+
 	case missing_comma:
 		cErrors++;
 		printf("%6d          ERROR!!			  missing comma\n", lineno);
