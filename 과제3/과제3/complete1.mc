@@ -1,3 +1,5 @@
+/* prime.mc */
+
 const int max=100;
 void main()
 {
