@@ -1,3 +1,5 @@
+/* factorial.mc */
+
 void main()
 {
   int n, f;
