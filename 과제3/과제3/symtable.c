@@ -1,5 +1,5 @@
 /*
- * symtable.c - Symbol table 및 Hash table 관리
+ * symtable.c - Symbol table & Hash table management
  */
 
 #include <stdio.h>
@@ -98,7 +98,7 @@ void ADDHT(int hscode)
 }
 
 /*
- * SymbolTable() - If read the identifier, symbol table management 
+ * SymbolTable() - Read the identifier and management symbol table, hash table
  */
 int SymbolTable()
 {
@@ -108,7 +108,7 @@ int SymbolTable()
 		ReportError(err);
 	}
 
-	//READ identifier
+	//Read identifier
 	for (int i = 0; i<yyleng; i++) {
 		ST[nextfree++] = yytext[i];
 	}
