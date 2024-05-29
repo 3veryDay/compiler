@@ -19,15 +19,15 @@ void ReportError(ErrorType err)
 		break;
   	case digit_ident:
 		cErrors++;
-		printf("%6d          ERROR!!			  %-10s		start with digit\n", lineno, yytext);
+		printf("line %6d          ERROR!!			  %-10s		start with digit\n", lineno, yytext);
 		break;
 	case long_ident:
 		cErrors++;
-		printf("%6d          ERROR!!			  %-13s	 	too long identifier\n", lineno, yytext);
+		printf("line %6d          ERROR!!			  %-13s	 	too long identifier\n", lineno, yytext);
 		break;
 	case ill_symbol:
 		cErrors++;
-		printf("%6d          ERROR!!			  %-5c		illegal symbol\n", lineno, yytext[0]);
+		printf("line %6d          ERROR!!			  %-5c		illegal symbol\n", lineno, yytext[0]);
 		break;
 	case over_st:
 		cErrors++;
@@ -37,56 +37,56 @@ void ReportError(ErrorType err)
 		break;
 	case missing_semi:
 		cErrors++;
-		printf("%6d          ERROR!!			  missing semicolon\n", lineno-1);
+		printf("line %6d          ERROR!!			  missing semicolon\n", lineno-1);
 		break;
 	case missing_lparen:
 		cErrors++;
-		printf("%6d          ERROR!!			  no left parenthesis\n", lineno);
+		printf("line %6d          ERROR!!			  no left parenthesis\n", lineno);
 		break;
 	case missing_lcurly:
 		cErrors++;
-		printf("%6d          ERROR!!			  no left curly bracket\n", lineno);
+		printf("line %6d          ERROR!!			  no left curly bracket\n", lineno);
 		break;
 	case missing_lsquare:
 		cErrors++;
-		printf("%6d          ERROR!!			  no left square bracket\n", lineno);
+		printf("line %6d          ERROR!!			  no left square bracket\n", lineno);
 		break;
 	case missing_rparen:
 		cErrors++;
-		printf("%6d          ERROR!!			  no right parenthesis\n", lineno);
+		printf("line %6d          ERROR!!			  no right parenthesis\n", lineno);
 		break;
 	case missing_rcurly:
 		cErrors++;
-		printf("%6d          ERROR!!			  no right curly bracket\n", lineno);
+		printf("line %6d          ERROR!!			  no right curly bracket\n", lineno);
 		break;
 	case missing_rsquare:
 		cErrors++;
-		printf("%6d          ERROR!!			  no right square bracket\n", lineno);
+		printf("line %6d          ERROR!!			  no right square bracket\n", lineno);
 		break;
 
 	case missing_comma:
 		cErrors++;
-		printf("%6d          ERROR!!			  missing comma\n", lineno);
+		printf("line %6d          ERROR!!			  missing comma\n", lineno);
 		break;
 	case missing_funcheader:
 		cErrors++;
-		printf("%6d          ERROR!!			  no function header\n", lineno);
+		printf("line %6d          ERROR!!			  no function header\n", lineno);
 		break;
 	case declaring_err:
 		cErrors++;
-		printf("%6d          ERROR!!              	wrong declaration\n", lineno);
+		printf("line %6d          ERROR!!              	wrong declaration\n", lineno);
 		break;
 	case missing_condition:
 		cErrors++;
-		printf("%6d          ERROR!!              	missing condition\n", lineno);
+		printf("line %6d          ERROR!!              	missing condition\n", lineno);
 		break;
 	case wrong_assign:
 		cErrors++;
-		printf("%6d          ERROR!!              	wrong assignment\n", lineno);
+		printf("line %6d          ERROR!!              	wrong assignment\n", lineno);
 		break;
 	case missing_operand:
 		cErrors++;
-		printf("%6d          ERROR!!              	missing operand\n", lineno);
+		printf("line %6d          ERROR!!              	missing operand\n", lineno);
 		break;
 		
 	}
