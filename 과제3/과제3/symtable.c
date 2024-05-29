@@ -1,5 +1,5 @@
 /*
- * Symbol.c - Symbol table management
+ * symtable.c - Symbol table 및 Hash table 관리
  */
 
 #include <stdio.h>
