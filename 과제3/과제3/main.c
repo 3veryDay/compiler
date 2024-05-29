@@ -18,6 +18,7 @@ void main()
 	printf("====================[[Hash Table]]====================\n");
 
 	printHSTable();
+	printf("\n\n2171047 JoYoona\n2176143 ParkSohyun\n2176365 JoEunhye\n2176368 JiHyunseo\n");
 }
 
 
