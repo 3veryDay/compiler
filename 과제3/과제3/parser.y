@@ -212,8 +212,8 @@ if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE
 					| TIF error                                             {yyerrok; ReportError(missing_lparen);}
 					;
 
-while_st 			: TWHILE TLPAREN expression TRPAREN TLCURLY statement TRCURLY
-					| TWHILE TLPAREN expression TRPAREN TLCURLY statement error 			{yyerrok; ReportError(missing_rcurly);}
+while_st 			: TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list TRCURLY
+					| TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list error 			{yyerrok; ReportError(missing_rcurly);}
 					| TWHILE TLPAREN expression error						{yyerrok; ReportError(missing_rparen);}
 					| TWHILE TLPAREN TRPAREN error							{yyerrok; ReportError(missing_condition);}
 					| TWHILE error                                        {yyerrok; ReportError(missing_lparen);}
