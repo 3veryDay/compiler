@@ -19,6 +19,7 @@ yyerror(char* s)
 
 // 에러 타입에 따라 에러 메시지 출력
 //ErrorType err : 에러 타입
+
 void ReportError(ErrorType err)
 {
 	switch (err)
