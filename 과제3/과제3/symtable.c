@@ -18,12 +18,12 @@ extern int yyleng;
  */
 void ComputeHS(int nid, int nfree)
 {
-	int code, i;
+	int code, i;    // ASCII code's sum if identifier
 	code = 0;
 	for (i = nid; i < nfree - 1; i++) {
 		code += (int)ST[i];
 	}
-	hashcode = code % HTsize;
+	hashcode = code % HTsize;    
 }
 
 /*
@@ -39,7 +39,7 @@ void LookupHS(int nid,int hscode)
 	found = FALSE;
 	if (HT[hscode] != NULL) {
 		here = HT[hscode];
-		while (here != NULL && found == FALSE) {
+		while (here != NULL && found == FALSE) {  // Check whether identifier already exists in hash table
 			found = TRUE;
 			i = here->index;
 			j = nid;
