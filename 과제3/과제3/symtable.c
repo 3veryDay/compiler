@@ -1,5 +1,7 @@
 /*
  * symtable.c - Symbol table & Hash table management
+ * programmer – 조윤아(2171047), 박소현(2176143), 조은혜(2176365), 지현서(2076368) 
+ * date – 2024-05-29
  */
 
 #include <stdio.h>
