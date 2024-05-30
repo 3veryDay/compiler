@@ -1,6 +1,4 @@
-/*
-	parser.y - MiniC를 위한 YACC 소스
-*/
+/*	parser.y - MiniC를 위한 YACC 소스	*/
 
 
 %{
@@ -149,14 +147,11 @@ declaration 		: dcl_spec init_dcl_list TSEMI
 					param = 0;
 					array = 0;
 					type = NONE;
-					ReportError(missing_semi);
-					yyerrok; // 다음 오류를 복구하기 위해 에러 상태를 초기화합니다.
-					}	// 오류 - 세미콜론 없음
+					ReportError(missing_semi);}	// 오류 - 세미콜론 없음
 					;
 
-init_dcl_list 		: init_declarator	 			
-					| init_dcl_list TCOMMA init_declarator		
-				    	| init_dcl_list TCOMMA error { yyerrok; ReportError(missing_comma); }			
+init_dcl_list 		: init_declarator				
+					| init_dcl_list TCOMMA init_declarator				
 					| init_dcl_list init_declarator							{yyerrok; ReportError(missing_comma); current_id -> error =1;}	// 오류 - 콤마 없음
 					;
 
@@ -165,6 +160,18 @@ init_declarator 	: declarator
 					| declarator TEQUAL TNUMBER								{yyerrok; ReportError(declaring_err);}	// 오류 - 변수 선언 에러
 					| declarator TASSIGN TREAL
 					| declarator TEQUAL TREAL								{yyerrok; ReportError(declaring_err);}	// 오류 - 변수 선언 에러
+					/*******************************/
+					| declarator TASSIGN TLCURLY init_list TRCURLY		// 배열 초기화 구문 추가
+					| declarator TEQUAL TLCURLY init_list TRCURLY		{yyerrok; ReportError(declaring_err);}	// 오류 - 변수 선언 에러
+					/*******************************/
+					;
+
+init_list 			: initializer									/*******************************/
+					| init_list TCOMMA initializer						/*******************************/
+					;
+
+initializer 		: TNUMBER									/*******************************/
+					| TREAL										/*******************************/
 					;
 
 declarator 			: TIDENT												{changeHSTable(); }
