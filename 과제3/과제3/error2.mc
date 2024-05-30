@@ -1,17 +1,15 @@
-void sort_array(int arr[], int size) {
-    int temp;
-    int i, j;
-    if (arr[i] > arr[j]) {
-        temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-}
+int calc_int(int a, int b){
 
-int main() {
-    int numbers[5) = {4, 2, 5, 1, 3}; 
-
-    sort_array(numbers, 5);
-
-    return 0;
+	int result
+	
+	if(a>b && b != 0){
+		result = a/b;
+	}else if(b>a %& a != 0 {
+		result =b/a;
+	}
+	else {
+		result = 0; 
+	}
+	
+	return result;
 }
