@@ -216,7 +216,7 @@ while_st 			: TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list TRCURLY		
 					| TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list error 			{yyerrok; ReportError(missing_rcurly); printf("while_st 			| TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list error  \n" );}	// 오류 - 오른쪽 중괄호 없음
 					| TWHILE TLPAREN expression error						{yyerrok; ReportError(missing_rparen); printf("while_st 			| TWHILE TLPAREN expression error	 \n" );}		// 오류 - 오른쪽 괄호 없음
 					| TWHILE TLPAREN TRPAREN error							{yyerrok; ReportError(missing_condition);printf("while_st 			| TWHILE TLPAREN TRPAREN error \n" );}	// 오류 - 조건문 없음
-					| TWHILE error                                        {yyerrok; ReportError(missing_lparen)printf("while_st 			| TWHILE error   \n" );}
+					| TWHILE error                                        {yyerrok; ReportError(missing_lparen);printf("while_st 			| TWHILE error   \n" );}
 					;
 
 return_st 			: TRETURN opt_expression TSEMI	{printf("return_st 			: TRETURN opt_expression TSEMI \n" );}	
