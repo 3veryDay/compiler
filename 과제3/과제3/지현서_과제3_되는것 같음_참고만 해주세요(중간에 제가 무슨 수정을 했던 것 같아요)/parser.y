@@ -161,18 +161,18 @@ init_declarator 	: declarator
 					| declarator TEQUAL TNUMBER								{yyerrok; ReportError(declaring_err);}	// 오류 - 변수 선언 에러
 					| declarator TASSIGN TREAL
 					| declarator TEQUAL TREAL								{yyerrok; ReportError(declaring_err);}	// 오류 - 변수 선언 에러
-					/*******************************/
+					
 					| declarator TASSIGN TLCURLY init_list TRCURLY		// 배열 초기화 구문 추가
 					| declarator TEQUAL TLCURLY init_list TRCURLY		{yyerrok; ReportError(declaring_err);}	// 오류 - 변수 선언 에러
-					/*******************************/
+					
 					;
 
-init_list 			: initializer									/*******************************/
-					| init_list TCOMMA initializer						/*******************************/
+init_list 			: initializer									
+					| init_list TCOMMA initializer						
 					;
 
-initializer 		: TNUMBER									/*******************************/
-					| TREAL										/*******************************/
+initializer 		: TNUMBER									
+					| TREAL										
 					;
 
 declarator 			: TIDENT												{changeHSTable(); }
