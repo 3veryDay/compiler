@@ -300,12 +300,12 @@ postfix_exp 		: primary_exp							{printf("postfix_exp 		: primary_exp			 \n" );
 	      		| postfix_exp TDEC		{printf("postfix_exp 		| postfix_exp TDEC			\n " );}	
 			;
 
-opt_actual_param 	: actual_param			printf(" opt_actual_param 	: actual_param	 \n");	;	
+opt_actual_param 	: actual_param			{printf(" opt_actual_param 	: actual_param	 \n");}	;	
 
-actual_param 		: actual_param_list;			printf("actual_param 		: actual_param_list;  \n");	
+actual_param 		: actual_param_list			{printf("actual_param 		: actual_param_list;  \n");}	;
 
-actual_param_list 	: assignment_exp				printf(" actual_param_list 	: assignment_exp		 \n");				
-		   	| actual_param_list TCOMMA assignment_exp 			printf(" actual_param_list | actual_param_list TCOMMA assignment_exp 	\n");	
+actual_param_list 	: assignment_exp				{printf(" actual_param_list 	: assignment_exp		 \n");	}			
+		   	| actual_param_list TCOMMA assignment_exp 			{printf(" actual_param_list | actual_param_list TCOMMA assignment_exp 	\n");	}
 			;
 
 primary_exp 		: TIDENT		
@@ -313,10 +313,10 @@ primary_exp 		: TIDENT
 				func =0;
 				param = 0;
 				array = 0;
-				type = NONE; 			printf(" primary_exp 		: TIDENT \n");	}
-	     		| TNUMBER				printf("  primary_exp 		: | TNUMBER	\n");	
-			| TREAL			printf(" primary_exp 		:  | TREAL\n");	
-	     		| TLPAREN expression TRPAREN			printf(" primary_exp 		: | TLPAREN expression TRPAREN	 \n");	
+				type = NONE; }		{printf(" primary_exp 		: TIDENT \n");	}
+	     		| TNUMBER				{printf("  primary_exp 		: | TNUMBER	\n");}
+			| TREAL			{printf(" primary_exp 		:  | TREAL\n");	}
+	     		| TLPAREN expression TRPAREN			{printf(" primary_exp 		: | TLPAREN expression TRPAREN	 \n");	}
 			| TLPAREN expression error							{yyerrok; ReportError(missing_rparen);	printf(" primary_exp 		:| TLPAREN expression error " );}		// 오류 - 오른쪽 괄호 없음
 			;
 %%
