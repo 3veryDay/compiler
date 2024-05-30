@@ -38,51 +38,52 @@ void changeHSTable();
 
 
 %%
-mini_c 			: translation_unit
+mini_c 			: translation_unit	{printf("mini_c - translation_unit\n");}
 				;
 
-translation_unit 		: external_dcl
-				| translation_unit external_dcl
+translation_unit 		: external_dcl	{printf("translation_unit - external_dcl\n");}
+				| translation_unit external_dcl		{printf("translation_unit - translation_unit external_dcl\n");}
 				;
 
-external_dcl 			: function_def
-		  		| declaration
-				| TIDENT TSEMI
-				| TIDENT error					{yyerrok;
+external_dcl 			: function_def	{printf("external_dcl - function_def");}
+		  		| declaration	{printf("external_dcl - declaration");}
+				| TIDENT TSEMI	{printf("external_dcl - TIDENT TSEMI");}
+				| TIDENT error					{yyerrok; printf("external_dcl - TIDENT error");
 												ReportError(missing_semi);}
 				;
 
-function_def 		: function_header compound_st
-				| function_header error					{yyerrok;
+function_def 		: function_header compound_st	{printf("function_def - function_header compound_st");}
+				| function_header error					{yyerrok; printf("function_def - function_header error");
 												ReportError(missing_semi);}	// 오류 - 세미콜론 없음
-				| function_header TSEMI
-				| error compound_st					{yyerrok;
+				| function_header TSEMI		{printf("function_def - function_header TSEMI");}
+				| error compound_st					{yyerrok; printf("function_def - error compound_st");
 												ReportError(missing_funcheader);}	// 오류 - 함수 헤더 없음
 				;
 
-function_header 		: dcl_spec function_name formal_param
+function_header 		: dcl_spec function_name formal_param		{printf("function_header - dcl_spec function_name formal_param");}
 				;
 
-dcl_spec 			: dcl_specifiers
+dcl_spec 			: dcl_specifiers	{printf("dcl_spec - dcl_specifiers");}
 				;
 
-dcl_specifiers 		: dcl_specifier
-		 		| dcl_specifiers dcl_specifier
+dcl_specifiers 		: dcl_specifier		{printf("dcl_specifiers - dcl_specifier");}
+		 		| dcl_specifiers dcl_specifier		{printf("dcl_specifiers - dcl_specifiers dcl_specifier");}
 				;
 
-dcl_specifier 		: type_qualifier
-				| type_specifier
+dcl_specifier 		: type_qualifier		{printf("dcl_specifier - type_qualifier");}
+				| type_specifier	{printf("dcl_specifier - type_specifier");}
 				;
 
-type_qualifier 		: TCONST							{con = 1;}
+type_qualifier 		: TCONST							{con = 1; printf("type_qualifier - TCONST");}
 				;
 
-type_specifier 		: TINT								{type = INT;}
-		 		| TVOID							{type = VOID;}
-				| TFLOAT							{type = FLOAT;}
+type_specifier 		: TINT								{type = INT; printf("type_specifier - TINT");}
+		 		| TVOID							{type = VOID; printf("type_specifier - TVOID");}
+				| TFLOAT							{type = FLOAT; printf("type_specifier - TFLOAT");}
 				;
 
-function_name 		: TIDENT							{func = 1;
+function_name 		: TIDENT							{printf("function_name - TIDENT");
+												func = 1;
 												changeHSTable();
 												func = 0;
 												con = 0;
@@ -91,12 +92,13 @@ function_name 		: TIDENT							{func = 1;
 												type = NONE;}
 				;
 
-formal_param 		: TLPAREN opt_formal_param TRPAREN
-				| TLPAREN opt_formal_param error			{yyerrok;
+formal_param 		: TLPAREN opt_formal_param TRPAREN	{printf("formal_param - TLPAREN opt_formal_param TRPAREN");}
+				| TLPAREN opt_formal_param error			{yyerrok; printf("formal_param - TLPAREN opt_formal_param error");
 												ReportError(missing_rparen);}	// 오류 - 오른쪽 괄호 없음
 				;
 
-opt_formal_param 		: formal_param_list						{param = 1;
+opt_formal_param 		: formal_param_list						{printf("opt_formal_param - formal_param_list");
+												param = 1;
 												changeHSTable();
 												func = 0;
 												con = 0;
@@ -106,30 +108,30 @@ opt_formal_param 		: formal_param_list						{param = 1;
 		   		|								{param = 0;}		// 파라미터 작업 후 0으로 초기화
 				;
 
-formal_param_list 		: param_dcl							{param = 1;
+formal_param_list 		: param_dcl							{printf("formal_param_list - param_dcl"); param = 1;
 												changeHSTable();}
-		    		| formal_param_list TCOMMA param_dcl
-				| formal_param_list TCOMMA error			{yyerrok;
+		    		| formal_param_list TCOMMA param_dcl	{printf("formal_param_list - formal_param_list TCOMMA param_dcl");}
+				| formal_param_list TCOMMA error			{yyerrok; printf("formal_param_list - formal_param_list TCOMMA error");
 												ReportError(missing_comma);}	// 오류 - 콤마 없음
-				| formal_param_list param_dcl				{yyerrok;
+				| formal_param_list param_dcl				{yyerrok; printf("formal_param_list - formal_param_list param_dcl");
 												ReportError(missing_comma);}	// 오류 - 콤마 없음
 				;
 
-param_dcl 			: dcl_spec declarator					{param = 1;
+param_dcl 			: dcl_spec declarator					{param = 1; printf("param_dcl - dcl_spec declarator");
 												changeHSTable();}
 				;
 
-compound_st 		: TLCURLY opt_dcl_list opt_stat_list TRCURLY %prec LOWER_THAN_OPT_STAT_LIST
-				| TLCURLY opt_dcl_list opt_stat_list error		{yyerrok;
+compound_st 		: TLCURLY opt_dcl_list opt_stat_list TRCURLY %prec LOWER_THAN_OPT_STAT_LIST	{printf("compound_st - TLCURLY opt_dcl_list opt_stat_list TRCURLY");}
+				| TLCURLY opt_dcl_list opt_stat_list error		{yyerrok; printf("compound_st - TLCURLY opt_dcl_list opt_stat_list error");
 												ReportError(missing_rcurly);}	// 오류 - 오른쪽 중괄호 없음
 				;
 
-opt_dcl_list 			: declaration_list
-				|
+opt_dcl_list 			: declaration_list		{printf("opt_dcl_list - declaration_list");}
+				|		{printf("opt_dcl_list - ");}
 				;
 
-declaration_list 		: declaration
-				| declaration_list declaration
+declaration_list 		: declaration		{printf("declaration_list - declaration");}
+				| declaration_list declaration		{printf("declaration_list - declaration_list declaration");}
 				;
 
 // 조윤아
