@@ -223,7 +223,7 @@ return_st 			: TRETURN opt_expression TSEMI	{printf("return_st 			: TRETURN opt_
 					| TRETURN opt_expression error							{yyerrok; ReportError(missing_semi); 	printf("return_st  | TRETURN opt_expression error\n" );}	// 오류 - 세미콜론 없음
 					;
 
-expression 			: assignment_exp;	{printf(" \n" );}	
+expression 			: assignment_exp	{printf(" \n" );} ;	
 
 assignment_exp 		: logical_or_exp				{printf("assignment_exp 		: logical_or_exp	 \n " );}	
 					| unary_exp TASSIGN assignment_exp 					{printf("assignment_exp 		:unary_exp TASSIGN assignment_exp  \n" );}	
