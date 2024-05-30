@@ -1,5 +1,7 @@
 /*
- * Symbol.c - Symbol table management
+ * symtable.c - Symbol table & Hash table management
+ * programmer – 조윤아(2171047), 박소현(2176143), 조은혜(2176365), 지현서(2076368) 
+ * date – 2024-05-29
  */
 
 #include <stdio.h>
@@ -12,26 +14,18 @@ void ReportError(ErrorType err);
 extern char *yytext;
 extern int yyleng;
 
-char print_ST[STsize];	//ST for printing the results
-int p_nextfree = 0;		//nextfree of print_ST
-int str_length;			//count length of string to print the results nicely
-
 /*
  * computeHS() - Compute the hash code of identifier by summing the ordinal values of 
  *             its charactors an then taking the sum modulo the size of HT
  */
-void ComputeHS(int nid,int nfree)
+void ComputeHS(int nid, int nfree)
 {
-	int code, i;
+	int code, i;    // ASCII code's sum if identifier
 	code = 0;
 	for (i = nid; i < nfree - 1; i++) {
-		int current = (int)ST[i];
-		//If current is lowercase, convert it to uppercase
-		current = (current >= 'A' && current <= 'Z' ? current - 'A' + 'a' : current);
-		code += current;
+		code += (int)ST[i];
 	}
-	hashcode = (code % HTsize) + 1;
-	hashcode = (hashcode == HTsize ? 0 : hashcode);
+	hashcode = code % HTsize;    
 }
 
 /*
@@ -47,16 +41,14 @@ void LookupHS(int nid,int hscode)
 	found = FALSE;
 	if (HT[hscode] != NULL) {
 		here = HT[hscode];
-		while (here != NULL && found == FALSE) {
+		while (here != NULL && found == FALSE) {  // Check whether identifier already exists in hash table
 			found = TRUE;
 			i = here->index;
 			j = nid;
 			sameid = i;
 
 			while (ST[i] != '\0' && ST[j] != '\0' && found == TRUE) {
-				int left = ST[i] >= 'A' && ST[i] <= 'Z' ? ST[i] - 'A' + 'a' : ST[i];
-				int right = ST[j] >= 'A' && ST[j] <= 'Z' ? ST[j] - 'A' + 'a' : ST[j];
-				if (left != right)
+				if (ST[i] != ST[j])
 					found = FALSE;
 				else {
 					i++;
@@ -108,7 +100,7 @@ void ADDHT(int hscode)
 }
 
 /*
- * SymbolTable() - If read the identifier, symbol table management 
+ * SymbolTable() - Read the identifier and management symbol table, hash table
  */
 int SymbolTable()
 {
@@ -118,7 +110,7 @@ int SymbolTable()
 		ReportError(err);
 	}
 
-	//READ identifier
+	//Read identifier
 	for (int i = 0; i<yyleng; i++) {
 		ST[nextfree++] = yytext[i];
 	}

@@ -1,7 +1,7 @@
 /*
  * glob.h - global variable for the project
  */
-#define STsize 1000
+#define STsize 1000 
 #define HTsize 100
 #define FALSE 0
 #define TRUE 1
@@ -27,14 +27,14 @@ HTpointer HT[HTsize];
 char ST[STsize];
 HTpointer current_id;
 
-int nextid;
-int nextfree;
+int nextid; 
+int nextfree; 
 int hashcode;
-int sameid;  //st, ht용
-
-int cErrors;  //number of errors
+int sameid; 
 int found;
-int lineno;
+
+int cErrors;  // number of errors
+int lineno;  // line number
 
 enum ErrorType {
 	noerror, digit_ident, long_ident, ill_symbol, over_st, missing_semi,
