@@ -45,44 +45,44 @@ translation_unit 		: external_dcl	{printf("translation_unit - external_dcl\n");}
 				| translation_unit external_dcl		{printf("translation_unit - translation_unit external_dcl\n");}
 				;
 
-external_dcl 			: function_def	{printf("external_dcl - function_def");}
-		  		| declaration	{printf("external_dcl - declaration");}
-				| TIDENT TSEMI	{printf("external_dcl - TIDENT TSEMI");}
-				| TIDENT error					{yyerrok; printf("external_dcl - TIDENT error");
+external_dcl 			: function_def	{printf("external_dcl - function_def\n");}
+		  		| declaration	{printf("external_dcl - declaration\n");}
+				| TIDENT TSEMI	{printf("external_dcl - TIDENT TSEMI\n");}
+				| TIDENT error					{yyerrok; printf("external_dcl - TIDENT error\n");
 												ReportError(missing_semi);}
 				;
 
-function_def 		: function_header compound_st	{printf("function_def - function_header compound_st");}
-				| function_header error					{yyerrok; printf("function_def - function_header error");
+function_def 		: function_header compound_st	{printf("function_def - function_header compound_st\n");}
+				| function_header error					{yyerrok; printf("function_def - function_header error\n");
 												ReportError(missing_semi);}	// 오류 - 세미콜론 없음
-				| function_header TSEMI		{printf("function_def - function_header TSEMI");}
+				| function_header TSEMI		{printf("function_def - function_header TSEMI\n");}
 				| error compound_st					{yyerrok; printf("function_def - error compound_st");
 												ReportError(missing_funcheader);}	// 오류 - 함수 헤더 없음
 				;
 
-function_header 		: dcl_spec function_name formal_param		{printf("function_header - dcl_spec function_name formal_param");}
+function_header 		: dcl_spec function_name formal_param		{printf("function_header - dcl_spec function_name formal_param\n");}
 				;
 
-dcl_spec 			: dcl_specifiers	{printf("dcl_spec - dcl_specifiers");}
+dcl_spec 			: dcl_specifiers	{printf("dcl_spec - dcl_specifiers\n");}
 				;
 
-dcl_specifiers 		: dcl_specifier		{printf("dcl_specifiers - dcl_specifier");}
-		 		| dcl_specifiers dcl_specifier		{printf("dcl_specifiers - dcl_specifiers dcl_specifier");}
+dcl_specifiers 		: dcl_specifier		{printf("dcl_specifiers - dcl_specifier\n");}
+		 		| dcl_specifiers dcl_specifier		{printf("dcl_specifiers - dcl_specifiers dcl_specifier\n");}
 				;
 
-dcl_specifier 		: type_qualifier		{printf("dcl_specifier - type_qualifier");}
-				| type_specifier	{printf("dcl_specifier - type_specifier");}
+dcl_specifier 		: type_qualifier		{printf("dcl_specifier - type_qualifier\n");}
+				| type_specifier	{printf("dcl_specifier - type_specifier\n");}
 				;
 
-type_qualifier 		: TCONST							{con = 1; printf("type_qualifier - TCONST");}
+type_qualifier 		: TCONST							{con = 1; printf("type_qualifier - TCONST\n");}
 				;
 
-type_specifier 		: TINT								{type = INT; printf("type_specifier - TINT");}
-		 		| TVOID							{type = VOID; printf("type_specifier - TVOID");}
-				| TFLOAT							{type = FLOAT; printf("type_specifier - TFLOAT");}
+type_specifier 		: TINT								{type = INT; printf("type_specifier - TINT\n");}
+		 		| TVOID							{type = VOID; printf("type_specifier - TVOID\n");}
+				| TFLOAT							{type = FLOAT; printf("type_specifier - TFLOAT\n");}
 				;
 
-function_name 		: TIDENT							{printf("function_name - TIDENT");
+function_name 		: TIDENT							{printf("function_name - TIDENT\n");
 												func = 1;
 												changeHSTable();
 												func = 0;
@@ -92,12 +92,12 @@ function_name 		: TIDENT							{printf("function_name - TIDENT");
 												type = NONE;}
 				;
 
-formal_param 		: TLPAREN opt_formal_param TRPAREN	{printf("formal_param - TLPAREN opt_formal_param TRPAREN");}
-				| TLPAREN opt_formal_param error			{yyerrok; printf("formal_param - TLPAREN opt_formal_param error");
+formal_param 		: TLPAREN opt_formal_param TRPAREN	{printf("formal_param - TLPAREN opt_formal_param TRPAREN\n");}
+				| TLPAREN opt_formal_param error			{yyerrok; printf("formal_param - TLPAREN opt_formal_param error\n");
 												ReportError(missing_rparen);}	// 오류 - 오른쪽 괄호 없음
 				;
 
-opt_formal_param 		: formal_param_list						{printf("opt_formal_param - formal_param_list");
+opt_formal_param 		: formal_param_list						{printf("opt_formal_param - formal_param_list\n");
 												param = 1;
 												changeHSTable();
 												func = 0;
@@ -108,36 +108,36 @@ opt_formal_param 		: formal_param_list						{printf("opt_formal_param - formal_p
 		   		|								{param = 0;}		// 파라미터 작업 후 0으로 초기화
 				;
 
-formal_param_list 		: param_dcl							{printf("formal_param_list - param_dcl"); param = 1;
+formal_param_list 		: param_dcl							{printf("formal_param_list - param_dcl\n"); param = 1;
 												changeHSTable();}
-		    		| formal_param_list TCOMMA param_dcl	{printf("formal_param_list - formal_param_list TCOMMA param_dcl");}
-				| formal_param_list TCOMMA error			{yyerrok; printf("formal_param_list - formal_param_list TCOMMA error");
+		    		| formal_param_list TCOMMA param_dcl	{printf("formal_param_list - formal_param_list TCOMMA param_dcl\n");}
+				| formal_param_list TCOMMA error			{yyerrok; printf("formal_param_list - formal_param_list TCOMMA error\n");
 												ReportError(missing_comma);}	// 오류 - 콤마 없음
-				| formal_param_list param_dcl				{yyerrok; printf("formal_param_list - formal_param_list param_dcl");
+				| formal_param_list param_dcl				{yyerrok; printf("formal_param_list - formal_param_list param_dcl\n");
 												ReportError(missing_comma);}	// 오류 - 콤마 없음
 				;
 
-param_dcl 			: dcl_spec declarator					{param = 1; printf("param_dcl - dcl_spec declarator");
+param_dcl 			: dcl_spec declarator					{param = 1; printf("param_dcl - dcl_spec declarator\n");
 												changeHSTable();}
 				;
 
-compound_st 		: TLCURLY opt_dcl_list opt_stat_list TRCURLY %prec LOWER_THAN_OPT_STAT_LIST	{printf("compound_st - TLCURLY opt_dcl_list opt_stat_list TRCURLY");}
-				| TLCURLY opt_dcl_list opt_stat_list error		{yyerrok; printf("compound_st - TLCURLY opt_dcl_list opt_stat_list error");
+compound_st 		: TLCURLY opt_dcl_list opt_stat_list TRCURLY %prec LOWER_THAN_OPT_STAT_LIST	{printf("compound_st - TLCURLY opt_dcl_list opt_stat_list TRCURLY\n");}
+				| TLCURLY opt_dcl_list opt_stat_list error		{yyerrok; printf("compound_st - TLCURLY opt_dcl_list opt_stat_list error\n");
 												ReportError(missing_rcurly);}	// 오류 - 오른쪽 중괄호 없음
 				;
 
-opt_dcl_list 			: declaration_list		{printf("opt_dcl_list - declaration_list");}
-				|		{printf("opt_dcl_list - ");}
+opt_dcl_list 			: declaration_list		{printf("opt_dcl_list - declaration_list\n");}
+				|		{printf("opt_dcl_list - \n");}
 				;
 
-declaration_list 		: declaration		{printf("declaration_list - declaration");}
-				| declaration_list declaration		{printf("declaration_list - declaration_list declaration");}
+declaration_list 		: declaration		{printf("declaration_list - declaration\n");}
+				| declaration_list declaration		{printf("declaration_list - declaration_list declaration\n");}
 				;
 
 // 조윤아
 
 declaration 		: dcl_spec init_dcl_list TSEMI	
-					{
+					{	printf("declaration - dcl_spec init_dcl_list TSEMI\n");
 						con = 0;
 						func =0;
 						param = 0;
@@ -145,7 +145,7 @@ declaration 		: dcl_spec init_dcl_list TSEMI
 						type = NONE;
 					}
 					| dcl_spec init_dcl_list error							
-					{yyerrok;
+					{yyerrok; printf("declaration - dcl_spec init_dcl_list error\n");
 					con = 0;
 					func =0;
 					param = 0;
@@ -154,57 +154,65 @@ declaration 		: dcl_spec init_dcl_list TSEMI
 					ReportError(missing_semi);}	// 오류 - 세미콜론 없음
 					;
 
-init_dcl_list 		: init_declarator				
-					| init_dcl_list TCOMMA init_declarator				
-					| init_dcl_list init_declarator							{yyerrok; ReportError(missing_comma); current_id -> error =1;}	// 오류 - 콤마 없음
+init_dcl_list 		: init_declarator	{printf("init_dcl_list - init_declarator\n");}				
+					| init_dcl_list TCOMMA init_declarator		{printf("init_dcl_list - init_dcl_list TCOMMA init_declarator\n");}			
+					| init_dcl_list init_declarator							{yyerrok; printf("init_dcl_list - init_dcl_list init_declarator\n"); 
+															ReportError(missing_comma); current_id -> error =1;}	// 오류 - 콤마 없음
 					;
 
-init_declarator 	: declarator						
-		 			| declarator TASSIGN TNUMBER
-					| declarator TEQUAL TNUMBER								{yyerrok; ReportError(declaring_err);}	// 오류 - 변수 선언 에러
-					| declarator TASSIGN TREAL
-					| declarator TEQUAL TREAL								{yyerrok; ReportError(declaring_err);}	// 오류 - 변수 선언 에러
+init_declarator 	: declarator		{printf("init_declarator - declarator\n");}					
+		 			| declarator TASSIGN TNUMBER		{printf("init_declarator - declarator TASSIGN TNUMBER\n");}
+					| declarator TEQUAL TNUMBER								{yyerrok; printf("init_declarator - declarator TEQUAL TNUMBER\n");
+													ReportError(declaring_err);}	// 오류 - 변수 선언 에러
+					| declarator TASSIGN TREAL	{printf("init_declarator - declarator TASSIGN TREAL\n");}
+					| declarator TEQUAL TREAL								{yyerrok; printf("init_declarator - declarator TEQUAL TREAL\n");
+															ReportError(declaring_err);}	// 오류 - 변수 선언 에러
 					;
 
-declarator 			: TIDENT												{changeHSTable(); }
-	     			| TIDENT TLSQUARE opt_number TRSQUARE					{array=1; changeHSTable(); }
-					| TIDENT TLSQUARE opt_number error						{yyerrok; ReportError(missing_rsquare); }	// 오류 - 오른쪽 대괄호 없음
+declarator 			: TIDENT												{changeHSTable(); printf("declarator - TIDENT\n");}
+	     			| TIDENT TLSQUARE opt_number TRSQUARE					{array=1; changeHSTable(); printf("declarator - TIDENT TLSQUARE opt_number TRSQUARE\n");}
+					| TIDENT TLSQUARE opt_number error						{yyerrok; printf("declarator - TIDENT TLSQUARE opt_number error\n");
+															ReportError(missing_rsquare); }	// 오류 - 오른쪽 대괄호 없음
 					;
 
-opt_number 			: TNUMBER					
-	     				|						
+opt_number 			: TNUMBER	{printf("opt_number - TNUMBER\n");}				
+	     				|	{printf("opt_number - \n");}					
 					;
 
-opt_stat_list 		: statement_list OPT_STAT_LIST
-		 			|
+opt_stat_list 		: statement_list OPT_STAT_LIST		{printf("opt_stat_list - statement_list OPT_STAT_LIST\n");}
+		 			|		{printf("opt_stat_list - \n");}
 					;
 
-statement_list 		: statement %prec LOWER_THAN_OPT_STAT_LIST					
-			        | statement_list error 
-					| statement_list statement 			
+statement_list 		: statement %prec LOWER_THAN_OPT_STAT_LIST		{printf("statement_list - statemen\n");}				
+			        | statement_list error 		{printf("statement_list - statement_list error\n");}
+					| statement_list statement 	{printf("statement_list - statement_list statement\n");}		
 					;
 
-statement 			: compound_st				
-	   				| expression_st				
-	   				| if_st						
-	   				| while_st					
-	   				| return_st					
+statement 			: compound_st				{printf("statement - compound_st\n");}
+	   				| expression_st				{printf("statement - expression_st\n");}
+	   				| if_st					{printf("statement - if_st\n");}	
+	   				| while_st					{printf("statement - while_st\n");}
+	   				| return_st				{printf("statement - return_st\n");}	
 					;
 
-expression_st 		: opt_expression TSEMI
-					| expression error										{yyerrok; ReportError(missing_semi);}	// 오류 - 세미콜론 없음
+expression_st 		: opt_expression TSEMI				{printf("expression_st - opt_expression TSEMI\n");}
+					| expression error										{yyerrok; printf("expression_st - opt_expression TSEMI\n");
+																	ReportError(missing_semi);}	// 오류 - 세미콜론 없음
 					;
 
 
-opt_expression 		: expression					
-		 			|						
+opt_expression 		: expression					{printf("opt_expression - expression\n");}
+		 			|					{printf("opt_expression - \n");}	
 					;
 
-if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE 		
-					| TIF TLPAREN expression TRPAREN statement TELSE statement
-					| TIF TLPAREN expression error							{yyerrok; ReportError(missing_rparen);}		// 오류 - 오른쪽 괄호 없음
-					| TIF TLPAREN TRPAREN error								{yyerrok; ReportError(missing_condition);}	// 오류 - 조건문 없음
-					| TIF error                                             {yyerrok; ReportError(missing_lparen);}
+if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE 	{printf("if_st - TIF TLPAREN expression TRPAREN statement\n");}	
+					| TIF TLPAREN expression TRPAREN statement TELSE statement	{printf("if_st - TIF TLPAREN expression TRPAREN statement TELSE statement\n");}
+					| TIF TLPAREN expression error							{yyerrok; printf("if_st - TIF TLPAREN expression error\n");
+															ReportError(missing_rparen);}		// 오류 - 오른쪽 괄호 없음
+					| TIF TLPAREN TRPAREN error								{yyerrok; printf("if_st - TIF TLPAREN TRPAREN error\n");
+																ReportError(missing_condition);}	// 오류 - 조건문 없음
+					| TIF error                                             {yyerrok; printf("if_st - TIF error\n");
+													ReportError(missing_lparen);}
 					;
 
 while_st 			: TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list TRCURLY
