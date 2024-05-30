@@ -205,7 +205,7 @@ opt_expression 		: expression					{printf("opt_expression - expression\n");}
 		 			|					{printf("opt_expression - \n");}	
 					;
 
-if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE 			printf(" if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE \n " );
+if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE 			{ printf(" if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE \n " );}
 					| TIF TLPAREN expression TRPAREN statement TELSE statement					printf(" if_st | TIF TLPAREN expression TRPAREN statement TELSE statement	\n " );
 					| TIF TLPAREN expression error							{yyerrok; ReportError(missing_rparen);	printf("if_st | TIF TLPAREN expression error	\n" );}		// 오류 - 오른쪽 괄호 없음
 					| TIF TLPAREN TRPAREN error								{yyerrok; ReportError(missing_condition);	printf("if_st | TIF TLPAREN TRPAREN error	\n" );}	// 오류 - 조건문 없음
