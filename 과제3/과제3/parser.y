@@ -55,6 +55,7 @@ external_dcl 			: function_def
 function_def 		: function_header compound_st
 				| function_header error					{yyerrok;
 												ReportError(missing_semi);}	// 오류 - 세미콜론 없음
+				| function_header TSEMI
 				| error compound_st					{yyerrok;
 												ReportError(missing_funcheader);}	// 오류 - 함수 헤더 없음
 				;
