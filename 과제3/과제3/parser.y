@@ -205,110 +205,107 @@ opt_expression 		: expression					{printf("opt_expression - expression\n");}
 		 			|					{printf("opt_expression - \n");}	
 					;
 
-if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE 	{printf("if_st - TIF TLPAREN expression TRPAREN statement\n");}	
-					| TIF TLPAREN expression TRPAREN statement TELSE statement	{printf("if_st - TIF TLPAREN expression TRPAREN statement TELSE statement\n");}
-					| TIF TLPAREN expression error							{yyerrok; printf("if_st - TIF TLPAREN expression error\n");
-															ReportError(missing_rparen);}		// 오류 - 오른쪽 괄호 없음
-					| TIF TLPAREN TRPAREN error								{yyerrok; printf("if_st - TIF TLPAREN TRPAREN error\n");
-																ReportError(missing_condition);}	// 오류 - 조건문 없음
-					| TIF error                                             {yyerrok; printf("if_st - TIF error\n");
-													ReportError(missing_lparen);}
+if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE 			printf(" if_st 				: TIF TLPAREN expression TRPAREN statement %prec LOWER_THAN_ELSE \n " );
+					| TIF TLPAREN expression TRPAREN statement TELSE statement					printf(" if_st | TIF TLPAREN expression TRPAREN statement TELSE statement	\n " );
+					| TIF TLPAREN expression error							{yyerrok; ReportError(missing_rparen);	printf("if_st | TIF TLPAREN expression error	\n" );}		// 오류 - 오른쪽 괄호 없음
+					| TIF TLPAREN TRPAREN error								{yyerrok; ReportError(missing_condition);	printf("if_st | TIF TLPAREN TRPAREN error	\n" );}	// 오류 - 조건문 없음
+					| TIF error                                             {yyerrok; ReportError(missing_lparen);	printf("if_st | TIF error  \n" );}
 					;
 
-while_st 			: TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list TRCURLY
-					| TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list error 			{yyerrok; ReportError(missing_rcurly);}	// 오류 - 오른쪽 중괄호 없음
-					| TWHILE TLPAREN expression error						{yyerrok; ReportError(missing_rparen);}		// 오류 - 오른쪽 괄호 없음
-					| TWHILE TLPAREN TRPAREN error							{yyerrok; ReportError(missing_condition);}	// 오류 - 조건문 없음
-					| TWHILE error                                        {yyerrok; ReportError(missing_lparen);}
+while_st 			: TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list TRCURLY		{printf("while_st 			: TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list TRCURLY \n" );}	
+					| TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list error 			{yyerrok; ReportError(missing_rcurly); printf("while_st 			| TWHILE TLPAREN expression TRPAREN TLCURLY  opt_stat_list error  \n" );}	// 오류 - 오른쪽 중괄호 없음
+					| TWHILE TLPAREN expression error						{yyerrok; ReportError(missing_rparen); printf("while_st 			| TWHILE TLPAREN expression error	 \n" );}		// 오류 - 오른쪽 괄호 없음
+					| TWHILE TLPAREN TRPAREN error							{yyerrok; ReportError(missing_condition);printf("while_st 			| TWHILE TLPAREN TRPAREN error \n" );}	// 오류 - 조건문 없음
+					| TWHILE error                                        {yyerrok; ReportError(missing_lparen)printf("while_st 			| TWHILE error   \n" );;}
 					;
 
-return_st 			: TRETURN opt_expression TSEMI
-					| TRETURN opt_expression error							{yyerrok; ReportError(missing_semi);}	// 오류 - 세미콜론 없음
+return_st 			: TRETURN opt_expression TSEMI	{printf("return_st 			: TRETURN opt_expression TSEMI \n" );}	
+					| TRETURN opt_expression error							{yyerrok; ReportError(missing_semi); 	printf("return_st  | TRETURN opt_expression error\n" );}	// 오류 - 세미콜론 없음
 					;
 
-expression 			: assignment_exp;
+expression 			: assignment_exp;	{printf(" \n" );}	
 
-assignment_exp 		: logical_or_exp				
-					| unary_exp TASSIGN assignment_exp 		
-					| unary_exp TADDASSIGN assignment_exp 	
-					| unary_exp TSUBASSIGN assignment_exp 	
-					| unary_exp TMULASSIGN assignment_exp 	
-					| unary_exp TDIVASSIGN assignment_exp 	
-					| unary_exp TMODASSIGN assignment_exp 	
-					| unary_exp TASSIGN										{yyerrok; ReportError(wrong_assign);}	// 오류 - 잘못된 대입
-					| unary_exp TADDASSIGN									{yyerrok; ReportError(wrong_assign);}		// 오류 - 잘못된 대입
-					| unary_exp TSUBASSIGN				 					{yyerrok; ReportError(wrong_assign);}		// 오류 - 잘못된 대입
-					| unary_exp TMULASSIGN				 					{yyerrok; ReportError(wrong_assign);}		// 오류 - 잘못된 대입
-					| unary_exp TDIVASSIGN				 					{yyerrok; ReportError(wrong_assign);}		// 오류 - 잘못된 대입
-					| unary_exp TMODASSIGN				 					{yyerrok; ReportError(wrong_assign);}	// 오류 - 잘못된 대입
+assignment_exp 		: logical_or_exp				{printf("assignment_exp 		: logical_or_exp	 \n " );}	
+					| unary_exp TASSIGN assignment_exp 					{printf("assignment_exp 		:unary_exp TASSIGN assignment_exp  \n" );}	
+					| unary_exp TADDASSIGN assignment_exp 				{printf("assignment_exp 		:| unary_exp TADDASSIGN assignment_exp  \n" );}	
+					| unary_exp TSUBASSIGN assignment_exp 				{printf("assignment_exp 		:| unary_exp TSUBASSIGN assignment_exp 	 \n" );}	
+					| unary_exp TMULASSIGN assignment_exp 				{printf("assignment_exp 		: | unary_exp TMULASSIGN assignment_exp \n" );}	
+					| unary_exp TDIVASSIGN assignment_exp 				{printf("assignment_exp 		:| unary_exp TDIVASSIGN assignment_exp 	 \n" );}	
+					| unary_exp TMODASSIGN assignment_exp 				{printf("assignment_exp 		:| unary_exp TMODASSIGN assignment_exp 	 \n" );}	
+					| unary_exp TASSIGN										{yyerrok; ReportError(wrong_assign);	printf("assignment_exp 		:| unary_exp TASSIGN	\n " );}	// 오류 - 잘못된 대입
+					| unary_exp TADDASSIGN									{yyerrok; ReportError(wrong_assign);	printf("assignment_exp 		: | | unary_exp TADDASSIGN	\n" );}		// 오류 - 잘못된 대입
+					| unary_exp TSUBASSIGN				 					{yyerrok; ReportError(wrong_assign);	printf("assignment_exp 		: | unary_exp TSUBASSIGN\n" );}		// 오류 - 잘못된 대입
+					| unary_exp TMULASSIGN				 					{yyerrok; ReportError(wrong_assign);	printf("assignment_exp 		: | unary_exp TMULASSIGN\n" );}		// 오류 - 잘못된 대입
+					| unary_exp TDIVASSIGN				 					{yyerrok; ReportError(wrong_assign);	printf("assignment_exp 		:| unary_exp TDIVASSIGN\n " );}		// 오류 - 잘못된 대입
+					| unary_exp TMODASSIGN				 					{yyerrok; ReportError(wrong_assign);	printf("assignment_exp 		: | unary_exp TMODASSIGN\n" );}	// 오류 - 잘못된 대입
 					;
 
-logical_or_exp 		: logical_and_exp				
-					| logical_or_exp TOR logical_and_exp 	
-					| logical_or_exp TOR error								{yyerrok; ReportError(missing_operand);}	// 오류 - 피연산자 없음
+logical_or_exp 		: logical_and_exp							{printf("logical_or_exp 		: logical_and_exp	\n " );}	
+					| logical_or_exp TOR logical_and_exp 				{printf("logical_or_exp 	| logical_or_exp TOR logical_and_exp \n " );}	
+					| logical_or_exp TOR error								{yyerrok; ReportError(missing_operand);	printf("logical_or_exp | logical_or_exp TOR error			\n " );}	// 오류 - 피연산자 없음
 					;
 
-logical_and_exp		: equality_exp					
-		 			| logical_and_exp TAND equality_exp 
-					| logical_and_exp TAND error							{yyerrok; ReportError(missing_operand);}		// 오류 - 피연산자 없음
+logical_and_exp		: equality_exp								{printf("logical_and_exp		: equality_exp \n" );}	
+		 			| logical_and_exp TAND equality_exp 			{printf("logical_and_exp		| logical_and_exp TAND equality_exp  \n" );}	
+					| logical_and_exp TAND error							{yyerrok; ReportError(missing_operand);	printf("logical_and_exp| logical_and_exp TAND error			\n " );}		// 오류 - 피연산자 없음
 					;
 
-equality_exp 		: relational_exp				
-					| equality_exp TEQUAL relational_exp 	
-					| equality_exp TNOTEQU relational_exp 	
-					| equality_exp TEQUAL error								{yyerrok; ReportError(missing_operand);}	// 오류 - 피연산자 없음
-					| equality_exp TNOTEQU error							{yyerrok; ReportError(missing_operand);}		// 오류 - 피연산자 없음
+equality_exp 		: relational_exp							{printf("equality_exp 		: relational_exp	 \n" );}	
+					| equality_exp TEQUAL relational_exp 				{printf("equality_exp 		: | equality_exp TEQUAL relational_exp\n " );}	
+					| equality_exp TNOTEQU relational_exp 				{printf("equality_exp 		:| equality_exp TNOTEQU relational_exp 	\n " );}	
+					| equality_exp TEQUAL error								{yyerrok; ReportError(missing_operand);	printf("equality_exp 		: equality_exp TEQUAL error	\n " );}	// 오류 - 피연산자 없음
+					| equality_exp TNOTEQU error							{yyerrok; ReportError(missing_operand);	printf("equality_exp 		:| equality_exp TNOTEQU error	\n " );}		// 오류 - 피연산자 없음
 					;	
 
-relational_exp 		: additive_exp 				
-			| relational_exp TGREAT additive_exp 		
-			| relational_exp TLESS additive_exp 		
-			| relational_exp TGREATEQU additive_exp 	
-			| relational_exp TLESSEQU additive_exp 	
-			| relational_exp TGREAT error							{yyerrok; ReportError(missing_operand);}		// 오류 - 피연산자 없음
-			| relational_exp TLESS  error							{yyerrok; ReportError(missing_operand);} 		// 오류 - 피연산자 없음
-			| relational_exp TGREATEQU error						{yyerrok; ReportError(missing_operand);}		// 오류 - 피연산자 없음
-			| relational_exp TLESSEQU error							{yyerrok; ReportError(missing_operand);}		// 오류 - 피연산자 없음
+relational_exp 		: additive_exp 							{printf(" relational_exp 		: additive_exp  \n" );}	
+			| relational_exp TGREAT additive_exp 					{printf("relational_exp 		| relational_exp TGREAT additive_exp   \n" );}	
+			| relational_exp TLESS additive_exp 					{printf("relational_exp 	| relational_exp TLESS additive_exp 	 \n " );}	
+			| relational_exp TGREATEQU additive_exp 				{printf("relational_exp 	| relational_exp TGREATEQU additive_exp \n " );}	
+			| relational_exp TLESSEQU additive_exp 				{printf(" relational_exp 	| relational_exp TLESSEQU additive_exp 	 \n" );}	
+			| relational_exp TGREAT error							{yyerrok; ReportError(missing_operand);	printf("relational_exp 	| relational_exp TGREAT error \n	 " );}		// 오류 - 피연산자 없음
+			| relational_exp TLESS  error							{yyerrok; ReportError(missing_operand);	printf("relational_exp 	| relational_exp TLESS  error \n " );} 		// 오류 - 피연산자 없음
+			| relational_exp TGREATEQU error						{yyerrok; ReportError(missing_operand);	printf("relational_exp 	| relational_exp TGREATEQU error	 \n " );}		// 오류 - 피연산자 없음
+			| relational_exp TLESSEQU error							{yyerrok; ReportError(missing_operand);	printf("relational_exp | relational_exp TLESSEQU error	 \n " );}		// 오류 - 피연산자 없음
 			;
 
-additive_exp 		: multiplicative_exp				
-			| additive_exp TADD multiplicative_exp 
-			| additive_exp TSUB multiplicative_exp 	
-			| additive_exp TADD error							{yyerrok; ReportError(missing_operand);}		// 오류 - 피연산자 없음
-			| additive_exp TSUB error							{yyerrok; ReportError(missing_operand);}			// 오류 - 피연산자 없음
+additive_exp 		: multiplicative_exp							{printf("additive_exp 		: multiplicative_exp  \n" );}	
+			| additive_exp TADD multiplicative_exp 			{printf(" additive_exp | additive_exp TADD multiplicative_exp 	 \n" );}	
+			| additive_exp TSUB multiplicative_exp 				{printf(" additive_exp| additive_exp TSUB multiplicative_exp 	 \n " );}	
+			| additive_exp TADD error							{yyerrok; ReportError(missing_operand);	printf("additive_exp | additive_exp TADD error \n " );}		// 오류 - 피연산자 없음
+			| additive_exp TSUB error							{yyerrok; ReportError(missing_operand);	printf(" additive_exp | additive_exp TSUB error \n" );}			// 오류 - 피연산자 없음
 			;
 
-multiplicative_exp 	: unary_exp					
-		    	| multiplicative_exp TMUL unary_exp 		
-		    	| multiplicative_exp TDIV unary_exp 		
-		    	| multiplicative_exp TMOD unary_exp 		
-			| multiplicative_exp TMUL error							{yyerrok; ReportError(missing_operand);}		// 오류 - 피연산자 없음
-		    	| multiplicative_exp TDIV error							{yyerrok; ReportError(missing_operand);}		// 오류 - 피연산자 없음
-		    	| multiplicative_exp TMOD error							{yyerrok; ReportError(missing_operand);}		// 오류 - 피연산자 없음
+multiplicative_exp 	: unary_exp								{printf("multiplicative_exp  : unary_exp	\n " );}	
+		    	| multiplicative_exp TMUL unary_exp 					{printf("multiplicative_exp  multiplicative_exp TMUL unary_exp  \n " );}	
+		    	| multiplicative_exp TDIV unary_exp 					{printf("multiplicative_exp   multiplicative_exp TDIV unary_exp  \n" );}	
+		    	| multiplicative_exp TMOD unary_exp 					{printf("multiplicative_exp | multiplicative_exp TMOD unary_exp 	 \n " );}	
+			| multiplicative_exp TMUL error							{yyerrok; ReportError(missing_operand);	printf("multiplicative_exp	| multiplicative_exp TMUL error   \n" );}		// 오류 - 피연산자 없음
+		    	| multiplicative_exp TDIV error							{yyerrok; ReportError(missing_operand);	printf("multiplicative_exp 	| multiplicative_exp TDIV error  \n" );}		// 오류 - 피연산자 없음
+		    	| multiplicative_exp TMOD error							{yyerrok; ReportError(missing_operand);	printf("multiplicative_exp | multiplicative_exp TMOD error \n " );}		// 오류 - 피연산자 없음
 			;
 
-unary_exp 		: postfix_exp					
-	   		| TSUB unary_exp				
-	   		| TNOT unary_exp				
-	   		| TINC unary_exp				
-	   		| TDEC unary_exp				
+unary_exp 		: postfix_exp								{printf("unary_exp 		: postfix_exp \n" );}	
+	   		| TSUB unary_exp							{printf("unary_exp 	| TSUB unary_exp	\n " );}	
+	   		| TNOT unary_exp							{printf("unary_exp 		| TNOT unary_exp		  " );}	
+	   		| TINC unary_exp							{printf("unary_exp 		| TINC unary_exp	 \n" );}	
+	   		| TDEC unary_exp							{printf(" unary_exp		| TDEC unary_exp	 	" );}	
 			;
 
-postfix_exp 		: primary_exp
-	      		| postfix_exp TLCURLY expression TRCURLY
-			| postfix_exp TLCURLY expression error						{yyerrok; ReportError(missing_rcurly);}		// 오류 - 오른쪽 중괄호 없음
-	      		| postfix_exp TLPAREN opt_actual_param TRPAREN
-			| postfix_exp TLPAREN opt_actual_param error					{yyerrok; ReportError(missing_rparen);}		// 오류 - 오른쪽 괄호 없음
-			| postfix_exp TINC
-	      		| postfix_exp TDEC
+postfix_exp 		: primary_exp							{printf("postfix_exp 		: primary_exp			 \n" );}	
+	      		| postfix_exp TLCURLY expression TRCURLY			{printf("postfix_exp 		| postfix_exp TLCURLY expression TRCURLY			 \n" );}	
+			| postfix_exp TLCURLY expression error						{yyerrok; ReportError(missing_rcurly);	printf("postfix_exp 		| postfix_exp TLCURLY expression error	\n " );}		// 오류 - 오른쪽 중괄호 없음
+	      		| postfix_exp TLPAREN opt_actual_param TRPAREN		{printf("postfix_exp 		| postfix_exp TLPAREN opt_actual_param TRPAREN			\n " );}	
+			| postfix_exp TLPAREN opt_actual_param error					{yyerrok; ReportError(missing_rparen);	printf(" postfix_exp | postfix_exp TLPAREN opt_actual_param error\n" );}		// 오류 - 오른쪽 괄호 없음
+			| postfix_exp TINC		{printf("postfix_exp 		: p| postfix_exp TINC			\n " );}	
+	      		| postfix_exp TDEC		{printf("postfix_exp 		| postfix_exp TDEC			\n " );}	
 			;
 
-opt_actual_param 	: actual_param	;
+opt_actual_param 	: actual_param			printf(" opt_actual_param 	: actual_param	 \n");	;	
 
-actual_param 		: actual_param_list;
+actual_param 		: actual_param_list;			printf("actual_param 		: actual_param_list;  \n");	
 
-actual_param_list 	: assignment_exp				
-		   	| actual_param_list TCOMMA assignment_exp 
+actual_param_list 	: assignment_exp				printf(" actual_param_list 	: assignment_exp		 \n");				
+		   	| actual_param_list TCOMMA assignment_exp 			printf(" actual_param_list | actual_param_list TCOMMA assignment_exp 	\n");	
 			;
 
 primary_exp 		: TIDENT		
@@ -316,14 +313,13 @@ primary_exp 		: TIDENT
 				func =0;
 				param = 0;
 				array = 0;
-				type = NONE;}
-	     		| TNUMBER	
-			| TREAL
-	     		| TLPAREN expression TRPAREN
-			| TLPAREN expression error							{yyerrok; ReportError(missing_rparen);}		// 오류 - 오른쪽 괄호 없음
+				type = NONE; 			printf(" primary_exp 		: TIDENT \n");	}
+	     		| TNUMBER				printf("  primary_exp 		: | TNUMBER	\n");	
+			| TREAL			printf(" primary_exp 		:  | TREAL\n");	
+	     		| TLPAREN expression TRPAREN			printf(" primary_exp 		: | TLPAREN expression TRPAREN	 \n");	
+			| TLPAREN expression error							{yyerrok; ReportError(missing_rparen);	printf(" primary_exp 		:| TLPAREN expression error " );}		// 오류 - 오른쪽 괄호 없음
 			;
 %%
-
 // changeHSTable : 해시테이블 설정 함수
 
 void changeHSTable(){
