@@ -43,7 +43,8 @@ translation_unit 		: external_dcl
 				| translation_unit external_dcl
 				;
 
-external_dcl 			: function_def
+external_dcl 			: init_dcl_list TSEMI
+				| function_def
 		  		| declaration
 				| TIDENT TSEMI
 				| TIDENT error					{yyerrok;
